@@ -1,1 +1,0 @@
-# Mandip Subedi - Personal Website
