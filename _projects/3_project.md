@@ -1,11 +1,11 @@
 ---
 layout: page
-title: project 3 with very long name
-description: a project that redirects to another website
-img: assets/img/7.jpg
-redirect: https://unsplash.com
+title: "<a href='https://drive.google.com/file/d/1R9Ut8DKAludKSpIMg4Zw0VrqYliGEv6R/view?usp=sharing' target='_blank'>Universal Basic Income and the Future of Work: The Role of Funding Mechanisms and Targeted Policies</a>"
+description: "This study examines UBI's effects on labor markets using the Diamond-Mortensen-Pissarides framework, analyzing how different funding mechanisms (corporate taxation vs. government sources) and transfer models (universal vs. targeted) impact unemployment, vacancy creation, and wages in the face of automation."
+img: assets/img/ubi.png
 importance: 3
 category: work
+giscus_comments: true
 ---
 
 Every project has a beautiful feature showcase page.
@@ -23,13 +23,13 @@ To give your project a background in the portfolio page, just add the img tag to
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/1.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/3.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -37,7 +37,7 @@ To give your project a background in the portfolio page, just add the img tag to
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -50,10 +50,10 @@ You describe how you toiled, sweated, _bled_ for your project, and then... you r
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -70,10 +70,10 @@ Here's the code for the last row of images above:
 ```html
 <div class="row justify-content-sm-center">
   <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
   <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
 </div>
 ```

@@ -15,6 +15,81 @@ table.table-cv {
   }
 }
 
+/* Reduce font size for institutions */
+.cv .time_table .institution {
+  font-size: 0.9rem !important;
+}
+
+/* Reduce font size for descriptions */
+.cv .time_table .items,
+.cv .time_table .description {
+  font-size: 0.9rem !important;
+}
+
+/* Reduce font size for description divs */
+.cv .time_table .items div,
+.cv .time_table .description div {
+  font-size: 0.9rem !important;
+}
+
+/* Specifically target the study abroad items */
+.cv .time_table .items .item,
+.cv .time_table .description .item {
+  font-size: 0.9rem !important;
+}
+
+/* More specific targeting for study abroad text */
+.cv .time_table .items .font-italic,
+.cv .time_table .description .font-italic {
+  font-size: 0.9rem !important;
+}
+
+/* Target the specific study abroad entries */
+.cv .time_table .items .font-italic div,
+.cv .time_table .description .font-italic div {
+  font-size: 0.9rem !important;
+}
+
+/* Even more specific targeting for the items class with font-italic */
+.cv .time_table .items.ml-1.ml-md-4.font-italic {
+  font-size: 0.9rem !important;
+}
+
+.cv .time_table .items.ml-1.ml-md-4.font-italic * {
+  font-size: 0.9rem !important;
+}
+
+.cv .time_table .items.ml-1.ml-md-4.font-italic span.item {
+  font-size: 0.9rem !important;
+}
+
+/* Even more comprehensive targeting for all description text */
+.cv .time_table .items p,
+.cv .time_table .description p {
+  font-size: 0.9rem !important;
+}
+
+/* Target any text within the description area */
+.cv .time_table .items *,
+.cv .time_table .description * {
+  font-size: 0.9rem !important;
+}
+
+/* Ultra-specific targeting for study abroad text */
+.cv .time_table .items.ml-1.ml-md-4.font-italic span.item,
+.cv .time_table .items.ml-1.ml-md-4.font-italic div.item {
+  font-size: 0.9rem !important;
+}
+
+/* Force all text in the items area to be small */
+.cv .time_table .items.ml-1.ml-md-4.font-italic,
+.cv .time_table .items.ml-1.ml-md-4.font-italic *,
+.cv .time_table .items.ml-1.ml-md-4.font-italic span,
+.cv .time_table .items.ml-1.ml-md-4.font-italic div {
+  font-size: 0.9rem !important;
+  font-size: 0.9rem !important;
+}
+
 a.btncv {
   color: var(--global-text-color) !important;
   border: 1px solid var(--global-text-color) !important;
@@ -41,6 +116,16 @@ a.btncv:hover {
 /*****************************
  * CV TIME_TABLE styles
  *****************************/
+
+/* Make job position titles use theme color (purple) - more specific selector */
+.cv .time_table .list-group-item .row .col-xs-10 .col-sm-10 .col-md-10 h6.title.font-weight-bold.ml-1.ml-md-4 {
+  color: var(--global-theme-color) !important;
+}
+
+/* Alternative more specific selector */
+.cv .time_table h6.title {
+  color: var(--global-theme-color) !important;
+}
 
 p.location {
   font-size: 0.7rem;
@@ -151,6 +236,52 @@ td.list-group-link {
 }
 
 /*****************************
+ * CV NESTED_LIST styles (Simple two-column layout)
+ *****************************/
+
+.cv .nested_list h5.font-italic {
+  color: var(--global-theme-color);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.cv .nested_list ul {
+  margin-bottom: 1rem;
+}
+
+.cv .nested_list li {
+  margin-bottom: 0.25rem;
+  list-style: none !important;
+}
+
+.cv .nested_list ul {
+  list-style: none !important;
+}
+
+/* More robust bullet point removal for CV nested lists */
+.cv .nested_list ul.list-unstyled {
+  list-style: none !important;
+  list-style-type: none !important;
+  padding-left: 0 !important;
+}
+
+.cv .nested_list ul.list-unstyled li {
+  list-style: none !important;
+  list-style-type: none !important;
+  list-style-image: none !important;
+  padding-left: 0 !important;
+}
+
+/* Target all possible list elements in CV nested lists */
+.cv .nested_list ul,
+.cv .nested_list ol,
+.cv .nested_list li {
+  list-style: none !important;
+  list-style-type: none !important;
+  list-style-image: none !important;
+}
+
+/*****************************
  * CV TOC styles
  *****************************/
 
@@ -218,3 +349,22 @@ ul.timeline li::before {
      color: var(--global-text-color);
 }
 */
+
+/* ULTIMATE OVERRIDE: Force position titles to use theme color with maximum specificity */
+.cv .time_table .list-group-item .row .col-xs-10.cl-sm-10.col-md-10.mt-2.mt-md-0 h6.title.font-weight-bold.ml-1.ml-md-4,
+.cv .time_table .list-group-item .row .col-xs-10.cl-sm-10.col-md-10.mt-2.mt-md-0 h6.title.font-weight-bold,
+.cv .time_table .list-group-item .row .col-xs-10.cl-sm-10.col-md-10.mt-2.mt-md-0 h6.title,
+.cv .time_table .list-group-item .row .col-xs-10.cl-sm-10.col-md-10 h6.title.font-weight-bold.ml-1.ml-md-4,
+.cv .time_table .list-group-item .row .col-xs-10.cl-sm-10.col-md-10 h6.title.font-weight-bold,
+.cv .time_table .list-group-item .row .col-xs-10.cl-sm-10.col-md-10 h6.title,
+.cv .time_table .list-group-item .row h6.title.font-weight-bold.ml-1.ml-md-4,
+.cv .time_table .list-group-item .row h6.title.font-weight-bold,
+.cv .time_table .list-group-item .row h6.title,
+.cv .time_table .list-group-item h6.title.font-weight-bold.ml-1.ml-md-4,
+.cv .time_table .list-group-item h6.title.font-weight-bold,
+.cv .time_table .list-group-item h6.title,
+.cv .time_table h6.title.font-weight-bold.ml-1.ml-md-4,
+.cv .time_table h6.title.font-weight-bold,
+.cv .time_table h6.title {
+  color: var(--global-theme-color) !important;
+}

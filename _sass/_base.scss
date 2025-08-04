@@ -665,10 +665,35 @@ footer.sticky-bottom {
   a {
     text-decoration: none;
 
+    .card-title {
+      color: var(--global-text-color) !important;
+      transition: color 0.3s ease;
+      
+      a {
+        color: var(--global-text-color) !important;
+        text-decoration: none !important;
+        transition: color 0.3s ease;
+      }
+    }
+
     &:hover {
       .card-title {
-        color: var(--global-theme-color);
+        color: var(--global-theme-color) !important;
+        
+        a {
+          color: var(--global-theme-color) !important;
+        }
       }
+    }
+  }
+
+  // Additional specific targeting for project title links
+  .card-title a {
+    color: var(--global-text-color) !important;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: var(--global-theme-color) !important;
     }
   }
 
@@ -1423,3 +1448,5 @@ figure.cover {
     color: #23212d !important;
   }
 }
+
+

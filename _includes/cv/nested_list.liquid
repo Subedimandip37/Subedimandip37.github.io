@@ -1,16 +1,14 @@
-<ul class="card-text font-weight-light list-group list-group-flush">
+<div class="row" style="margin-left: 20px;">
   {% for content in entry.contents %}
-    <li class="list-group-item">
-      <h5 class="font-italic">{{ content.title }}</h5>
+    <div class="col-md-6">
+      <h6 style="color: var(--global-theme-color);">{{ content.title }}</h6>
       {% if content.items %}
-        <ul class="subitems">
+        <div class="font-weight-light">
           {% for subitem in content.items %}
-            <li>
-              <span class="subitem">{{ subitem }}</span>
-            </li>
+            <div style="margin-bottom: 0.25rem;">{{ subitem }}</div>
           {% endfor %}
-        </ul>
+        </div>
       {% endif %}
-    </li>
+    </div>
   {% endfor %}
-</ul>
+</div>

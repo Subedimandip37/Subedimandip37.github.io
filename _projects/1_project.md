@@ -1,8 +1,8 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: "<a href='https://drive.google.com/file/d/1MnSTx7xUrg9XBNqA5O7KQfMT6QRkmRti/view?usp=sharing' target='_blank'>Industrial Delicensing and Productivity Dispersion: Firm Dynamics and Resource Allocation in Post-Reform India</a>"
+description: "This is the proposal to examine the impact of India's 1991 industrial delicensing policy on productivity dispersion using Hopenhayn's structural model. The research aims to analyze how removing entry restrictions across industries affected firm dynamics, productivity dispersion, and resource allocation in post-reform India."
+img: assets/img/fellowship_proposal.png
 importance: 1
 category: work
 related_publications: true
@@ -23,13 +23,13 @@ To give your project a background in the portfolio page, just add the img tag to
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/1.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/3.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -37,7 +37,7 @@ To give your project a background in the portfolio page, just add the img tag to
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -50,10 +50,10 @@ You describe how you toiled, sweated, _bled_ for your project, and then... you r
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -70,10 +70,10 @@ Here's the code for the last row of images above:
 ```html
 <div class="row justify-content-sm-center">
   <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
   <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
 </div>
 ```

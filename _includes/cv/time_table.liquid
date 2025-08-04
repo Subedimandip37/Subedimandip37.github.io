@@ -29,24 +29,18 @@
         {% endif %}
         <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
           {% if content.title %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">{{ content.title }}</h6>
+            <h6 class="title font-weight-bold ml-1 ml-md-4" style="color: var(--global-theme-color) !important;">{{ content.title }}</h6>
           {% endif %}
           {% if content.department or content.institution %}
             <table class="table-cv ml-1 ml-md-4 institution">
               <tbody>
                 {% if content.institution %}
                   <tr>
-                    <td style="vertical-align: top; text-align: center" class="institution">
-                      <i class="fa-solid fa-building-columns iconinstitution"></i>
-                    </td>
                     <td class="institution">{{ content.institution }}</td>
                   </tr>
                 {% endif %}
                 {% if content.department %}
                   <tr>
-                    <td style="vertical-align: top; text-align: center" class="department">
-                      <i class="fa-regular fa-circle-dot icondepartment"></i>
-                    </td>
                     <td class="department">{{ content.department }}</td>
                   </tr>
                 {% endif %}
@@ -57,44 +51,44 @@
             <div class="ml-1 ml-md-4">{{ content.maindescription }}</div>
           {% endif %}
           {% if content.description %}
-            <ul class="items">
+            <div class="items ml-1 ml-md-4 font-italic" style="font-size: 0.9rem !important;">
               {% for item in content.description %}
-                <li>
+                <div style="margin-bottom: 0.25rem;">
                   {% if item.contents %}
                     <span class="item-title">{{ item.title }}</span>
-                    <ul class="subitems">
+                    <div class="subitems">
                       {% for subitem in item.contents %}
-                        <li>
+                        <div style="margin-bottom: 0.25rem;">
                           <span class="subitem">{{ subitem }}</span>
-                        </li>
+                        </div>
                       {% endfor %}
-                    </ul>
+                    </div>
                   {% else %}
                     <span class="item">{{ item }}</span>
                   {% endif %}
-                </li>
+                </div>
               {% endfor %}
-            </ul>
+            </div>
           {% endif %}
           {% if content.items %}
-            <ul class="items">
+            <div class="items ml-1 ml-md-4 font-italic" style="font-size: 0.9rem !important;">
               {% for item in content.items %}
-                <li>
+                <div style="margin-bottom: 0.25rem;">
                   {% if item.contents %}
                     <span class="item-title">{{ item.title }}</span>
-                    <ul class="subitems">
+                    <div class="subitems">
                       {% for subitem in item.contents %}
-                        <li>
+                        <div style="margin-bottom: 0.25rem;">
                           <span class="subitem">{{ subitem }}</span>
-                        </li>
+                        </div>
                       {% endfor %}
-                    </ul>
+                    </div>
                   {% else %}
                     <span class="item">{{ item }}</span>
                   {% endif %}
-                </li>
+                </div>
               {% endfor %}
-            </ul>
+            </div>
           {% endif %}
           {% if content.linkitems %}
             <div class="container-links ml-1 ml-md-4">

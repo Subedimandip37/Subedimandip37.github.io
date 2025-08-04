@@ -1,10 +1,13 @@
 ---
 layout: page
-title: project 4
-description: another without an image
-img:
-importance: 3
-category: fun
+title: "<a href='https://drive.google.com/file/d/1wxe2WLexgYpNVvRAdHqMIQ7nk_TVk7Hi/view?usp=sharing' target='_blank'>Empowering Nepal’s Gig Economy: A Comprehensive
+Approach to Worker Classification, Social Protections, and Regulation</a>"
+description: "This policy paper outlines key proposals to address challenges related to the misclassification of gig workers in Nepal and to establish comprehensive social security benefits, along with strategies for taxation and regulation policy. The research proposes innovative solutions including a two-step robust testing mechanism for worker classification, a contribution-based Social Security Fund (SSF), and uniform taxation policies to create a conducive regulatory environment for Nepal's gig economy."
+
+img: assets/img/hackathon.png
+importance: 4
+category: work
+giscus_comments: true
 ---
 
 Every project has a beautiful feature showcase page.
@@ -22,13 +25,13 @@ To give your project a background in the portfolio page, just add the img tag to
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/1.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/3.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -36,7 +39,7 @@ To give your project a background in the portfolio page, just add the img tag to
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -49,10 +52,10 @@ You describe how you toiled, sweated, _bled_ for your project, and then... you r
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -69,10 +72,10 @@ Here's the code for the last row of images above:
 ```html
 <div class="row justify-content-sm-center">
   <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
   <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
 </div>
 ```

@@ -1,0 +1,24 @@
+<div class="col mb-4">
+  <a href="{{ gallery_item.url | relative_url }}">
+    <div class="card h-100 hoverable">
+      <div class="row no-gutters">
+        {% if gallery_item.img %}
+          <div class="col-md-6">
+            {% include figure.liquid loading="eager" path=gallery_item.img sizes="(min-width: 768px) 156px, 50vw" alt="gallery thumbnail" class="card-img" %}
+          </div>
+        {% endif %}
+        <div class="{% if gallery_item.img %}col-md-6{% else %}col-md-12{% endif %}">
+          <div class="card-body">
+            <h3 class="card-title">{{ gallery_item.title }}</h3>
+            <p class="card-text">{{ gallery_item.description }}</p>
+            <div class="row ml-1 mr-1 p-0">
+              <small class="text-muted">
+                <i class="fa-solid fa-images"></i> Photo Gallery
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div> 

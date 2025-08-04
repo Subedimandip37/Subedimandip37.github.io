@@ -1,10 +1,12 @@
 ---
 layout: page
-title: project 5
-description: a project with a background image
-img: assets/img/1.jpg
-importance: 3
-category: fun
+title: "<a href='https://drive.google.com/file/d/1dJvbDftEwuTZoxSzwG2bDNaw6Dgu0UaB/view?usp=sharing' target='_blank'>Does student presence matter in business surveys? An Experimental Evidence from Aburi, Ghana</a>"
+description: "This study, conducted in Aburi, Ghana, uses a RCT to examine the impact of a student's presence on business surveys. The paper found that the presence of a student during a business survey significantly increased the length of the survey and decreased the reported years of education."
+
+img: assets/img/rct.png
+importance: 5
+category: work
+giscus_comments: true
 ---
 
 Every project has a beautiful feature showcase page.
@@ -22,13 +24,13 @@ To give your project a background in the portfolio page, just add the img tag to
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/1.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/3.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -36,7 +38,7 @@ To give your project a background in the portfolio page, just add the img tag to
 </div>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/5.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -49,10 +51,10 @@ You describe how you toiled, sweated, _bled_ for your project, and then... you r
 
 <div class="row justify-content-sm-center">
     <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
     <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
     </div>
 </div>
 <div class="caption">
@@ -69,10 +71,10 @@ Here's the code for the last row of images above:
 ```html
 <div class="row justify-content-sm-center">
   <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/6.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
   <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    <img src="assets/img/11.jpg" class="img-fluid rounded z-depth-1" alt="example image" style="pointer-events: none; cursor: default;">
   </div>
 </div>
 ```

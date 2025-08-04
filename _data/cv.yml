@@ -1,97 +1,144 @@
-- title: General Information
+- title: Basics
   type: map
   contents:
-    - name: Full Name
-      value: Albert Einstein
-    - name: Date of Birth
-      value: 14th March 1879
-    - name: Languages
-      value: English, German
+    - name: Name
+      value: Mandip Subedi
+    - name: Label
+      value: Research Fellow
+    - name: Email
+      value: mandipsubedi@nyu.edu
+    - name: Url
+      value: https://subedimandip37.github.io
+    - name: Summary
+      value: Economics graduate from New York University Abu Dhabi, focusing on labor economics, macro development, and policy evaluation.
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: Bachelor of Arts in Economics
+      institution: New York University Abu Dhabi
+      year: 2021.09 - 2025.05
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
-      description:
-        - Description 1.
-        - Description 2.
+        - "Regional Seminar: NYU Madrid, Spain (January 2025)"
+        - "Study Abroad: NYU New York, USA (Fall 2023)"
+        - "June-term: NYU Accra, Ghana (June 2022)"
+        
+    
+    - title: School Leaving Certificate
+      institution: Gandaki Boarding School, Nepal
+      year: 2018.08 - 2021.02
+      description: Science
 
-- title: Experience
+- title: Work Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Post-Graduate Practical Training Program
+      institution: NYU Abu Dhabi
+      department: "Supervisor: Asst. Prof. Veda Narasimhan"
+      year: 2025.05 - 2025.07
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - Processed, merged, and harmonized India's last 3 population and economic censuses from Development Data Lab into a unified, analysis-ready dataset using R and QGIS.
+
+    - title: Research Assistant to ICTs and Inter-Ethnic Marriage in Sub-Saharan Africa Project
+      institution: NYU Abu Dhabi
+      department: "Supervisor: Assoc. Prof. Luca Maria Pesando & Asst. Prof. Benjamin Laughlin"
+      year: 2024.05 - 2025.05
       description:
-        - Description 1.
-        - Description 2.
-
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
+        - Co-authoring a quantitative study on ICTs and inter-ethnic marriage by executing the end-to-end data workflow, from integrating DHS survey and geospatial data for 21 African countries in R and QGIS to developing analytical variables and conducting regression analysis.
+    
+    - title: Research Assistant to French Labor Policy Reform Project (Commissioned by the Office of the PM, France)
+      institution: NYU Abu Dhabi
+      department: "Supervisor: Prof. Étienne Wasmer"
+      year: 2024.04 - 2024.07
       description:
+        - Contributed to a policy report for the French Prime Minister’s Office by synthesizing research on dynamic economic models (OLG/DGE) and conducting comparative analysis of international labor market institutions.
 
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
+- title: Volunteering and Community
   type: time_table
   contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+    - title: Returning Resident Assistant
+      institution: Office of Student Life at NYU Abu Dhabi
+      year: 2024.09 - 2025.08
+      description:
+        - Oversaw a residential community of 36 students by managing key operational duties, conducting wellness checks, developing engagement programs, analyzing feedback, and assisting the RA recruitment process.
+    
+    - title: Co-founder and Director
+      institution: Booster Education Institute
+      year: 2023.02 - 2024.08
+      description:
+        - Co-founded the institute in Pokhara to offer a unique summer camp that blended academics with hands-on skills like startup bootcamps and graphic design.
+   
+    - title: Summer Intern
+      institution: Office of MP Sumana Shrestha, Federal Parliament of Nepal
+      year: 2023.06 - 2023.08
+      description:
+        - Co-founded the Nepali Students' Association (NSA) and served as its President, building the organization's vision, membership, and campus presence from the ground up. Authored the foundational constitution and bylaws, establishing the organization's governance and operational framework.
+    
+    - title: Project Leader
+      institution: Davis Projects for Peace
+      year: 2023.05 - 2023.08
+      description:
+        - Secured a $10,000 Davis Projects for Peace grant and directed the establishment of an Academic Resource Center, managing the entire project from proposal to completion.
+    
+    - title: Co-founder and President
+      institution: Nepali Student Association, NYU Abu Dhabi
+      year: 2023.01 - 2023.06
+      description:
+        - Co-founded the organization and served as its President, building the organization's vision, membership, and campus presence from the ground up. Authored the foundational constitution and bylaws, establishing the organization's governance and operational framework.
 
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
+    - title: Co-founder and Sub-Coordinator
+      institution: Leadership Forum Pokhara
+      year: 2019.10 - 2022.07
+      description:
+        - Actively shaped local policy discourse by chairing model parliament conferences, overseeing student-led policy research, and hosting high-level political discussions.
 
-- title: Academic Interests
+- title: Skills
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Languages
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - R 
+        - Stata 
+        - Python 
+        - MATLAB 
+        - LaTeX
+    - title: Software and Tools
       items:
-        - Description 1.
-        - Description 2.
+        - QGIS
+        - Git/GitHub
+        - Cursor
+        - Figma
+        - Tableau
 
-- title: Other Interests
-  type: list
+- title: Languages
+  type: nested_list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - title: Nepali
+      items:
+        - Native speaker
+    - title: English
+      items:
+        - Fluent
+    - title: Hindi
+      items:
+        - Advanced
+    - title: French
+      items:
+        - Basic
+
+- title: Interests
+  type: nested_list
+  contents:
+    - title: Research
+      items:
+        - Labor Economics
+        - Development Economics
+        - Policy Evaluation
+        - Spatial Economics
+    - title: Community
+      items:
+        - Pro-bono Economic Analysis
+        - Mentoring and Training
+        - Education Outreach
+
+

@@ -1,0 +1,3 @@
+# Development configuration
+# Override baseurl for local development
+baseurl: "" 
