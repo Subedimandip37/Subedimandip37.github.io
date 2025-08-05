@@ -50,6 +50,7 @@ category: personal
   
   <div class="row justify-content-center">
     <div class="col-sm-6 mt-3 mt-md-0">
+        <!-- Updated kayak video with improved browser compatibility -->
         <video class="img-fluid rounded z-depth-1" controls muted loop style="max-height: 400px;" preload="metadata" onerror="console.log('Video error:', this.error);" onloadstart="console.log('Video loading started');" oncanplay="console.log('Video can play');">
             <source src="/assets/video/kayak.mp4" type="video/mp4">
             <source src="/assets/video/kayak.mov" type="video/quicktime">
