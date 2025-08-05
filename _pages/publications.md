@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /publications/
+permalink: /research/
 title: Research
 description: Research by categories in reversed chronological order. 
 nav: true
@@ -17,4 +17,4 @@ nav_order: 2
 
 {% bibliography -f papers -q @*[selected=true] %}
 
-</div>
+</div> 
