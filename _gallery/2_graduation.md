@@ -10,27 +10,19 @@ category: personal
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        <img src="/assets/img/grad1.jpg" class="img-fluid rounded z-depth-1" alt="Graduation ceremony">
+        <img src="/assets/img/grad2.jpg" class="img-fluid rounded z-depth-1" alt="Graduation ceremony">
         <div class="caption">
             A proud moment shared with my biggest supporters. So grateful to have my family with me on graduation day.
         </div>
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        <img src="/assets/img/grad2.jpg" class="img-fluid rounded z-depth-1" alt="Graduation celebration">
+        <img src="/assets/img/grad3.jpg" class="img-fluid rounded z-depth-1" alt="Graduation celebration">
         <div class="caption">
             One final photo as a student at the iconic myNYUAD.
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        <img src="/assets/img/grad3.jpg" class="img-fluid rounded z-depth-1" alt="Graduation with family">
-        <div class="caption">
-            Celebrating this milestone with the people who made it all possible.
-        </div>
-    </div>
-</div>
 
 <div class="row justify-content-center">
     <div class="col-sm-6 mt-3 mt-md-0">
