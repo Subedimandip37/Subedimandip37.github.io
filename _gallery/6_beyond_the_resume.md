@@ -50,7 +50,8 @@ category: personal
   
   <div class="row justify-content-center">
     <div class="col-sm-6 mt-3 mt-md-0">
-        <video class="img-fluid rounded z-depth-1" controls muted loop style="max-height: 400px;" preload="metadata">
+        <video class="img-fluid rounded z-depth-1" controls muted loop style="max-height: 400px;" preload="metadata" onerror="console.log('Video error:', this.error);" onloadstart="console.log('Video loading started');" oncanplay="console.log('Video can play');">
+            <source src="/assets/video/kayak.mp4" type="video/mp4">
             <source src="/assets/video/kayak.mov" type="video/quicktime">
             <p>Your browser does not support the video tag. <a href="/assets/video/kayak.mov" target="_blank">Click here to download the video</a></p>
         </video>
