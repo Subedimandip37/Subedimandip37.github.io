@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://subedimandip37.github.io/sitemap.xml
+Sitemap: https://www.mandipsubedi.com/sitemap.xml
