@@ -21,7 +21,7 @@ ninja.data = [{
           description: "Research by categories in reversed chronological order.",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/publications/";
+            window.location.href = "/research/";
           },
         },{id: "nav-projects",
           title: "Projects",
@@ -319,17 +319,6 @@ ninja.data = [{
             window.location.href = "/blog/2021/distill/";
           
         },
-      },{id: "post-a-post-with-twitter",
-        
-          title: "a post with twitter",
-        
-        description: "an example of a blog post with twitter",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2020/twitter/";
-          
-        },
       },{id: "post-a-post-with-disqus-comments",
         
           title: "a post with disqus comments",
@@ -395,31 +384,31 @@ ninja.data = [{
           description: "Developing innovative solutions to address critical policy gaps within the Nepalese labor market during a high-impact, solutions-driven hackathon.",
           section: "Gallery",handler: () => {
               window.location.href = "/gallery/1_policy_hackathon/";
-            },},{id: "gallery-davis-project-for-peace",
-          title: 'Davis Project for Peace',
-          description: "Leading a Davis Project for Peace initiative to establish an Academic Resource Center, designed to empower local students and foster educational growth.",
-          section: "Gallery",handler: () => {
-              window.location.href = "/gallery/2_davis_peace/";
             },},{id: "gallery-graduation",
           title: 'Graduation',
           description: "Celebrating a significant milestone: my graduation in May 2025.",
           section: "Gallery",handler: () => {
-              window.location.href = "/gallery/2_travel/";
+              window.location.href = "/gallery/2_graduation/";
+            },},{id: "gallery-davis-project-for-peace",
+          title: 'Davis Project for Peace',
+          description: "Leading a Davis Project for Peace initiative to establish an Academic Resource Center, designed to empower local students and foster educational growth.",
+          section: "Gallery",handler: () => {
+              window.location.href = "/gallery/3_davis_peace/";
             },},{id: "gallery-leadership-and-community",
           title: 'Leadership and Community',
           description: "This collection highlights my dedication to service, leadership in action, and impactful community-focused initiatives.",
           section: "Gallery",handler: () => {
-              window.location.href = "/gallery/3_leadership_training/";
-            },},{id: "gallery-beyond-the-resume",
-          title: 'Beyond the Resume',
-          description: "Personal moments, hobbies, and life experiences",
-          section: "Gallery",handler: () => {
-              window.location.href = "/gallery/4_%20miscellaneous/";
+              window.location.href = "/gallery/4_leadership_community/";
             },},{id: "gallery-ghana-field-trip",
           title: 'Ghana Field Trip',
           description: "Documenting the research process from my academic fieldwork in Ghana, from hands-on data collection to meaningful cross-cultural interaction.",
           section: "Gallery",handler: () => {
-              window.location.href = "/gallery/4_ghana_field_trip/";
+              window.location.href = "/gallery/5_ghana_field_trip/";
+            },},{id: "gallery-beyond-the-resume",
+          title: 'Beyond the Resume',
+          description: "Personal moments, hobbies, and life experiences",
+          section: "Gallery",handler: () => {
+              window.location.href = "/gallery/6_beyond_the_resume/";
             },},{id: "news-won-nepali-congress-policy-hackathon-on-gig-economy",
           title: 'Won Nepali Congress Policy Hackathon on Gig Economy',
           description: "",
