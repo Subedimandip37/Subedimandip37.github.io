@@ -22,8 +22,7 @@
         - "Regional Seminar: NYU Madrid, Spain (January 2025)"
         - "Study Abroad: NYU New York, USA (Fall 2023)"
         - "June-term: NYU Accra, Ghana (June 2022)"
-        
-    
+
     - title: School Leaving Certificate
       institution: Gandaki Boarding School, Nepal
       year: 2018.08 - 2021.02
@@ -45,7 +44,7 @@
       year: 2024.05 - 2025.05
       description:
         - Co-authoring a quantitative study on ICTs and inter-ethnic marriage by executing the end-to-end data workflow, from integrating DHS survey and geospatial data for 21 African countries in R and QGIS to developing analytical variables and conducting regression analysis.
-    
+
     - title: Research Assistant to French Labor Policy Reform Project (Commissioned by the Office of the PM, France)
       institution: NYU Abu Dhabi
       department: "Supervisor: Prof. Étienne Wasmer"
@@ -61,25 +60,25 @@
       year: 2024.09 - 2025.08
       description:
         - Oversaw a residential community of 36 students by managing key operational duties, conducting wellness checks, developing engagement programs, analyzing feedback, and assisting the RA recruitment process.
-    
+
     - title: Co-founder and Director
       institution: Booster Education Institute
       year: 2023.02 - 2024.08
       description:
         - Co-founded the institute in Pokhara to offer a unique summer camp that blended academics with hands-on skills like startup bootcamps and graphic design.
-   
+
     - title: Summer Intern
       institution: Office of MP Sumana Shrestha, Federal Parliament of Nepal
       year: 2023.06 - 2023.08
       description:
-        - Co-founded the Nepali Students' Association (NSA) and served as its President, building the organization's vision, membership, and campus presence from the ground up. Authored the foundational constitution and bylaws, establishing the organization's governance and operational framework.
-    
+        - Conducted macroeconomic analysis to inform the MP's legislative position on the national Finance Bill. Formulated targeted strategies for technology sector job growth.
+
     - title: Project Leader
       institution: Davis Projects for Peace
       year: 2023.05 - 2023.08
       description:
         - Secured a $10,000 Davis Projects for Peace grant and directed the establishment of an Academic Resource Center, managing the entire project from proposal to completion.
-    
+
     - title: Co-founder and President
       institution: Nepali Student Association, NYU Abu Dhabi
       year: 2023.01 - 2023.06
@@ -97,10 +96,10 @@
   contents:
     - title: Languages
       items:
-        - R 
-        - Stata 
-        - Python 
-        - MATLAB 
+        - R
+        - Stata
+        - Python
+        - MATLAB
         - LaTeX
     - title: Software and Tools
       items:
@@ -140,5 +139,3 @@
         - Pro-bono Economic Analysis
         - Mentoring and Training
         - Education Outreach
-
-
