@@ -1,35 +1,58 @@
 <div class="col">
-  <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
-    <div class="card h-100 hoverable">
-      {% if project.img %}
-        {%
-          include figure.liquid
-          loading="eager"
-          path=project.img
-          sizes = "250px"
-          alt="project thumbnail"
-          class="card-img-top"
-        %}
+  <div class="card h-100 hoverable">
+    {% if project.img %}
+      {% comment %} Extract drive link from title if it contains an href {% endcomment %}
+      {% assign drive_link = '' %}
+      {% if project.title contains 'href=' %}
+        {% assign title_parts = project.title | split: "href='" %}
+        {% if title_parts.size > 1 %}
+          {% assign href_part = title_parts[1] | split: "'" %}
+          {% assign drive_link = href_part[0] %}
+        {% endif %}
       {% endif %}
-      <div class="card-body">
-        <h2 class="card-title">{{ project.title }}</h2>
-        <p class="card-text">{{ project.description }}</p>
-        <div class="row ml-1 mr-1 p-0">
-          {% if project.github %}
-            <div class="github-icon">
-              <div class="icon" data-toggle="tooltip" title="Code Repository">
-                <a href="{{ project.github }}"><i class="fa-brands fa-github gh-icon"></i></a>
-              </div>
-              {% if project.github_stars %}
-                <span class="stars" data-toggle="tooltip" title="GitHub Stars">
-                  <i class="fa-solid fa-star"></i>
-                  <span id="{{ project.github_stars }}-stars"></span>
-                </span>
-              {% endif %}
+
+      {% if drive_link != '' %}
+        <a href="{{ drive_link }}" target="_blank">
+          {%
+            include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes = "250px"
+            alt="project thumbnail"
+            class="card-img-top"
+          %}
+        </a>
+      {% else %}
+        <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
+          {%
+            include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes = "250px"
+            alt="project thumbnail"
+            class="card-img-top"
+          %}
+        </a>
+      {% endif %}
+    {% endif %}
+    <div class="card-body">
+      <h2 class="card-title">{{ project.title }}</h2>
+      <p class="card-text">{{ project.description }}</p>
+      <div class="row ml-1 mr-1 p-0">
+        {% if project.github %}
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="{{ project.github }}"><i class="fa-brands fa-github gh-icon"></i></a>
             </div>
-          {% endif %}
-        </div>
+            {% if project.github_stars %}
+              <span class="stars" data-toggle="tooltip" title="GitHub Stars">
+                <i class="fa-solid fa-star"></i>
+                <span id="{{ project.github_stars }}-stars"></span>
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
     </div>
-  </a>
+  </div>
 </div>

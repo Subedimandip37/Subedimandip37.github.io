@@ -8,7 +8,7 @@ subtitle: BA in Economics
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: mandip_subedi.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p><i class="fa-solid fa-envelope" style="color: var(--global-theme-color);"></i> <span style="color: var(--global-theme-color);">mandipsubedi@nyu.edu</span></p>
@@ -27,9 +27,3 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
-
-I am a [Post-Graduation Research Fellow](https://nyuad.nyu.edu/en/academics/undergraduate/undergraduate-research/tamayyuz-research-fellowship.html) in the Economics Department at NYU Abu Dhabi under the supervision of [Assoc. Prof. Raul Santaeulalia-Llopis](https://nyuad.nyu.edu/en/academics/divisions/social-science/faculty/raul-santaeulalia-llopis.html). My primary research interest is in labor economics, macro development, and policy evaluation. 
-
-My current research focuses on the impact of India’s 1991 industrial delicensing policy. I am using structural models and firm-level data to analyze whether the reform improved efficiency by reducing entry barriers or simply increased firm heterogeneity and experimentation.
-
-I am a May 2025 graduate of NYU Abu Dhabi and aim to pursue a PhD in economics.
