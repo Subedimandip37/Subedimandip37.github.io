@@ -389,9 +389,9 @@ ninja.data = [{
           description: "Celebrating a significant milestone: my graduation in May 2025.",
           section: "Gallery",handler: () => {
               window.location.href = "/gallery/2_graduation/";
-            },},{id: "gallery-davis-project-for-peace",
-          title: 'Davis Project for Peace',
-          description: "Leading a Davis Project for Peace initiative to establish an Academic Resource Center, designed to empower local students and foster educational growth.",
+            },},{id: "gallery-davis-projects-for-peace",
+          title: 'Davis Projects for Peace',
+          description: "Leading a Davis Projects for Peace initiative to establish an Academic Resource Center, designed to empower local students and foster educational growth.",
           section: "Gallery",handler: () => {
               window.location.href = "/gallery/3_davis_peace/";
             },},{id: "gallery-leadership-and-community",
