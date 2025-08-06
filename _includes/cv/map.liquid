@@ -7,9 +7,7 @@
       {% if content.value %}
         {% if content.name == 'Url' %}
           <td class="p-1 pl-2 font-weight-light text">
-            <a href="https://{{ content.value }}" target="_blank" style="color: var(--global-theme-color); text-decoration: none;">
-              {{- content.value -}}
-            </a>
+            <a href="{{ content.value }}" target="_blank" style="color: var(--global-theme-color); text-decoration: none;">{{ content.value }}</a>
           </td>
         {% else %}
           <td class="p-1 pl-2 font-weight-light text">{{ content.value }}</td>
