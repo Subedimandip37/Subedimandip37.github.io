@@ -30,7 +30,7 @@ category: work
     </div>
 </div>
 
-## Nepali Students Association at NYU Abu Dhabi
+## Nepali Student Association at NYU Abu Dhabi
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
