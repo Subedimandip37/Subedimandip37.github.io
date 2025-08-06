@@ -7,7 +7,6 @@ importance: 3
 category: work
 ---
 
-
 ## Economics Seminar
 
 <div class="row">
@@ -31,7 +30,7 @@ category: work
     </div>
 </div>
 
-## Nepalese Students Association at NYU Abu Dhabi
+## Nepali Students Association at NYU Abu Dhabi
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -65,8 +64,6 @@ category: work
     </div>
 </div>
 
-
-
 ## Leadership Forum Pokhara
 
 <div class="row">
@@ -98,4 +95,3 @@ category: work
         </div>
     </div>
 </div>
-
