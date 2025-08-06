@@ -1,18 +1,17 @@
 ---
 layout: page
-title: Davis Project for Peace
-description: Leading a Davis Project for Peace initiative to establish an Academic Resource Center, designed to empower local students and foster educational growth.
+title: Davis Projects for Peace
+description: Leading a Davis Projects for Peace initiative to establish an Academic Resource Center, designed to empower local students and foster educational growth.
 img: assets/img/davis_cover.jpg
 importance: 2
 category: work
 ---
 
-
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
         <img src="/assets/img/davis1.jpg" class="img-fluid rounded z-depth-1" alt="Davis Peace project">
         <div class="caption">
-            Facilitating a leadership training session for students inside the newly established conference room under the project.
+            The project team after a successful leadership training for the students—one of the first events held in the conference room built through our Davis Projects for Peace grant.
         </div>
     </div>
     <div class="col-sm mt-3 mt-md-0">
@@ -30,4 +29,4 @@ category: work
             Formally transitioning the completed Academic Resource Center to school administrators and community leaders
         </div>
     </div>
-</div> 
+</div>
