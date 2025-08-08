@@ -461,6 +461,13 @@ ninja.data = [{
           window.open("https://github.com/Subedimandip37", "_blank");
         },
       },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0005-3668-6774", "_blank");
+        },
+      },{
         id: 'social-linkedin',
         title: 'LinkedIn',
         section: 'Socials',
@@ -473,6 +480,13 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://twitter.com/Mandip37", "_blank");
+        },
+      },{
+        id: 'social-facebook',
+        title: 'Facebook',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://facebook.com/subedimandip37", "_blank");
         },
       },{
       id: 'light-theme',
