@@ -1,9 +1,9 @@
 {% if site.enable_google_verification or site.enable_bing_verification %}
   <!-- Website verification -->
-  {% if site.enable_google_verification %}
+  {% if site.enable_google_verification and site.google_site_verification %}
     <meta name="google-site-verification" content="{{ site.google_site_verification }}">
   {% endif %}
-  {% if site.enable_bing_verification %}
+  {% if site.enable_bing_verification and site.bing_site_verification %}
     <meta name="msvalidate.01" content="{{ site.bing_site_verification }}">
   {% endif %}
   <!--
@@ -17,6 +17,18 @@
 {% capture author_name %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
 
 <!-- Standard metadata -->
+{% comment %}
+  Compute smarter fallbacks for description/keywords
+{% endcomment %}
+{% assign meta_description = page.description %}
+{% if meta_description == nil or meta_description == '' %}
+  {% if page.excerpt %}
+    {% assign meta_description = page.excerpt | strip_html | strip_newlines | replace: '  ', ' ' | truncate: 160 %}
+  {% else %}
+    {% assign meta_description = site.description %}
+  {% endif %}
+{% endif %}
+{% assign meta_keywords = page.keywords | default: site.keywords %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,9 +51,9 @@
   {% endif %}
 </title>
 <meta name="author" content="{{ author_name }}">
-<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-{% if page.keywords or site.keywords %}
-  <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}{{ site.keywords }}{% endif %}">
+<meta name="description" content="{{ meta_description }}">
+{% if meta_keywords %}
+  <meta name="keywords" content="{{ meta_keywords }}">
 {% endif %}
 
 {% assign is_blog_post = false %}
@@ -57,7 +69,7 @@
   <meta property="og:type" content="{% if is_blog_post %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{% if page.title %}{{ title }} | {{ page.title }}{% else %}{{ title }}{% endif %}">
   <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url | remove_first: 'index.html' }}">
-  <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:description" content="{{ meta_description }}">
   {% if page.og_image or site.og_image %}
     <meta property="og:image" content="{% if page.og_image %}{{ page.og_image }}{% else %}{{ site.og_image }}{% endif %}">
   {% endif %}
@@ -66,7 +78,7 @@
   <!-- Twitter card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ title }}{% endif %}">
-  <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:description" content="{{ meta_description }}">
   {% if page.og_image or site.og_image %}
     <meta name="twitter:image" content="{% if page.og_image %}{{ page.og_image }}{% else %}{{ site.og_image }}{% endif %}">
   {% endif %}
@@ -232,7 +244,7 @@
         },
         "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
         "@type": "{% if is_blog_post %}BlogPosting{% else %}WebSite{% endif %}",
-        "description": "{% if page.description %}{{ page.description }}{% else if site.description %}{{ site.description }}{% endif %}",
+        "description": "{{ meta_description }}",
         "headline": "{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}",
         {% if sameaslinks != blank %}
         "sameAs": {{ sameaslinks | jsonify }},
@@ -241,6 +253,59 @@
         "@context": "https://schema.org"
     }
   </script>
+
+  {%- comment -%}
+    BreadcrumbList for posts and pages
+  {%- endcomment -%}
+  {% if is_blog_post %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ site.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "{{ site.url }}/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ page.title }}",
+            "item": "{{ page.url | prepend: site.baseurl | prepend: site.url }}"
+          }
+        ]
+      }
+    </script>
+  {% elsif page.url != '/' %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ site.url }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ page.title }}",
+            "item": "{{ page.url | prepend: site.baseurl | prepend: site.url }}"
+          }
+        ]
+      }
+    </script>
+  {% endif %}
 
   {%- comment -%}
     Add dedicated Person schema on the homepage to help Google build a knowledge panel.
@@ -269,6 +334,23 @@
           "name": "NYU Abu Dhabi"
         },
         "email": "mailto:{{ site.data.socials.email }}"
+      }
+    </script>
+
+    {%- comment -%}
+      Add WebSite with SearchAction for sitelinks search.
+    {%- endcomment -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ site.title == 'blank' | ternary: author_name, site.title }}",
+        "url": "{{ site.url }}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ site.url }}/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     </script>
   {% endif %}
