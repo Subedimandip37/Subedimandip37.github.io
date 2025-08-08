@@ -2,7 +2,7 @@
 layout: profiles
 permalink: /people/
 title: People
-description: members of the lab or group
+description: "Profiles and links for Mandip Subedi — Economics researcher at NYU Abu Dhabi"
 nav: false
 nav_order: 9
 

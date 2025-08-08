@@ -4,6 +4,8 @@ title: About
 nav: true
 nav_order: 1
 permalink: /
+description: "Mandip Subedi — Post‑Graduation Research Fellow in Economics at NYU Abu Dhabi. Research: labor economics, macro development, policy evaluation."
+keywords: ["Mandip Subedi", "NYU Abu Dhabi", "economics", "labor economics", "macro development", "policy evaluation"]
 subtitle: BA in Economics
 
 profile:

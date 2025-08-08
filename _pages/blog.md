@@ -4,6 +4,8 @@ permalink: /blog/
 title: Blog
 nav: false
 nav_order: 1
+description: "Blog posts by Mandip Subedi on economics, research, and policy"
+keywords: ["Mandip Subedi blog", "economics blog", "policy research"]
 pagination:
   enabled: true
   collection: posts
