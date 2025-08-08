@@ -11,7 +11,7 @@ ninja.data = [{
     },
   },{id: "nav-about",
           title: "About",
-          description: "",
+          description: "Mandip Subedi — Post‑Graduation Research Fellow in Economics at NYU Abu Dhabi. Research: labor economics, macro development, policy evaluation.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/";
