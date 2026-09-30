@@ -15,7 +15,7 @@
     --accent: #b3261e; --world: #2f6fb0;
     --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
     --deva: "Noto Sans Devanagari", var(--sans);
-    --ruler: 58px; --row: 26px; --gap: 4px; --pad: 28px;
+    --ruler: 56px; --row: 42px; --pad: 28px;
   }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; }
@@ -31,6 +31,7 @@
 
   .tag-head { margin-top: 10px; font: 600 11px var(--sans); text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint);
               display: flex; align-items: center; gap: 10px; }
+  .tags.collapsed { display: none; }
   .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
   .tag { font: 500 12px/1 var(--sans); padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line);
          background: #fff; color: var(--ink); cursor: pointer; white-space: nowrap; }
@@ -40,7 +41,7 @@
   .tag.on i { color: rgba(255,255,255,.8); }
   .tag .dot, .chip .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--c); margin-right: 5px; vertical-align: 1px; }
   .tag.on .dot { background: #fff; }
-  .tags-toggle { display: none; }
+  .tags-toggle { display: inline-block; }
   .chip { font: 500 11.5px/1 var(--sans); padding: 5px 8px; border-radius: 999px; background: #f2f3f6; border: 0; color: var(--ink); cursor: pointer; }
 
   .bar-ui { flex: none; position: sticky; top: 0; z-index: 8; background: rgba(244,241,234,.97); backdrop-filter: blur(8px);
@@ -62,34 +63,32 @@
   .status { font-size: 12.5px; color: var(--muted); margin-top: 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
   .stage-wrap { flex: 1; min-height: 280px; position: relative; display: flex; flex-direction: column; }
-  .stage { flex: 1; overflow: auto; cursor: grab; background:
-    repeating-linear-gradient(90deg, transparent, transparent 7px, rgba(0,0,0,.015) 7px, rgba(0,0,0,.015) 8px); }
+  .stage { flex: 1; overflow: auto; cursor: grab; background: #eef0f3; }
   .stage.grabbing { cursor: grabbing; }
   .board { position: relative; min-height: 100%; }
-  .ruler { position: sticky; top: 0; z-index: 3; height: var(--ruler); background: rgba(244,241,234,.92);
-           border-bottom: 1px solid var(--line); }
-  .era-label { position: absolute; top: 3px; font: 650 11px var(--sans); color: var(--faint); letter-spacing: .02em;
-               white-space: nowrap; pointer-events: none; }
-  .tick { position: absolute; top: 18px; height: calc(var(--ruler) - 18px); border-left: 1px solid #d3d8e0; padding-left: 6px;
-          font-size: 11px; color: var(--muted); display: flex; flex-direction: column; justify-content: center; pointer-events: none; }
-  .tick.major { border-left-color: #b7bec9; color: var(--ink); font-weight: 600; }
-  .tick small { font-weight: 400; color: var(--faint); }
+  .ruler { position: sticky; top: 0; z-index: 3; height: var(--ruler); background: #f4f5f7;
+           border-bottom: 1px solid #cfd3da; }
+  .era-label { position: absolute; top: 4px; font: 650 11px var(--sans); color: #8a909c; letter-spacing: .04em;
+               text-transform: uppercase; white-space: nowrap; pointer-events: none; }
+  .tick { position: absolute; top: 20px; height: calc(var(--ruler) - 20px); border-left: 1px solid #d5d9e0; padding-left: 7px;
+          font-size: 11px; color: #6b7280; display: flex; align-items: center; pointer-events: none; }
+  .tick.major { border-left-color: #9aa3b0; color: var(--ink); font-weight: 600; }
   .gridline { position: absolute; top: var(--ruler); bottom: 0; width: 1px; background: rgba(29,36,51,.06); pointer-events: none; }
-  .era-bg { position: absolute; top: var(--ruler); bottom: 0; opacity: .5; pointer-events: none; }
   .now { position: absolute; top: var(--ruler); bottom: 0; width: 1px; background: var(--accent); pointer-events: none; z-index: 2; }
-  .now::after { content: "now"; position: absolute; top: 4px; left: 4px; font: 600 10px var(--sans); color: var(--accent); }
+  .now::after { content: "now"; position: absolute; top: 6px; left: 5px; font: 600 10px var(--sans); color: var(--accent); }
 
-  .lanes { position: relative; }
-  .bar { position: absolute; height: 22px; border: 0; border-radius: 4px; color: #fff; font: 600 11.5px/22px var(--sans);
-         text-align: left; padding: 0 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
-         cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
-  .bar:hover, .bar:focus { outline: 2px solid #111; outline-offset: 1px; z-index: 4; }
-  .bar.on { outline: 2px solid #ff00aa; outline-offset: 1px; z-index: 5; }
-  .bar.world { box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 3px var(--world); }
-  .bar.point { padding: 0; border-radius: 11px; text-indent: 14px; overflow: visible; background-clip: padding-box; }
-  .bar.point::before { content: ""; position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 11px;
-                       background: inherit; box-shadow: inherit; }
-  .bar.dim { opacity: .18; }
+  .lanes { position: absolute; left: 0; width: 100%; background: repeating-linear-gradient(
+      to bottom, #e4e7ec 0 var(--row), #f3f4f6 var(--row) calc(var(--row) * 2)); }
+  .bar { position: absolute; height: 30px; border: 2px solid #1b2a14; border-radius: 9px; color: #14210e;
+         background: #c5e85a; font: 650 12.5px/26px var(--sans); text-align: left; padding: 0 12px;
+         overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer;
+         box-shadow: 0 1px 0 rgba(27,42,20,.12); }
+  .bar:hover, .bar:focus { outline: none; filter: brightness(1.05); z-index: 4; box-shadow: 0 2px 8px rgba(27,42,20,.18); }
+  .bar.on { background: #1b2a14; color: #c5e85a; z-index: 5; }
+  .bar.world { box-shadow: 0 0 0 2px #6fa8d6; }
+  .name { position: absolute; height: 30px; line-height: 30px; font: 500 13px var(--sans); color: #1d2433;
+          white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 280px; pointer-events: none; }
+  .bar.on + .name { font-weight: 650; }
 
   #tip { position: fixed; z-index: 30; display: none; max-width: 280px; background: #1d2433; color: #fff;
          font-size: 12.5px; line-height: 1.35; padding: 8px 10px; border-radius: 8px; pointer-events: none;
@@ -121,10 +120,7 @@
   footer { flex: none; color: var(--faint); font-size: 12px; padding: 10px 0 16px; }
 
   @media (max-width: 700px) {
-    .tags-toggle { display: inline-block; }
-    .tags.collapsed { display: none; }
     .panel { width: 100%; }
-    .bar { font-size: 11px; }
   }
 </style>
 </head>
@@ -133,7 +129,7 @@
   <div class="wrap">
     <a class="home" href="/">← mandipsubedi.com</a>
     <h1>Nepal Through Time</h1>
-    <p class="lede">A horizontal timeline: the length of a bar is how long that event lasted, and bars stacked on top of each other were happening at the same time. Dates in AD and Bikram Sambat. Click a bar to read it.</p>
+    <p class="lede">Each event sits on its own row and steps down as time moves forward. The length of a bar is how long it lasted. Dates in AD and Bikram Sambat. Click a bar to read it.</p>
     <div class="tag-head"><span>Show one tag</span><button class="btn tags-toggle" id="tags-toggle" type="button" aria-expanded="false">Tags</button></div>
     <div class="tags collapsed" id="tags" role="group" aria-label="Filter by tag"></div>
   </div>
@@ -163,10 +159,10 @@
 </div>
 <div id="tip" role="tooltip"></div>
 <aside class="panel" id="panel"></aside>
-<footer class="wrap">Compiled by Mandip Subedi. Bar length follows the dates in the source: a five-year premiership occupies five years, a one-day massacre is a short mark. BS dates from 1918 AD onwards are exact conversions or the dates recorded in the notes; earlier BS years are approximate. Drag the chart to pan; use +/− to zoom.</footer>
+<footer class="wrap">Compiled by Mandip Subedi. Each event has its own row; overlapping years sit on neighbouring rows. Bar length follows the dates in the source. BS dates from 1918 AD onwards are exact conversions or the dates recorded in the notes; earlier BS years are approximate. Drag to pan; use +/− to zoom.</footer>
 
 <script>
-const DATA_VERSION = "20261001004238";
+const DATA_VERSION = "20261001010617";
 const TAG_COLORS = {
   king: "#8a5a00", rana: "#9c2f2f", government: "#3d5a80", panchayat: "#7a6c2e", congress: "#2b8a3e",
   communist: "#c92a2a", parties: "#5f3dc4", election: "#1971c2", constitution: "#495057", movement: "#e8590c",
@@ -190,7 +186,7 @@ const SEGMENTS = [
   [1951, 1990, 18],
   [1990, 2032, 22],
 ];
-const ROW = 26, RULER = 58, PAD = 36, MIN_BAR = 8;
+const ROW = 42, RULER = 56, PAD = 40, MIN_BAR = 52, LABEL_ROOM = 320;
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
@@ -278,15 +274,9 @@ function ticks() {
 }
 
 function pack(events) {
-  const ends = [];
-  const ordered = [...events].sort((a, b) => a.t0 - b.t0 || (b.t1 - b.t0) - (a.t1 - a.t0));
-  for (const e of ordered) {
-    let i = ends.findIndex(t => t <= e.t0 + 0.002);
-    if (i < 0) { i = ends.length; ends.push(0); }
-    e.lane = i;
-    ends[i] = e.t1;
-  }
-  return ends.length;
+  const ordered = [...events].sort((a, b) => a.t0 - b.t0 || a.t1 - b.t1 || a.title.localeCompare(b.title));
+  ordered.forEach((e, i) => { e.lane = i; });
+  return ordered.length;
 }
 
 function matches(e) {
@@ -296,13 +286,8 @@ function matches(e) {
 function paint() {
   shown = DATA.events.filter(matches);
   const lanes = Math.max(pack(shown), 1);
-  const width = Math.ceil(xOf(TMAX) + PAD);
-  const height = RULER + 16 + lanes * ROW + 24;
-  const eraHtml = DATA.eras.map((er, i) => {
-    const next = DATA.eras[i + 1];
-    const x = xOf(er.from), w = xOf(next ? next.from : TMAX) - x;
-    return `<div class="era-bg" style="left:${x}px;width:${w}px;background:${ERA_TINTS[i % ERA_TINTS.length]}"></div>`;
-  }).join("");
+  const width = Math.ceil(xOf(TMAX) + PAD + LABEL_ROOM);
+  const height = RULER + lanes * ROW;
   const eraLabels = DATA.eras.map(er =>
     `<div class="era-label" style="left:${xOf(er.from) + 8}px">${esc(er.label)}</div>`).join("");
   const tickHtml = ticks().map(({ t, major }) =>
@@ -311,17 +296,19 @@ function paint() {
     `<div class="gridline" style="left:${xOf(t)}px"></div>`).join("");
   const bars = shown.map(e => {
     const x = xOf(e.t0), w = Math.max(MIN_BAR, xOf(e.t1) - x);
-    const point = w < 22;
+    const inside = w >= 160;
     const world = e.tags.includes("international");
-    return `<button type="button" class="bar${point ? " point" : ""}${world ? " world" : ""}${state.selected === e.id ? " on" : ""}"
-      data-id="${esc(e.id)}" title=""
-      style="left:${x}px;width:${w}px;top:${RULER + 16 + e.lane * ROW}px;background:${colorOf(e)}">${w >= 64 ? esc(e.title) : ""}</button>`;
+    const y = e.lane * ROW + 6;
+    const name = inside ? "" : `<span class="name" style="left:${x + w + 10}px;top:${y}px">${esc(e.title)}</span>`;
+    return `<button type="button" class="bar${world ? " world" : ""}${state.selected === e.id ? " on" : ""}"
+      data-id="${esc(e.id)}"
+      style="left:${x}px;width:${w}px;top:${y}px">${inside ? esc(e.title) : ""}</button>${name}`;
   }).join("");
   $("board").style.width = width + "px";
   $("board").style.height = height + "px";
-  $("board").innerHTML = `<div class="ruler">${eraLabels}${tickHtml}</div>${eraHtml}${gridHtml}
+  $("board").innerHTML = `<div class="ruler">${eraLabels}${tickHtml}</div>${gridHtml}
     <div class="now" style="left:${xOf(new Date().getFullYear() + 0.75)}px"></div>
-    <div class="lanes">${bars}</div>`;
+    <div class="lanes" style="top:${RULER}px;height:${lanes * ROW}px">${bars}</div>`;
 
   $("eras").innerHTML = DATA.eras.map(er =>
     `<button type="button" data-era="${er.id}">${esc(er.label)}</button>`).join("");
@@ -333,7 +320,7 @@ function paint() {
   const filters = [state.tag && `tagged <b>${esc(tagLabel(state.tag))}</b>`, state.q && `matching “${esc(state.q)}”`].filter(Boolean);
   $("status").innerHTML = `${shown.length.toLocaleString()} of ${DATA.events.length.toLocaleString()} events` +
     (filters.length ? ` ${filters.join(" and ")} <button class="btn" type="button" id="clear">Clear</button>` : "") +
-    ` · drag to pan · longer bar = longer event`;
+    ` · drag to pan · one event per row`;
   $("deva").setAttribute("aria-pressed", state.deva);
   $("zoom-out").disabled = state.zoom <= 0.45;
   $("zoom-in").disabled = state.zoom >= 6;
@@ -373,14 +360,16 @@ function select(id, scroll) {
     const e = byId[id];
     const stage = $("stage");
     const x = xOf((e.t0 + e.t1) / 2);
-    stage.scrollTo({ left: x - stage.clientWidth * 0.35, top: Math.max(0, RULER + e.lane * ROW - 80), behavior: "instant" });
+    stage.scrollTo({ left: x - stage.clientWidth * 0.3, top: Math.max(0, RULER + e.lane * ROW - 80), behavior: "instant" });
   }
 }
 
 function jumpEra(id) {
-  const er = DATA.eras.find(x => x.id === id);
-  if (!er) return;
-  $("stage").scrollLeft = Math.max(0, xOf(er.from) - 40);
+  const first = shown.find(e => e.era === id);
+  if (!first) return;
+  const stage = $("stage");
+  stage.scrollLeft = Math.max(0, xOf(first.t0) - 28);
+  stage.scrollTop = Math.max(0, RULER + first.lane * ROW - 20);
 }
 
 function setZoom(z, cx) {
