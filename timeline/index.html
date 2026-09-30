@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nepal Through Time: A Socio-Economic Timeline | Mandip Subedi</title>
+<meta name="description" content="A timeline of Nepali and world socio-economic and political history, from the ancient Kathmandu valley to the federal republic, with dates in AD and Bikram Sambat.">
+<link rel="icon" href="/assets/img/ms.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433; --muted: #5d6576; --faint: #8b92a1; --line: #dfe3ea; --bg: #f7f5f0; --card: #fff;
+    --accent: #b3261e; --accent-soft: #fbeae8; --world: #2f6fb0; --world-soft: #e8f0fa;
+    --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --deva: "Noto Sans Devanagari", var(--sans);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans); }
+  a { color: var(--accent); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  header.top { padding: 28px 0 12px; }
+  .home { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .home:hover { color: var(--accent); }
+  h1 { font: 650 clamp(30px, 5vw, 44px)/1.1 var(--serif); margin: 10px 0 6px; letter-spacing: -0.01em; }
+  .lede { color: var(--muted); max-width: 680px; margin: 0; }
+
+  .bar { position: sticky; top: 0; z-index: 10; background: rgba(247, 245, 240, 0.96); backdrop-filter: blur(6px);
+         border-bottom: 1px solid var(--line); padding: 12px 0 10px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .search { flex: 1 1 260px; position: relative; }
+  .search input { width: 100%; padding: 9px 12px 9px 34px; border: 1px solid var(--line); border-radius: 8px;
+                  font: inherit; background: #fff; }
+  .search input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  .search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--faint); }
+  select, .btn { font: 500 13px var(--sans); border: 1px solid var(--line); background: #fff; color: var(--ink);
+                 border-radius: 8px; padding: 8px 11px; cursor: pointer; }
+  .btn:hover, select:hover { border-color: var(--faint); }
+  .btn[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .status { font-size: 13px; color: var(--muted); margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .status .clear { font-size: 12px; padding: 3px 8px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font: 500 12px/1 var(--sans); padding: 6px 9px; border-radius: 999px; border: 1px solid var(--line);
+         background: #fff; color: var(--ink); cursor: pointer; white-space: nowrap; }
+  .tag i { font-style: normal; color: var(--faint); margin-left: 3px; }
+  .tag:hover { border-color: var(--c, var(--faint)); }
+  .tag.on { background: var(--c, var(--ink)); border-color: var(--c, var(--ink)); color: #fff; }
+  .tag.on i { color: rgba(255, 255, 255, 0.8); }
+  .tag .dot, .chip .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--c); margin-right: 5px; vertical-align: 1px; }
+  .tag.on .dot { background: #fff; }
+  .tags-toggle { display: none; }
+  .tag-head { margin-top: 18px; font: 600 12px var(--sans); text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint);
+              display: flex; align-items: center; gap: 10px; }
+  .tag-head .btn { text-transform: none; letter-spacing: 0; }
+  .tags { margin-top: 8px; }
+
+  .eras { display: flex; gap: 4px; overflow-x: auto; margin-top: 10px; padding-bottom: 2px; scrollbar-width: thin; }
+  .eras a { font-size: 12px; color: var(--muted); text-decoration: none; padding: 4px 8px; border-radius: 6px; white-space: nowrap; }
+  .eras a:hover { background: #fff; color: var(--ink); }
+  .eras a.empty { opacity: 0.35; pointer-events: none; }
+
+  main { padding: 10px 0 80px; }
+  .era { margin-top: 34px; }
+  .era h2 { font: 650 22px/1.2 var(--serif); margin: 0 0 4px; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .era h2 small { font: 500 13px var(--sans); color: var(--faint); }
+  .list { position: relative; margin: 12px 0 0; padding: 0; list-style: none; }
+  .list::before { content: ""; position: absolute; left: 150px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+
+  .ev { position: relative; display: grid; grid-template-columns: 150px 1fr; }
+  .ev::before { content: ""; position: absolute; left: 145px; top: 17px; width: 12px; height: 12px; border-radius: 50%;
+                background: var(--bg); border: 2px solid var(--accent); z-index: 1; }
+  .ev.world::before { border-color: var(--world); }
+  .ev.open::before { background: var(--accent); }
+  .ev.world.open::before { background: var(--world); }
+  .when { padding: 12px 18px 0 0; text-align: right; font-size: 12.5px; line-height: 1.35; }
+  .when .ad { font-weight: 600; color: var(--ink); display: block; }
+  .when .bs { color: var(--muted); display: block; margin-top: 2px; }
+  .when .bs.deva { font-family: var(--deva); }
+  .card { margin: 4px 0 4px 22px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; min-width: 0; }
+  .ev.open .card { border-color: #cfd5de; box-shadow: 0 4px 18px rgba(29, 36, 51, 0.06); }
+  .head { width: 100%; display: flex; gap: 10px; align-items: flex-start; text-align: left; background: none; border: 0;
+          padding: 11px 14px; font: inherit; color: inherit; cursor: pointer; border-radius: 10px; }
+  .head:hover h3 { color: var(--accent); }
+  .ev.world .head:hover h3 { color: var(--world); }
+  .head.static { cursor: default; }
+  .head.static:hover h3 { color: inherit; }
+  .head h3 { flex: 1; margin: 0; font: 600 15.5px/1.4 var(--sans); overflow-wrap: anywhere; }
+  .badge { font: 600 10px/1 var(--sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--world);
+           background: var(--world-soft); padding: 4px 6px; border-radius: 4px; margin-top: 3px; white-space: nowrap; }
+  .chev { flex: none; margin-top: 3px; color: var(--faint); transition: transform 0.15s; }
+  .ev.open .chev { transform: rotate(90deg); }
+  .body { padding: 0 16px 14px; border-top: 1px solid var(--line); }
+  .body p { margin: 12px 0 0; }
+  .body mark { background: #fff1a8; padding: 0 1px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chip { font: 500 11.5px/1 var(--sans); padding: 5px 8px; border-radius: 999px; background: #f2f3f6; border: 0; color: var(--ink); cursor: pointer; }
+  .chip:hover { background: #e6e8ee; }
+  .meta { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+  .meta a { word-break: break-all; }
+  .permalink { color: var(--faint); text-decoration: none; font-size: 12px; margin-left: 6px; }
+  .permalink:hover { color: var(--accent); }
+  .tbl { overflow-x: auto; margin-top: 12px; }
+  table { border-collapse: collapse; font-size: 13px; min-width: 100%; }
+  th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: #f6f7f9; font-weight: 600; }
+  pre { white-space: pre; overflow-x: auto; font: 12px/1.5 ui-monospace, Menlo, monospace; background: #f6f7f9; padding: 10px; border-radius: 6px; margin: 12px 0 0; }
+  .empty-state { text-align: center; color: var(--muted); padding: 60px 0; }
+  footer { color: var(--faint); font-size: 12.5px; padding: 20px 0 40px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 640px) {
+    html { scroll-padding-top: 120px; }
+    .list::before { left: 7px; }
+    .ev { grid-template-columns: 1fr; padding-left: 26px; }
+    .ev::before { left: 2px; top: 5px; }
+    .when { text-align: left; padding: 0 0 2px; display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+    .when .bs { margin: 0; }
+    .card { margin: 0 0 12px; }
+    .tags-toggle { display: inline-block; }
+    .tags.collapsed { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <a class="home" href="/">← mandipsubedi.com</a>
+  <h1>Nepal Through Time</h1>
+  <p class="lede">A timeline of Nepal's political, social and economic history, set against events in the wider world.
+    Dates are given in AD and Bikram Sambat (BS). Click an event to read more, or pick a tag to see only those events.</p>
+  <div class="tag-head"><span>Show one tag</span><button class="btn tags-toggle" id="tags-toggle" type="button" aria-expanded="false">Tags</button></div>
+  <div class="tags collapsed" id="tags" role="group" aria-label="Filter by tag"></div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="row">
+      <label class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search events, e.g. Birta, Koshi, Jung Bahadur" aria-label="Search events" autocomplete="off">
+      </label>
+      <button class="btn" id="expand" type="button">Expand all</button>
+      <button class="btn" id="deva" type="button" aria-pressed="false" title="Show BS dates in Nepali">वि.सं. नेपालीमा</button>
+    </div>
+    <nav class="eras" id="eras" aria-label="Jump to era"></nav>
+    <div class="status" id="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<main class="wrap" id="timeline"><p class="empty-state">Loading the timeline…</p></main>
+<footer class="wrap">Compiled by Mandip Subedi. BS dates from 1918 AD onwards are exact conversions or the dates recorded in the source notes;
+  earlier BS years are approximate, since the calendar in use varied. Events known only by year show both BS years that the AD year spans.</footer>
+
+<script>
+const DATA_VERSION = "20261001001034";
+const TAG_COLORS = {
+  king: "#8a5a00", rana: "#9c2f2f", government: "#3d5a80", panchayat: "#7a6c2e", congress: "#2b8a3e",
+  communist: "#c92a2a", parties: "#5f3dc4", election: "#1971c2", constitution: "#495057", movement: "#e8590c",
+  conflict: "#862e2e", diplomacy: "#0b7285", international: "#2f6fb0", land: "#5c940d", economy: "#a26100",
+  infrastructure: "#6741d9", social: "#c2255c", calamity: "#d9480f", culture: "#9c36b5", identity: "#087f5b",
+  data: "#868e96",
+};
+const BS_MONTHS = ["Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra", "Asoj", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"];
+const BS_MONTHS_NE = ["बैशाख", "जेठ", "असार", "साउन", "भदौ", "असोज", "कात्तिक", "मंसिर", "पुस", "माघ", "फागुन", "चैत"];
+const MONTH_ALIASES = { baishakh: 0, baisakh: 0, jestha: 1, jeth: 1, asar: 2, ashadh: 2, shrawan: 3, saun: 3, bhadra: 4, bhadau: 4,
+  asoj: 5, ashwin: 5, kartik: 6, mangsir: 7, poush: 8, push: 8, magh: 9, falgun: 10, phagun: 10, chaitra: 11, chait: 11 };
+const DIGITS_NE = "०१२३४५६७८९";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const state = { tag: null, q: "", deva: localStorage.getItem("timeline-deva") === "1", open: new Set() };
+const domId = id => `e-${id}`;
+let DATA = null, byId = {};
+
+const neDigits = s => String(s).replace(/\d/g, d => DIGITS_NE[d]);
+
+function bsPart(b, deva) {
+  if (b === "present") return deva ? "हालसम्म" : "present";
+  const months = deva ? BS_MONTHS_NE : BS_MONTHS, n = deva ? neDigits : x => x;
+  if (b.approx) return (deva ? "करिब " : "c. ") + n(b.y);
+  if (b.m2) {
+    const span = b.m2 === b.m ? months[b.m - 1] : `${months[b.m - 1]}–${months[b.m2 - 1]}`;
+    return b.y2 ? `${months[b.m - 1]} ${n(b.y)}–${months[b.m2 - 1]} ${n(b.y2)}` : `${span} ${n(b.y)}`;
+  }
+  if (b.y2) return `${n(b.y)}/${n(String(b.y2).slice(-2))}`;
+  if (b.d) return deva ? `${n(b.y)} ${months[b.m - 1]} ${n(b.d)}` : `${b.d} ${months[b.m - 1]} ${b.y}`;
+  return n(b.y);
+}
+
+function bsText(e, deva) {
+  if (e.bs_text) {
+    if (!deva) return /\bBS\b/.test(e.bs_text) ? e.bs_text : `${e.bs_text} BS`;
+    return neDigits(e.bs_text.replace(/\bBS\b/, "").replace(/[A-Za-z]+/g, w => {
+      const i = MONTH_ALIASES[w.toLowerCase()];
+      return i === undefined ? (w.toLowerCase() === "onward" ? "देखि" : w) : BS_MONTHS_NE[i];
+    })).trim() + " वि.सं.";
+  }
+  if (e.bs_note) return deva ? "वि.सं. अघि" : "Before BS era";
+  if (!e.bs) return "";
+  const { from, to } = e.bs, n = deva ? neDigits : x => x, suffix = deva ? " वि.सं." : " BS";
+  if (to && to !== "present" && from.y2 && to.y2 && !from.m) return `${n(from.y)}–${n(to.y2)}${suffix}`;
+  if (to && from.approx && to.approx) {
+    return (deva ? "करिब " : "c. ") + (from.y === to.y ? n(from.y) : `${n(from.y)}–${n(to.y)}`) + suffix;
+  }
+  const a = bsPart(from, deva), b = to ? bsPart(to, deva) : null;
+  return (b ? `${a} – ${b}` : a) + suffix;
+}
+
+const matches = e => (!state.tag || e.tags.includes(state.tag)) && (!state.q || e._text.includes(state.q));
+
+function highlight(htmlStr) {
+  if (!state.q) return htmlStr;
+  const re = new RegExp(`(${state.q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+  return htmlStr.replace(/(^|>)([^<]+)/g, (m, a, text) => a + text.replace(re, "<mark>$1</mark>"));
+}
+
+function eventHTML(e) {
+  const world = e.tags.includes("international"), hasBody = !!e.detail || e.sources;
+  const open = state.open.has(e.id);
+  const bs = bsText(e, state.deva);
+  return `<li class="ev${world ? " world" : ""}${open ? " open" : ""}" id="${domId(e.id)}" data-id="${e.id}">
+    <div class="when"><span class="ad">${esc(e.ad)}</span>${bs ? `<span class="bs${state.deva ? " deva" : ""}">${esc(bs)}</span>` : ""}</div>
+    <div class="card">
+      <button class="head${hasBody ? "" : " static"}" type="button" ${hasBody ? `aria-expanded="${open}"` : "tabindex=\"-1\""}>
+        <h3>${highlight(esc(e.title))}</h3>${world ? `<span class="badge">World</span>` : ""}
+        ${hasBody ? `<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>` : ""}
+      </button>
+      ${open ? bodyHTML(e) : ""}
+    </div></li>`;
+}
+
+function bodyHTML(e) {
+  const tags = e.tags.map(t => `<button class="chip" type="button" data-tag="${t}" style="--c:${TAG_COLORS[t]}"><span class="dot"></span>${esc(tagLabel(t))}</button>`).join("");
+  const sources = e.sources ? `<div class="meta">Source: ${e.sources.map(s => /^https?:\/\//.test(s)
+    ? `<a href="${esc(s)}" target="_blank" rel="noopener">${esc(s.replace(/^https?:\/\/(www\.)?/, "").slice(0, 70))}</a>` : esc(s)).join("; ")}</div>` : "";
+  return `<div class="body">${highlight(e.detail || "")}<div class="chips">${tags}<a class="permalink" href="#${e.id}" title="Link to this event">#</a></div>${sources}</div>`;
+}
+
+const tagLabel = t => (DATA.tags.find(x => x.id === t) || { label: t }).label;
+
+function render() {
+  const shown = DATA.events.filter(matches);
+  const byEra = {};
+  shown.forEach(e => (byEra[e.era] ||= []).push(e));
+  $("timeline").innerHTML = shown.length ? DATA.eras.filter(er => byEra[er.id]).map(er => `
+    <section class="era" id="era-${er.id}">
+      <h2>${esc(er.label)} <small>${esc(er.years)} · ${byEra[er.id].length} event${byEra[er.id].length === 1 ? "" : "s"}</small></h2>
+      <ol class="list">${byEra[er.id].map(eventHTML).join("")}</ol>
+    </section>`).join("")
+    : `<p class="empty-state">No events match${state.q ? ` “${esc(state.q)}”` : ""}${state.tag ? ` in ${esc(tagLabel(state.tag))}` : ""}.</p>`;
+
+  $("eras").innerHTML = DATA.eras.map(er => `<a href="#era-${er.id}" class="${byEra[er.id] ? "" : "empty"}">${esc(er.label)}</a>`).join("");
+  const counts = {};
+  DATA.events.filter(e => !state.q || e._text.includes(state.q)).forEach(e => e.tags.forEach(t => counts[t] = (counts[t] || 0) + 1));
+  $("tags").innerHTML = `<button class="tag${state.tag ? "" : " on"}" type="button" data-tag="">All events</button>` +
+    DATA.tags.map(t => `<button class="tag${state.tag === t.id ? " on" : ""}" type="button" data-tag="${t.id}" title="${esc(t.about)}" style="--c:${TAG_COLORS[t.id]}">
+      <span class="dot"></span>${esc(t.label)}<i>${counts[t.id] || 0}</i></button>`).join("");
+  const filters = [state.tag && `tagged <b>${esc(tagLabel(state.tag))}</b>`, state.q && `matching “${esc(state.q)}”`].filter(Boolean);
+  $("status").innerHTML = `Showing ${shown.length.toLocaleString()} of ${DATA.events.length.toLocaleString()} events` +
+    (filters.length ? ` ${filters.join(" and ")} <button class="btn clear" type="button" id="clear">Clear</button>` : "");
+  $("expand").textContent = shown.length && shown.every(e => state.open.has(e.id) || !(e.detail || e.sources)) ? "Collapse all" : "Expand all";
+  $("tags-toggle").textContent = state.tag ? `Tag: ${tagLabel(state.tag)}` : "Tags";
+}
+
+function toggle(li) {
+  const id = li.dataset.id, e = byId[id];
+  if (!e.detail && !e.sources) return;
+  const open = !state.open.has(id);
+  open ? state.open.add(id) : state.open.delete(id);
+  li.classList.toggle("open", open);
+  li.querySelector(".head").setAttribute("aria-expanded", open);
+  const body = li.querySelector(".body");
+  if (open && !body) li.querySelector(".card").insertAdjacentHTML("beforeend", bodyHTML(e));
+  if (!open && body) body.remove();
+  $("expand").textContent = DATA.events.filter(matches).every(x => state.open.has(x.id) || !(x.detail || x.sources)) ? "Collapse all" : "Expand all";
+}
+
+function writeHash() {
+  const parts = [];
+  if (state.tag) parts.push(`tag=${state.tag}`);
+  if (state.q) parts.push(`q=${encodeURIComponent(state.q)}`);
+  history.replaceState(null, "", parts.length ? `#${parts.join("&")}` : location.pathname + location.search);
+}
+
+function readHash() {
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h && !h.includes("=") && byId[h]) return { event: h };
+  const p = Object.fromEntries(h.split("&").filter(Boolean).map(x => x.split("=")));
+  state.tag = DATA.tags.some(t => t.id === p.tag) ? p.tag : null;
+  state.q = (p.q || "").toLowerCase();
+  $("q").value = p.q || "";
+  return {};
+}
+
+function setTag(tag) {
+  state.tag = tag || null;
+  writeHash();
+  render();
+  const top = $("timeline").offsetTop - document.querySelector(".bar").offsetHeight;
+  if (scrollY > top) window.scrollTo({ top });
+}
+
+function goToEvent(id) {
+  if (!byId[id]) return;
+  if (!matches(byId[id])) { state.tag = null; state.q = ""; $("q").value = ""; }
+  state.open.add(id);
+  render();
+  const go = () => $(domId(id)) && $(domId(id)).scrollIntoView({ block: "start", behavior: "instant" });
+  setTimeout(go, 30);
+  document.fonts.ready.then(() => setTimeout(go, 30));
+}
+
+async function init() {
+  history.scrollRestoration = "manual";
+  DATA = await fetch(`events.json?v=${DATA_VERSION}`).then(r => r.json());
+  DATA.events.forEach(e => {
+    byId[e.id] = e;
+    e._text = (e.title + " " + e.detail.replace(/<[^>]+>/g, " ") + " " + e.ad).toLowerCase()
+      .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"');
+  });
+  $("deva").setAttribute("aria-pressed", state.deva);
+  const { event } = readHash();
+  render();
+  if (event) goToEvent(event);
+
+  $("timeline").addEventListener("click", ev => {
+    const chip = ev.target.closest(".chip");
+    if (chip) return setTag(chip.dataset.tag);
+    const head = ev.target.closest(".head");
+    if (head) toggle(head.closest(".ev"));
+  });
+  $("tags").addEventListener("click", ev => {
+    const b = ev.target.closest(".tag");
+    if (!b) return;
+    setTag(b.dataset.tag === state.tag ? "" : b.dataset.tag);
+    if (matchMedia("(max-width: 640px)").matches) { $("tags").classList.add("collapsed"); $("tags-toggle").setAttribute("aria-expanded", "false"); }
+  });
+  $("status").addEventListener("click", ev => {
+    if (ev.target.id !== "clear") return;
+    state.tag = null; state.q = ""; $("q").value = ""; writeHash(); render();
+  });
+  let timer;
+  $("q").addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { state.q = $("q").value.trim().toLowerCase(); writeHash(); render(); }, 180);
+  });
+  $("expand").addEventListener("click", () => {
+    const shown = DATA.events.filter(matches).filter(e => e.detail || e.sources);
+    const allOpen = shown.every(e => state.open.has(e.id));
+    shown.forEach(e => allOpen ? state.open.delete(e.id) : state.open.add(e.id));
+    render();
+  });
+  $("deva").addEventListener("click", () => {
+    state.deva = !state.deva;
+    localStorage.setItem("timeline-deva", state.deva ? "1" : "0");
+    $("deva").setAttribute("aria-pressed", state.deva);
+    render();
+  });
+  $("tags-toggle").addEventListener("click", () => {
+    const collapsed = $("tags").classList.toggle("collapsed");
+    $("tags-toggle").setAttribute("aria-expanded", !collapsed);
+  });
+  window.addEventListener("hashchange", () => {
+    const { event } = readHash();
+    if (event) goToEvent(event); else render();
+  });
+}
+init();
+</script>
+</body>
+</html>
