@@ -2,201 +2,623 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nepal Through Time: A Socio-Economic Timeline | Mandip Subedi</title>
-<meta name="description" content="A horizontal timeline of Nepali and world socio-economic and political history. Bar length is how long an event lasted; overlapping bars happened at the same time. Dates in AD and Bikram Sambat.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nepal Through Time · A Digital Historical Atlas | Mandip Subedi</title>
+<meta name="description" content="An interactive chronology of Nepal's political, social and economic history, set beside the world events that shaped it. Hundreds of events from the ancient Kathmandu Valley to the federal republic, dated in AD and Bikram Sambat.">
+<meta property="og:title" content="Nepal Through Time · A Digital Historical Atlas">
+<meta property="og:description" content="An interactive chronology of Nepal's history, dated in AD and Bikram Sambat.">
+<meta name="theme-color" content="#f5f0e6">
 <link rel="icon" href="/assets/img/ms.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,650&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1d2433; --muted: #5d6576; --faint: #8b92a1; --line: #dfe3ea; --bg: #f4f1ea; --card: #fff;
-    --accent: #b3261e; --world: #2f6fb0;
-    --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --paper: #f5f0e6; --paper-2: #eee7d9; --paper-3: #e5dcca; --card: #fbf8f1;
+    --ink: #211d18; --ink-2: #4a443b; --ink-3: #6b6357; --rule: #d8cebb; --rule-2: #e7e0d2;
+    --crimson: #9e1b32; --crimson-ink: #861628; --crimson-wash: rgba(158, 27, 50, .08);
+    --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
     --deva: "Noto Sans Devanagari", var(--sans);
-    --ruler: 56px; --row: 42px; --pad: 28px;
+    --row: 40px; --axis: 54px; --drawer: 440px;
+    --shadow-sm: 0 1px 2px rgba(33, 29, 24, .06);
+    --shadow: 0 1px 2px rgba(33, 29, 24, .06), 0 10px 30px rgba(33, 29, 24, .10);
   }
   * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--sans); display: flex; flex-direction: column; }
-  a { color: var(--accent); }
-  .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.55 var(--sans); }
+  a { color: var(--crimson); text-underline-offset: 2px; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--crimson); outline-offset: 2px; }
+  .wrap { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .skip { position: absolute; left: 12px; top: -40px; background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 6px; z-index: 100; }
+  .skip:focus { top: 12px; }
+  .deva { font-family: var(--deva); }
 
-  header.top { padding: 18px 0 8px; flex: none; }
-  .home { font-size: 13px; color: var(--muted); text-decoration: none; }
-  .home:hover { color: var(--accent); }
-  h1 { font: 650 clamp(26px, 4vw, 38px)/1.1 var(--serif); margin: 6px 0 4px; letter-spacing: -0.01em; }
-  .lede { color: var(--muted); max-width: 720px; margin: 0 0 8px; font-size: 14px; }
+  /* ---------- masthead ---------- */
+  .topnav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0 0; font-size: 13.5px; }
+  .topnav .brand { font: 600 15px var(--serif); color: var(--ink); text-decoration: none; letter-spacing: .01em; }
+  .topnav nav { display: flex; gap: 20px; }
+  .topnav nav a { color: var(--ink-2); text-decoration: none; }
+  .topnav a:hover { color: var(--crimson); }
+  .masthead { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 420px); gap: 40px;
+              align-items: center; padding: 44px 0 34px; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font: 600 11.5px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--crimson); margin: 0 0 14px; }
+  h1 { font: 500 clamp(40px, 6.4vw, 74px)/1.0 var(--serif); letter-spacing: -.022em; margin: 0 0 18px; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--crimson); }
+  .intro { font: 400 clamp(17px, 1.6vw, 19.5px)/1.55 var(--serif); color: var(--ink-2); max-width: 640px; margin: 0 0 26px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 26px; padding: 0; }
+  .stats div { padding: 0 22px; border-left: 1px solid var(--rule); }
+  .stats div:first-child { padding-left: 0; border-left: 0; }
+  .stats dt { font: 600 10.5px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); order: 2; }
+  .stats dd { margin: 0 0 2px; font: 500 26px/1.15 var(--serif); }
+  .stats div { display: flex; flex-direction: column-reverse; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); text-decoration: none;
+         font: 500 14px var(--sans); padding: 11px 18px; border-radius: 999px; transition: background .15s; }
+  .cta:hover { background: var(--crimson); }
+  .cta-note { margin-left: 14px; font-size: 13px; color: var(--ink-3); }
+  .motif { width: 100%; height: auto; color: var(--ink); }
+  .motif .land { fill: rgba(158, 27, 50, .045); stroke: var(--ink); stroke-opacity: .55; stroke-width: 1.3; stroke-linejoin: round; }
+  .motif .grid line { stroke: var(--ink); stroke-opacity: .09; stroke-width: 1; }
+  .motif text { font: italic 400 15px var(--serif); fill: var(--ink-3); }
+  .motif .pin { fill: var(--crimson); }
 
-  .tag-head { margin-top: 10px; font: 600 11px var(--sans); text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint);
-              display: flex; align-items: center; gap: 10px; }
-  .tags.collapsed { display: none; }
-  .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-  .tag { font: 500 12px/1 var(--sans); padding: 5px 8px; border-radius: 999px; border: 1px solid var(--line);
-         background: #fff; color: var(--ink); cursor: pointer; white-space: nowrap; }
-  .tag i { font-style: normal; color: var(--faint); margin-left: 3px; }
-  .tag:hover { border-color: var(--c, var(--faint)); }
-  .tag.on { background: var(--c, var(--ink)); border-color: var(--c, var(--ink)); color: #fff; }
-  .tag.on i { color: rgba(255,255,255,.8); }
-  .tag .dot, .chip .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--c); margin-right: 5px; vertical-align: 1px; }
-  .tag.on .dot { background: #fff; }
-  .tags-toggle { display: inline-block; }
-  .chip { font: 500 11.5px/1 var(--sans); padding: 5px 8px; border-radius: 999px; background: #f2f3f6; border: 0; color: var(--ink); cursor: pointer; }
+  /* ---------- explorer ---------- */
+  .explorer { height: 100vh; height: 100dvh; display: flex; flex-direction: column; min-height: 520px; }
+  .toolbar { flex: none; padding: 12px 0 0; background: var(--paper); border-bottom: 1px solid var(--rule); position: relative; z-index: 20; }
+  .tb-row { display: flex; gap: 10px; align-items: center; }
+  .search { position: relative; flex: 1 1 320px; min-width: 0; }
+  .search input { width: 100%; height: 42px; padding: 0 40px 0 40px; border: 1px solid var(--rule); border-radius: 10px; background: var(--card);
+                  font: 400 15px var(--sans); color: var(--ink); box-shadow: var(--shadow-sm); }
+  .search input::placeholder { color: var(--ink-3); }
+  .search input:focus { outline: none; border-color: var(--ink-2); box-shadow: 0 0 0 3px rgba(33, 29, 24, .08); }
+  .search input::-webkit-search-cancel-button { display: none; }
+  .search .icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--ink-3); pointer-events: none; }
+  .search kbd { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font: 500 11.5px var(--sans); color: var(--ink-3);
+                border: 1px solid var(--rule); border-radius: 5px; padding: 1px 6px; background: var(--paper); }
+  .search .clear { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border: 0; border-radius: 8px;
+                   background: none; cursor: pointer; color: var(--ink-3); display: none; }
+  .search .clear:hover { background: var(--paper-2); color: var(--ink); }
+  .search.has-q .clear { display: block; }
+  .search.has-q kbd { display: none; }
+  .results { position: absolute; left: 0; right: 0; top: calc(100% + 6px); background: var(--card); border: 1px solid var(--rule); border-radius: 12px;
+             box-shadow: var(--shadow); max-height: min(62vh, 560px); overflow: auto; z-index: 40; padding: 6px; }
+  .results[hidden] { display: none; }
+  .results .r-head { font: 600 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); padding: 8px 10px 6px; }
+  .result { display: block; width: 100%; text-align: left; border: 0; background: none; border-radius: 8px; padding: 9px 10px; cursor: pointer; }
+  .result[aria-selected="true"], .result:hover { background: var(--paper-2); }
+  .result .r-title { font: 500 16px/1.3 var(--serif); color: var(--ink); }
+  .result .r-meta { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+  .result .r-meta .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--c); margin-right: 6px; vertical-align: 1px; }
+  .result .r-snip { font-size: 13px; color: var(--ink-2); margin-top: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  mark { background: rgba(158, 27, 50, .14); color: inherit; border-radius: 2px; padding: 0 1px; }
+  .r-empty { padding: 18px 12px; color: var(--ink-2); font-size: 14px; }
+  .r-empty b { font-family: var(--serif); font-weight: 500; font-size: 16px; display: block; color: var(--ink); margin-bottom: 4px; }
+  .r-more { padding: 8px 10px; font-size: 12.5px; color: var(--ink-3); }
 
-  .bar-ui { flex: none; position: sticky; top: 0; z-index: 8; background: rgba(244,241,234,.97); backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--line); padding: 8px 0; }
-  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .search { flex: 1 1 220px; position: relative; min-width: 160px; }
-  .search input { width: 100%; padding: 8px 12px 8px 32px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: #fff; }
-  .search input:focus { outline: 2px solid #fbeae8; border-color: var(--accent); }
-  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--faint); }
-  .btn { font: 500 13px var(--sans); border: 1px solid var(--line); background: #fff; color: var(--ink);
-         border-radius: 8px; padding: 7px 10px; cursor: pointer; }
-  .btn:hover { border-color: var(--faint); }
-  .btn[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
-  .btn:disabled { opacity: .4; cursor: default; }
-  .eras { display: flex; gap: 4px; overflow-x: auto; margin-top: 8px; scrollbar-width: thin; }
-  .eras button { font-size: 12px; color: var(--muted); background: none; border: 0; padding: 4px 8px; border-radius: 6px;
-                 white-space: nowrap; cursor: pointer; }
-  .eras button:hover, .eras button.on { background: #fff; color: var(--ink); }
-  .status { font-size: 12.5px; color: var(--muted); margin-top: 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; height: 42px; padding: 0 14px; border: 1px solid var(--rule); border-radius: 10px;
+         background: var(--card); color: var(--ink); font: 500 13.5px var(--sans); cursor: pointer; white-space: nowrap; box-shadow: var(--shadow-sm); }
+  .btn:hover { border-color: var(--ink-3); }
+  .btn[aria-expanded="true"] { border-color: var(--ink); }
+  .btn .count[hidden] { display: none; }
+  .btn .count { background: var(--crimson); color: #fff; font-size: 11px; font-weight: 600; min-width: 19px; height: 19px; border-radius: 999px;
+                display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+  .seg { display: inline-flex; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 10px; padding: 3px; height: 42px; flex: none; }
+  .seg button { border: 0; background: none; border-radius: 7px; padding: 0 12px; font: 500 13px var(--sans); color: var(--ink-2); cursor: pointer; white-space: nowrap; }
+  .seg button:hover { color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgba(33, 29, 24, .12), 0 0 0 1px rgba(33, 29, 24, .04); }
+  .seg button .deva { font-size: 13.5px; }
+  .seg-label { font: 600 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-right: -2px; }
 
-  .stage-wrap { flex: 1; min-height: 280px; position: relative; display: flex; flex-direction: column; }
-  .stage { flex: 1; overflow: auto; cursor: grab; background: #eef0f3; }
+  /* overview navigator */
+  .overview { margin-top: 12px; user-select: none; }
+  .ov-eras { position: relative; height: 26px; }
+  .ov-era { position: absolute; top: 0; height: 26px; border: 0; padding: 0 6px; background: none; cursor: pointer; text-align: left; overflow: hidden;
+            font: 500 11.5px/26px var(--sans); color: var(--ink-2); white-space: nowrap; border-left: 1px solid var(--rule); }
+  .ov-era:first-child { border-left: 0; }
+  .ov-era::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--ec); opacity: .35; border-radius: 2px; }
+  .ov-era:hover { color: var(--ink); background: rgba(33, 29, 24, .035); }
+  .ov-era.on { color: var(--ink); font-weight: 600; }
+  .ov-era.on::after { opacity: 1; }
+  .ov-era .short-hidden { visibility: hidden; }
+  .ov-track { position: relative; height: 30px; margin-top: 3px; cursor: pointer; border-radius: 6px; background: rgba(33, 29, 24, .03); overflow: hidden; touch-action: none; }
+  .ov-track svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ov-track path { fill: var(--ink); opacity: .22; }
+  .ov-window { position: absolute; top: 0; bottom: 0; border: 1.5px solid var(--ink); border-radius: 5px; background: rgba(255, 255, 255, .35);
+               box-shadow: 0 0 0 9999px rgba(245, 240, 230, .45); pointer-events: none; min-width: 6px; }
+  .ov-sel { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--crimson); pointer-events: none; display: none; }
+  .ov-sel.on { display: block; }
+
+  .status { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; min-height: 40px; padding: 7px 0; font-size: 13px; color: var(--ink-2); }
+  .status .viewing b { font: 500 16px var(--serif); color: var(--ink); }
+  .status .viewing .yrs { color: var(--ink-3); margin-left: 6px; }
+  .status .sep { width: 1px; height: 16px; background: var(--rule); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .fchip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 6px 0 10px; border-radius: 999px; border: 1px solid var(--rule);
+           background: var(--card); font: 500 12.5px var(--sans); cursor: pointer; }
+  .fchip:hover { border-color: var(--crimson); color: var(--crimson); }
+  .fchip svg { opacity: .6; }
+  .linkbtn { border: 0; background: none; color: var(--crimson); font: 500 13px var(--sans); cursor: pointer; padding: 2px 4px; text-decoration: underline; text-underline-offset: 2px; }
+  .status .hint { margin-left: auto; color: var(--ink-3); font-size: 12.5px; }
+
+  /* filters popover */
+  .popover { position: absolute; z-index: 45; top: 62px; right: 0; width: min(560px, calc(100vw - 24px)); max-height: min(72vh, 680px); overflow: auto;
+             background: var(--card); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--shadow); padding: 18px 20px 0; }
+  .popover[hidden] { display: none; }
+  .popover h3 { font: 600 11px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 9px; }
+  .popover section { margin-bottom: 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 11px; border: 1px solid var(--rule); border-radius: 999px;
+          background: var(--paper); font: 500 13px var(--sans); color: var(--ink); cursor: pointer; }
+  .pill i { font-style: normal; color: var(--ink-3); font-size: 12px; }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .pill:hover { border-color: var(--ink-3); }
+  .pill[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .pill[aria-pressed="true"] i { color: rgba(245, 240, 230, .7); }
+  .pill[aria-pressed="true"] .dot { box-shadow: 0 0 0 2px var(--paper); }
+  .pill.zero { opacity: .45; }
+  .group-name { font-size: 12px; color: var(--ink-3); margin: 10px 0 6px; }
+  .group-name:first-of-type { margin-top: 0; }
+  .range { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+  .range label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--ink-3); }
+  .range input { width: 120px; height: 36px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); padding: 0 10px; font: 500 14px var(--sans); color: var(--ink); }
+  .range .note { font-size: 12px; color: var(--ink-3); padding-bottom: 8px; }
+  .pop-foot { position: sticky; bottom: 0; display: flex; align-items: center; gap: 10px; padding: 12px 0 14px; background: var(--card); border-top: 1px solid var(--rule-2); margin-top: 4px; }
+  .pop-foot .n { font-size: 13.5px; color: var(--ink-2); margin-right: auto; }
+  .pop-foot .n b { color: var(--ink); }
+  .btn.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); height: 36px; }
+  .btn.small { height: 36px; }
+
+  /* views */
+  .views { flex: 1; min-height: 0; position: relative; }
+  .view { position: absolute; inset: 0; }
+  .view[hidden] { display: none; }
+
+  /* timeline stage */
+  .stage { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; background: var(--paper); cursor: grab; outline: none; }
   .stage.grabbing { cursor: grabbing; }
-  .board { position: relative; min-height: 100%; }
-  .ruler { position: sticky; top: 0; z-index: 3; height: var(--ruler); background: #f4f5f7;
-           border-bottom: 1px solid #cfd3da; }
-  .era-label { position: absolute; top: 4px; font: 650 11px var(--sans); color: #8a909c; letter-spacing: .04em;
-               text-transform: uppercase; white-space: nowrap; pointer-events: none; }
-  .tick { position: absolute; top: 20px; height: calc(var(--ruler) - 20px); border-left: 1px solid #d5d9e0; padding-left: 7px;
-          font-size: 11px; color: #6b7280; display: flex; align-items: center; pointer-events: none; }
-  .tick.major { border-left-color: #9aa3b0; color: var(--ink); font-weight: 600; }
-  .gridline { position: absolute; top: var(--ruler); bottom: 0; width: 1px; background: rgba(29,36,51,.06); pointer-events: none; }
-  .now { position: absolute; top: var(--ruler); bottom: 0; width: 1px; background: var(--accent); pointer-events: none; z-index: 2; }
-  .now::after { content: "now"; position: absolute; top: 6px; left: 5px; font: 600 10px var(--sans); color: var(--accent); }
+  .stage:focus-visible { box-shadow: inset 0 0 0 2px var(--crimson); }
+  .board { position: relative; }
+  .bands { position: absolute; left: 0; top: 0; bottom: 0; right: 0; pointer-events: none; }
+  .band { position: absolute; top: 0; bottom: 0; }
+  .band:nth-child(even) { background: rgba(120, 96, 60, .045); }
+  .band::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: rgba(33, 29, 24, .10); }
+  .gl { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(33, 29, 24, .045); }
+  .nowline { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1px dashed var(--crimson); opacity: .6; }
+  .axis { position: sticky; top: 0; z-index: 5; height: var(--axis); background: rgba(245, 240, 230, .94); backdrop-filter: blur(6px);
+          border-bottom: 1px solid var(--rule); }
+  .axis .era { position: absolute; top: 6px; font: 600 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+               white-space: nowrap; padding-left: 8px; border-left: 2px solid var(--ec); line-height: 14px; }
+  .axis .tick { position: absolute; bottom: 0; height: 22px; border-left: 1px solid var(--rule); padding: 0 0 4px 6px; font: 500 11.5px/18px var(--sans);
+                color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .axis .tick.major { color: var(--ink); border-left-color: var(--ink-3); }
+  .axis .tick.ne { font-family: var(--deva); }
+  .axis .era { overflow: hidden; text-overflow: ellipsis; }
+  .axis-unit { position: absolute; z-index: 7; top: 5px; right: 16px; font: 500 11px/16px var(--sans); color: var(--ink-3);
+               background: var(--paper); padding: 0 6px; border-radius: 4px; pointer-events: none; }
+  body.drawer-open .float.zoom, body.drawer-open .axis-unit { right: calc(var(--drawer) + 18px); }
+  .rows { position: absolute; left: 0; right: 0; top: var(--axis); }
+  .rowline { position: absolute; left: 0; right: 0; height: var(--row); border-bottom: 1px solid rgba(33, 29, 24, .045); pointer-events: none; }
+  .rowline.sel { background: var(--crimson-wash); border-bottom-color: transparent; }
+  .rowline.hov { background: rgba(33, 29, 24, .035); }
 
-  .lanes { position: absolute; left: 0; width: 100%; background: repeating-linear-gradient(
-      to bottom, #e4e7ec 0 var(--row), #f3f4f6 var(--row) calc(var(--row) * 2)); }
-  .bar { position: absolute; height: 30px; border: 2px solid #1b2a14; border-radius: 9px; color: #14210e;
-         background: #c5e85a; font: 650 12.5px/26px var(--sans); text-align: left; padding: 0 12px;
-         overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer;
-         box-shadow: 0 1px 0 rgba(27,42,20,.12); }
-  .bar:hover, .bar:focus { outline: none; filter: brightness(1.05); z-index: 4; box-shadow: 0 2px 8px rgba(27,42,20,.18); }
-  .bar.on { background: #1b2a14; color: #c5e85a; z-index: 5; }
-  .bar.world { box-shadow: 0 0 0 2px #6fa8d6; }
-  .name { position: absolute; height: 30px; line-height: 30px; font: 500 13px var(--sans); color: #1d2433;
-          white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 280px; pointer-events: none; }
-  .bar.on + .name { font-weight: 650; }
+  .ev { position: absolute; height: 26px; display: flex; align-items: center; padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+        text-align: left; color: var(--ink); border-radius: 5px; max-width: none; }
+  .ev .bar { position: relative; flex: none; height: 26px; border-radius: 5px;
+             background: color-mix(in srgb, var(--c) 22%, var(--card)); border: 1px solid color-mix(in srgb, var(--c) 58%, transparent);
+             box-shadow: inset 3px 0 0 var(--c); transition: box-shadow .12s, transform .12s; }
+  .ev.k-span .bar { background: color-mix(in srgb, var(--c) 10%, rgba(251, 248, 241, .5)); border-color: color-mix(in srgb, var(--c) 38%, transparent);
+                    background-image: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--c) 7%, transparent) 6px 7px); }
+  .ev.approx .bar { border-style: dashed;
+                    -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.25), #000 14px, #000 calc(100% - 14px), rgba(0,0,0,.25));
+                    mask-image: linear-gradient(90deg, rgba(0,0,0,.25), #000 14px, #000 calc(100% - 14px), rgba(0,0,0,.25)); }
+  .ev.ongoing .bar { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 26px), rgba(0,0,0,.15));
+                     mask-image: linear-gradient(90deg, #000 calc(100% - 26px), rgba(0,0,0,.15)); }
+  .ev .mark { flex: none; width: 12px; height: 12px; margin: 0 2px 0 1px; transform: rotate(45deg); background: var(--c); border-radius: 2px;
+              box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px color-mix(in srgb, var(--c) 45%, transparent); transition: transform .12s; }
+  .ev.approx .mark { background: var(--paper); box-shadow: inset 0 0 0 2px var(--c); }
+  .ev .lbl { font: 500 14.5px/26px var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 440px; padding: 0 6px 0 9px; color: var(--ink); }
+  .ev.inside .lbl { position: absolute; left: 6px; right: 6px; max-width: none; padding: 0 4px 0 6px; }
+  .ev.inside { overflow: visible; }
+  .ev:hover .bar, .ev:focus-visible .bar { box-shadow: inset 3px 0 0 var(--c), 0 2px 10px rgba(33, 29, 24, .14); }
+  .ev:hover .mark, .ev:focus-visible .mark { transform: rotate(45deg) scale(1.2); }
+  .ev:hover .lbl { color: var(--crimson-ink); }
+  .ev:focus-visible { outline: 2px solid var(--crimson); outline-offset: 3px; }
+  .ev.on .bar { box-shadow: inset 3px 0 0 var(--c), 0 0 0 2px var(--crimson), 0 4px 14px rgba(158, 27, 50, .18); }
+  .ev.on .mark { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--crimson); }
+  .ev.on .lbl { color: var(--crimson-ink); font-weight: 600; }
+  .ev.dim { opacity: .22; }
+  .ev.dim:hover { opacity: .7; }
 
-  #tip { position: fixed; z-index: 30; display: none; max-width: 280px; background: #1d2433; color: #fff;
-         font-size: 12.5px; line-height: 1.35; padding: 8px 10px; border-radius: 8px; pointer-events: none;
-         box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-  #tip b { display: block; margin-bottom: 2px; }
+  .tl-empty { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); text-align: center; background: var(--card); border: 1px solid var(--rule);
+              border-radius: 14px; padding: 24px 28px; box-shadow: var(--shadow); max-width: 360px; z-index: 6; }
+  .tl-empty b { display: block; font: 500 20px var(--serif); margin-bottom: 6px; }
+  .tl-empty p { margin: 0 0 14px; color: var(--ink-2); font-size: 14px; }
 
-  .panel { position: fixed; z-index: 12; right: 0; top: 0; height: 100%; width: min(420px, 100%);
-           background: var(--card); border-left: 1px solid var(--line); transform: translateX(100%);
-           transition: transform .2s ease; overflow: auto; padding: 18px 20px 40px;
-           box-shadow: -8px 0 24px rgba(29,36,51,.08); }
-  .panel.open { transform: none; }
-  .panel h2 { font: 650 22px/1.25 var(--serif); margin: 8px 0 6px; }
-  .panel .when { font-size: 13.5px; color: var(--muted); }
-  .panel .when .bs { display: block; margin-top: 2px; }
-  .panel .when .bs.deva { font-family: var(--deva); }
-  .panel .body { margin-top: 12px; }
-  .panel .body p { margin: 0 0 10px; }
-  .panel .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-  .panel .meta { margin-top: 12px; font-size: 12.5px; color: var(--muted); }
-  .panel .meta a { word-break: break-all; }
-  .close { float: right; }
-  .tbl { overflow-x: auto; margin: 10px 0; }
-  table { border-collapse: collapse; font-size: 13px; min-width: 100%; }
-  th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
-  th { background: #f6f7f9; font-weight: 600; }
-  pre { white-space: pre; overflow-x: auto; font: 12px/1.5 ui-monospace, Menlo, monospace; background: #f6f7f9;
-        padding: 10px; border-radius: 6px; }
-  .empty-hint { color: var(--faint); font-size: 13.5px; padding-top: 24px; }
-  footer { flex: none; color: var(--faint); font-size: 12px; padding: 10px 0 16px; }
+  .float { position: absolute; z-index: 8; display: flex; gap: 6px; }
+  .float.zoom { right: 18px; bottom: 18px; }
+  .float.key { left: 18px; bottom: 18px; flex-direction: column; align-items: flex-start; }
+  .fbtn { height: 36px; min-width: 36px; padding: 0 11px; border: 1px solid var(--rule); border-radius: 9px; background: rgba(251, 248, 241, .96);
+          box-shadow: var(--shadow-sm); font: 500 13px var(--sans); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+  .fbtn:hover { border-color: var(--ink-3); }
+  .fbtn:disabled { opacity: .4; cursor: default; }
+  .key-dots { display: inline-flex; }
+  .key-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); margin-right: -2px; box-shadow: 0 0 0 1.5px var(--card); }
+  .key-dots { margin-right: 4px; }
+  .fgroup { display: inline-flex; box-shadow: var(--shadow-sm); border-radius: 9px; }
+  .fgroup .fbtn { box-shadow: none; border-radius: 0; font-size: 17px; }
+  .fgroup .fbtn:first-child { border-radius: 9px 0 0 9px; }
+  .fgroup .fbtn:last-child { border-radius: 0 9px 9px 0; border-left: 0; }
+  .legend { background: rgba(251, 248, 241, .97); border: 1px solid var(--rule); border-radius: 12px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 12.5px;
+            color: var(--ink-2); max-width: 520px; display: grid; grid-template-columns: auto auto; gap: 4px 22px; }
+  .legend[hidden] { display: none; }
+  .legend h4 { grid-column: 1 / -1; margin: 6px 0 2px; font: 600 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .legend h4:first-child { margin-top: 0; }
+  .legend span { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .legend .sw { width: 11px; height: 11px; border-radius: 3px; background: var(--c); flex: none; }
+  .legend .shape { width: 34px; flex: none; display: flex; align-items: center; justify-content: center; }
+  .legend .shape .ev { position: static; }
+  .legend .shape .bar { height: 14px !important; }
+  .legend .shape .mark { width: 10px; height: 10px; }
 
-  @media (max-width: 700px) {
-    .panel { width: 100%; }
+  #tip { position: fixed; z-index: 60; pointer-events: none; max-width: 320px; background: var(--ink); color: var(--paper); border-radius: 10px;
+         padding: 10px 12px; font-size: 12.5px; line-height: 1.45; box-shadow: 0 10px 30px rgba(0, 0, 0, .25); opacity: 0; transition: opacity .1s; }
+  #tip.on { opacity: 1; }
+  #tip b { display: block; font: 500 15px/1.3 var(--serif); margin-bottom: 4px; }
+  #tip .t-date { color: rgba(245, 240, 230, .92); }
+  #tip .t-alt { color: rgba(245, 240, 230, .65); }
+  #tip .t-tags { margin-top: 6px; display: flex; align-items: center; gap: 6px; color: rgba(245, 240, 230, .8); }
+  #tip .t-tags i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); display: inline-block; }
+
+  /* list view */
+  .listview { overflow: auto; overscroll-behavior: contain; }
+  .list-inner { width: min(980px, calc(100% - 40px)); margin: 0 auto; padding: 8px 0 80px; }
+  .list-era { position: sticky; top: 0; z-index: 2; background: rgba(245, 240, 230, .96); backdrop-filter: blur(6px); margin: 0; padding: 18px 0 10px;
+              border-bottom: 1px solid var(--rule); display: flex; align-items: baseline; gap: 12px; }
+  .list-era h3 { margin: 0; font: 500 24px var(--serif); }
+  .list-era span { color: var(--ink-3); font-size: 13px; }
+  .list-era::before { content: ""; width: 4px; align-self: stretch; background: var(--ec); border-radius: 2px; }
+  .list ol { list-style: none; margin: 0; padding: 0; }
+  .li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px; width: 100%; text-align: left; border: 0; background: none;
+        padding: 14px 10px; border-bottom: 1px solid var(--rule-2); cursor: pointer; border-radius: 6px; }
+  .li:hover { background: rgba(33, 29, 24, .03); }
+  .li.on { background: var(--crimson-wash); }
+  .li-date { font: 500 13px/1.45 var(--sans); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .li-date small { display: block; color: var(--ink-3); font-weight: 400; font-size: 12px; }
+  .li-title { font: 500 18px/1.3 var(--serif); color: var(--ink); }
+  .li-snip { font-size: 13.5px; color: var(--ink-2); margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .li-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--ink-3); }
+  .li-tags span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--c); margin-right: 5px; vertical-align: 1px; }
+  .list-empty { text-align: center; padding: 80px 20px; color: var(--ink-2); }
+  .list-empty b { display: block; font: 500 22px var(--serif); color: var(--ink); margin-bottom: 6px; }
+
+  /* periods view */
+  .periodview { overflow: auto; overscroll-behavior: contain; }
+  .periods { width: min(1240px, calc(100% - 40px)); margin: 0 auto; padding: 22px 0 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+  .pcard { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 20px 22px 18px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .pcard::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: var(--ec); }
+  .pcard .p-years { font: 600 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .pcard h3 { font: 500 25px/1.15 var(--serif); margin: 6px 0 8px; }
+  .pcard .p-count { font-size: 13.5px; color: var(--ink-2); }
+  .pcard .p-count b { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--ink); }
+  .pcard .p-spark { height: 34px; margin: 12px 0 6px; display: flex; align-items: flex-end; gap: 1px; }
+  .pcard .p-spark i { flex: 1; background: var(--ec); opacity: .55; border-radius: 1px 1px 0 0; min-height: 1px; }
+  .pcard h4 { font: 600 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 12px 0 6px; }
+  .pcard .p-themes { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pcard .p-themes button { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 3px 9px; font-size: 12px; cursor: pointer; }
+  .pcard .p-themes button:hover { border-color: var(--ink-3); }
+  .pcard .p-themes i { font-style: normal; color: var(--ink-3); margin-left: 3px; }
+  .pcard ul { list-style: none; padding: 0; margin: 0; }
+  .pcard li button { border: 0; background: none; padding: 4px 0; text-align: left; cursor: pointer; font: 400 15px/1.35 var(--serif); color: var(--ink); display: block; width: 100%; }
+  .pcard li button:hover { color: var(--crimson); }
+  .pcard li small { font-family: var(--sans); font-size: 12px; color: var(--ink-3); margin-left: 6px; }
+  .pcard .p-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 16px; }
+  .pcard.none { opacity: .55; }
+
+  /* detail drawer */
+  .drawer { position: fixed; z-index: 70; top: var(--dtop, 0px); right: 0; bottom: 0; width: min(var(--drawer), 100%); background: var(--card); border-left: 1px solid var(--rule);
+            box-shadow: -18px 0 40px rgba(33, 29, 24, .12); transform: translateX(104%); transition: transform .26s cubic-bezier(.2, .8, .2, 1);
+            display: flex; flex-direction: column; visibility: hidden; }
+  .drawer.open { transform: none; visibility: visible; }
+  .d-head { flex: none; display: flex; align-items: center; gap: 8px; padding: 14px 16px 12px 24px; border-bottom: 1px solid var(--rule-2); }
+  .d-period { font: 600 11px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-right: auto; display: flex; align-items: center; gap: 8px; }
+  .d-period::before { content: ""; width: 9px; height: 9px; border-radius: 2px; background: var(--ec); }
+  .ibtn { height: 34px; min-width: 34px; padding: 0 10px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); cursor: pointer;
+          display: inline-flex; align-items: center; justify-content: center; gap: 6px; font: 500 12.5px var(--sans); color: var(--ink); }
+  .ibtn:hover { border-color: var(--ink-3); }
+  .d-body { flex: 1; overflow: auto; padding: 22px 24px 26px; overscroll-behavior: contain; }
+  .d-body h2 { font: 500 29px/1.15 var(--serif); letter-spacing: -.01em; margin: 0 0 16px; outline: none; }
+  .dates { margin: 0 0 16px; display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 7px 12px; font-size: 14px; }
+  .dates dt { font: 600 10.5px/22px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .dates dd { margin: 0; color: var(--ink); line-height: 1.5; }
+  .dates dd .sub { color: var(--ink-3); font-size: 12.5px; }
+  .badge { display: inline-block; font: 600 10.5px/1 var(--sans); letter-spacing: .04em; padding: 4px 7px; border-radius: 999px; margin-left: 6px; vertical-align: 2px;
+           background: var(--paper-2); color: var(--ink-2); border: 1px solid var(--rule); text-transform: uppercase; }
+  .badge.warn { background: rgba(160, 116, 36, .12); border-color: rgba(160, 116, 36, .35); color: #6d4d12; }
+  .tagrow { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; }
+  .tagrow button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 4px 10px;
+                   font: 500 12.5px var(--sans); cursor: pointer; color: var(--ink); }
+  .tagrow button:hover { border-color: var(--ink-3); }
+  .tagrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .prose { font: 400 17px/1.65 var(--serif); color: var(--ink); }
+  .prose p { margin: 0 0 14px; }
+  .prose .none { color: var(--ink-3); font-style: italic; }
+  .tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--rule); border-radius: 8px; }
+  .tbl table { border-collapse: collapse; font: 13px/1.4 var(--sans); min-width: 100%; }
+  .tbl th, .tbl td { border-bottom: 1px solid var(--rule-2); padding: 7px 10px; text-align: left; vertical-align: top; }
+  .tbl th { background: var(--paper-2); font-weight: 600; }
+  .prose pre { white-space: pre; overflow-x: auto; font: 12px/1.5 ui-monospace, Menlo, monospace; background: var(--paper-2); padding: 12px; border-radius: 8px; }
+  .d-sec { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--rule-2); }
+  .d-sec h3 { font: 600 11px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
+  .d-sec .why { font-size: 12.5px; color: var(--ink-3); margin: -4px 0 10px; }
+  .sources a { display: block; word-break: break-word; font-size: 13.5px; margin-bottom: 6px; }
+  .sources span { display: block; font-size: 13.5px; margin-bottom: 6px; color: var(--ink-2); }
+  .rel { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 9px 10px; margin: 0 -10px; width: calc(100% + 20px);
+         border-radius: 8px; cursor: pointer; }
+  .rel:hover { background: var(--paper-2); }
+  .rel b { display: block; font: 500 15.5px/1.3 var(--serif); }
+  .rel small { color: var(--ink-3); font-size: 12px; }
+  .hidden-note { background: var(--paper-2); border-radius: 10px; padding: 10px 12px; font-size: 13px; color: var(--ink-2); margin: 0 0 16px; }
+  .d-foot { flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--rule-2); background: var(--card); }
+  .pn { border: 1px solid var(--rule); background: var(--paper); border-radius: 10px; padding: 8px 12px; text-align: left; cursor: pointer; min-width: 0; }
+  .pn:hover:not(:disabled) { border-color: var(--ink-3); }
+  .pn:disabled { opacity: .4; cursor: default; }
+  .pn small { display: block; font: 600 10px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .pn span { display: block; font: 500 14px/1.3 var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pn.next { text-align: right; }
+
+  footer.site { border-top: 1px solid var(--rule); padding: 34px 0 48px; color: var(--ink-2); font-size: 13.5px; }
+  footer.site .cols { display: grid; grid-template-columns: 1.1fr 1.6fr; gap: 40px; }
+  footer.site h2 { font: 500 20px var(--serif); margin: 0 0 8px; color: var(--ink); }
+  footer.site h3 { font: 600 11px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+  footer.site p { margin: 0 0 10px; max-width: 640px; }
+
+  @media (max-width: 980px) {
+    .masthead { grid-template-columns: 1fr; padding-top: 30px; }
+    .motif { display: none; }
+    .hint { display: none; }
+    .seg-label { display: none; }
+  }
+  @media (max-width: 760px) {
+    .wrap { width: calc(100% - 28px); }
+    .topnav nav a.extra { display: none; }
+    .masthead { padding: 26px 0 26px; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    .stats div, .stats div:first-child { padding: 0 0 0 12px; border-left: 2px solid var(--rule); }
+    .stats dd { font-size: 21px; }
+    .cta-note { display: block; margin: 12px 0 0; }
+    .toolbar { padding-top: 10px; }
+    .tb-row { flex-wrap: wrap; gap: 6px; }
+    .search { flex-basis: 100%; }
+    .search input { height: 40px; }
+    .search kbd { display: none; }
+    .btn, .seg { height: 36px; }
+    .btn { padding: 0 10px; }
+    .seg button { padding: 0 8px; font-size: 12.5px; }
+    .view-switch { margin-left: auto; }
+    .overview { margin-top: 8px; }
+    .ov-eras { height: 22px; }
+    .ov-era { height: 22px; line-height: 22px; font-size: 10.5px; padding: 0 4px; }
+    .ov-track { height: 20px; }
+    .status { min-height: 32px; padding: 4px 0; font-size: 12.5px; }
+    .status .viewing b { font-size: 15px; }
+    .lbl-long { display: none; }
+    .popover { position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: 100%; max-height: 82vh; border-radius: 16px 16px 0 0; }
+    .drawer { top: 0; width: 100%; border-left: 0; transform: translateY(104%); }
+    .drawer.open { transform: none; }
+    .li { grid-template-columns: 1fr; gap: 4px; }
+    .float.key { bottom: 14px; left: 12px; }
+    .float.zoom { bottom: 14px; right: 12px; }
+    .zoom .opt { display: none; }
+    .legend { grid-template-columns: 1fr; max-width: calc(100vw - 24px); }
+    footer.site .cols { grid-template-columns: 1fr; gap: 20px; }
+    .ev .lbl { max-width: 260px; font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   }
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <a class="home" href="/">← mandipsubedi.com</a>
-    <h1>Nepal Through Time</h1>
-    <p class="lede">Each event sits on its own row and steps down as time moves forward. The length of a bar is how long it lasted. Dates in AD and Bikram Sambat. Click a bar to read it.</p>
-    <div class="tag-head"><span>Show one tag</span><button class="btn tags-toggle" id="tags-toggle" type="button" aria-expanded="false">Tags</button></div>
-    <div class="tags collapsed" id="tags" role="group" aria-label="Filter by tag"></div>
-  </div>
-</header>
+<a class="skip" href="#explorer">Skip to the timeline</a>
 
-<div class="bar-ui">
-  <div class="wrap">
-    <div class="row">
-      <label class="search">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="Search events, e.g. Birta, Koshi, Jung Bahadur" aria-label="Search events" autocomplete="off">
-      </label>
-      <button class="btn" id="zoom-out" type="button" title="Zoom out">−</button>
-      <button class="btn" id="zoom-in" type="button" title="Zoom in">+</button>
-      <button class="btn" id="fit" type="button">Fit</button>
-      <button class="btn" id="deva" type="button" aria-pressed="false" title="Show BS dates in Nepali">वि.सं. नेपालीमा</button>
+<div class="wrap">
+  <div class="topnav">
+    <a class="brand" href="/">Mandip Subedi</a>
+    <nav aria-label="Site">
+      <a class="extra" href="/Qgis/constituencies/">Election atlas</a>
+      <a href="/">← Back to mandipsubedi.com</a>
+    </nav>
+  </div>
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">A digital historical atlas</p>
+      <h1>Nepal <em>Through</em> Time</h1>
+      <p class="intro" id="intro">An interactive chronology of Nepal’s political, social and economic history, from the drying of the ancient Kathmandu lake to the federal republic, set beside the world events that shaped it. Every entry carries its date in both the Gregorian calendar (AD) and Bikram Sambat (BS).</p>
+      <dl class="stats" id="stats" aria-label="About this timeline"></dl>
+      <a class="cta" href="#explorer" id="cta">Explore the timeline <span aria-hidden="true">↓</span></a>
+      <span class="cta-note">Search, filter by theme or period, and open any event for its full note.</span>
     </div>
-    <nav class="eras" id="eras" aria-label="Jump to era"></nav>
-    <div class="status" id="status" aria-live="polite"></div>
-  </div>
+    <svg class="motif" viewBox="0 0 600 343" aria-hidden="true" focusable="false">
+      <g class="grid" id="motif-grid"></g>
+      <path class="land" d="M593.3 325.9L592.5 335.4L587.6 341.8L579.8 337.3L577.2 331.7L574.2 335.8L570.1 333.1L568.2 337.9L561.7 335.9L556.2 340.4L546.0 335.5L538.9 338.2L536.7 343.2L530.5 337.9L523.5 338.5L518.3 334.6L516.8 323.3L503.9 333.6L494.5 333.9L491.8 337.0L463.1 320.6L453.9 323.1L440.0 316.5L426.8 324.7L426.8 321.4L418.2 317.8L418.2 305.6L410.9 299.3L389.0 310.2L379.8 308.9L378.2 299.5L365.8 300.8L367.9 297.9L361.8 295.6L361.4 291.9L337.8 284.7L341.2 269.9L336.3 260.4L312.0 256.4L309.1 250.8L309.8 245.3L341.7 258.8L342.0 267.5L361.4 268.9L361.8 258.8L350.1 253.8L349.9 243.6L339.1 240.0L331.5 242.8L326.4 240.0L302.3 241.4L314.4 230.9L304.9 233.7L298.2 242.2L283.0 243.4L281.6 245.7L286.7 249.5L281.0 252.7L283.8 256.4L280.5 259.6L262.1 249.3L246.0 248.5L245.6 257.1L239.3 260.9L230.7 250.6L197.3 246.5L198.7 239.3L194.7 228.3L176.2 231.8L148.4 211.4L140.9 210.9L134.7 216.9L104.7 198.0L100.9 190.6L92.9 193.7L93.0 188.3L85.0 174.8L71.8 171.6L70.6 167.1L63.2 166.6L61.8 162.6L58.0 163.5L48.4 157.4L44.9 151.3L36.4 147.1L33.3 148.7L34.0 158.8L29.0 152.3L22.4 151.8L11.8 139.3L15.3 137.8L22.3 142.9L18.9 130.7L23.5 117.6L21.3 116.8L19.0 125.9L12.7 130.0L7.0 124.6L7.0 127.6L3.5 127.9L3.9 135.6L1.3 135.9L0.0 128.1L5.6 120.4L6.4 112.4L15.7 109.1L14.0 102.5L17.6 103.9L19.0 94.9L13.6 83.9L18.0 83.1L25.7 71.2L22.6 58.6L27.8 53.5L32.1 54.3L40.2 40.7L50.6 36.9L64.1 17.5L71.8 17.8L78.8 35.6L87.6 36.3L90.6 31.2L88.4 24.7L93.9 24.4L98.6 19.9L99.5 2.0L110.2 6.3L110.7 1.5L114.2 2.7L116.3 0.0L142.5 10.4L149.6 7.2L152.8 12.1L150.7 17.5L158.5 24.5L156.0 31.7L167.9 33.3L180.0 41.7L183.8 40.3L190.7 48.1L189.1 50.9L196.9 51.1L194.2 57.1L198.7 56.9L204.1 63.2L212.2 61.9L223.2 70.5L228.0 68.7L237.5 73.4L236.8 78.4L242.4 79.5L247.5 85.8L249.8 95.9L259.6 106.0L264.1 107.4L269.2 100.5L275.0 100.2L276.7 95.7L283.5 93.7L297.3 96.3L299.2 100.5L305.7 101.2L302.7 105.6L304.7 117.0L309.0 117.9L307.4 129.9L320.8 133.2L324.6 141.7L336.8 143.0L342.1 151.4L353.6 156.8L362.9 155.1L368.5 147.5L378.2 150.9L378.1 160.2L371.8 166.6L373.2 176.5L392.1 181.2L394.8 177.3L401.6 176.7L408.6 179.2L409.1 183.1L416.8 172.3L423.3 188.9L410.5 194.1L403.7 190.9L392.0 205.5L398.1 203.2L399.6 207.5L400.8 202.7L410.1 203.1L419.7 209.3L422.5 206.5L420.5 200.7L424.0 205.8L429.8 195.0L436.4 205.0L434.3 209.6L442.6 212.9L447.1 210.3L443.9 197.1L451.7 190.0L454.9 206.4L462.7 207.5L468.3 212.4L475.6 208.2L480.3 195.2L484.7 198.7L492.4 195.9L493.6 201.5L514.6 208.8L524.1 219.5L542.5 216.1L544.7 219.5L553.0 215.7L556.7 220.4L560.6 218.3L565.0 220.9L572.9 208.6L575.5 212.0L596.3 214.9L599.9 217.0L600.0 222.3L588.7 247.0L591.4 252.8L584.6 278.5L588.2 285.3L595.4 289.6L598.2 299.7L599.1 311.0L593.3 325.9Z"/>
+      <circle class="pin" cx="0" cy="0" r="4" id="motif-pin"/>
+    </svg>
+  </header>
 </div>
 
-<div class="stage-wrap">
-  <div class="stage" id="stage" tabindex="0">
-    <div class="board" id="board"></div>
+<section class="explorer" id="explorer" aria-label="Timeline explorer">
+  <div class="toolbar">
+    <div class="wrap">
+      <div class="tb-row">
+        <div class="search" id="search-box">
+          <svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Search events, people, places or years" autocomplete="off" spellcheck="false"
+                 role="combobox" aria-expanded="false" aria-controls="results" aria-autocomplete="list" aria-label="Search the timeline">
+          <kbd aria-hidden="true">/</kbd>
+          <button class="clear" id="q-clear" type="button" aria-label="Clear search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+          <div class="results" id="results" role="listbox" aria-label="Search results" hidden></div>
+        </div>
+        <button class="btn" id="filters-btn" type="button" aria-expanded="false" aria-controls="filters">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg>
+          <span class="lbl-long">Filters</span> <span class="count" id="filters-count" hidden></span>
+        </button>
+        <span class="seg-label" id="dates-label">Dates</span>
+        <div class="seg" role="group" aria-labelledby="dates-label" id="date-seg">
+          <button type="button" data-date="ad" title="Gregorian calendar">AD</button>
+          <button type="button" data-date="bs" title="Bikram Sambat, in English numerals">BS</button>
+          <button type="button" data-date="ne" title="बिक्रम सम्वत्, नेपाली अङ्कमा"><span class="deva" lang="ne">वि.सं.</span></button>
+        </div>
+        <div class="seg view-switch" role="group" aria-label="View" id="view-seg">
+          <button type="button" data-view="timeline">Timeline</button>
+          <button type="button" data-view="list">List</button>
+          <button type="button" data-view="periods">Periods</button>
+        </div>
+      </div>
+      <div class="popover" id="filters" role="dialog" aria-label="Filter events" hidden></div>
+      <div class="overview" id="overview">
+        <div class="ov-eras" id="ov-eras" role="group" aria-label="Historical periods"></div>
+        <div class="ov-track" id="ov-track" aria-hidden="true">
+          <svg id="ov-density" preserveAspectRatio="none"></svg>
+          <div class="ov-window" id="ov-window"></div>
+          <div class="ov-sel" id="ov-sel"></div>
+        </div>
+      </div>
+      <div class="status" id="status"></div>
+      <div class="sr-only" id="live" aria-live="polite"></div>
+    </div>
   </div>
-</div>
+
+  <div class="views">
+    <div class="view" id="v-timeline">
+      <div class="stage" id="stage" tabindex="0" aria-label="Timeline. Scroll to move through time; use the arrow keys to step between events.">
+        <div class="board" id="board">
+          <div class="bands" id="bands"></div>
+          <div class="axis" id="axis"></div>
+          <div class="rows" id="rows"></div>
+        </div>
+      </div>
+      <div class="axis-unit" id="axis-unit" hidden></div>
+      <div class="tl-empty" id="tl-empty" hidden></div>
+      <div class="float key">
+        <div class="legend" id="legend" hidden></div>
+        <button class="fbtn" id="key-btn" type="button" aria-expanded="false" aria-controls="legend">
+          <span class="key-dots" aria-hidden="true"><i style="--c:#8a5530"></i><i style="--c:#35577f"></i><i style="--c:#8f2737"></i><i style="--c:#2b6d6a"></i><i style="--c:#9a7322"></i></span><span>Key<span class="lbl-long"> to colours and shapes</span></span></button>
+      </div>
+      <div class="float zoom" role="group" aria-label="Zoom">
+        <button class="fbtn opt" id="fit" type="button" title="Fit the events in view">Fit</button>
+        <button class="fbtn opt" id="all" type="button" title="Zoom out to all of history and return to the beginning">Show all history</button>
+        <div class="fgroup">
+          <button class="fbtn" id="zoom-out" type="button" aria-label="Zoom out">−</button>
+          <button class="fbtn" id="zoom-in" type="button" aria-label="Zoom in">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="view listview" id="v-list" hidden><div class="list-inner list" id="list"></div></div>
+    <div class="view periodview" id="v-periods" hidden><div class="periods" id="periods"></div></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap cols">
+    <div>
+      <h2>Nepal Through Time</h2>
+      <p>Compiled by <a href="/">Mandip Subedi</a>. Sources are listed on individual events where the compilation records them.</p>
+      <p id="updated"></p>
+    </div>
+    <div>
+      <h3>About the dates</h3>
+      <p>AD dates follow the source compilation. BS dates from 1918 AD (1975 BS) onward are exact calendar conversions or the BS dates recorded in the source; for earlier events only an approximate BS year is given (AD + 56 or 57). Where the source records only a year, the event spans that whole year and its BS equivalent straddles two BS years. Ancient dates are approximate ranges, and events before 57 BCE predate the Bikram Sambat era.</p>
+      <p>On the timeline, bar length shows how long an event lasted; dashed, soft‑edged bars and hollow markers mark approximate dates. Very early history is drawn on a compressed scale.</p>
+    </div>
+  </div>
+</footer>
+
+<aside class="drawer" id="drawer" aria-labelledby="d-title" aria-hidden="true">
+  <div class="d-head">
+    <span class="d-period" id="d-period"></span>
+    <button class="ibtn" id="d-copy" type="button">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+      <span>Copy link</span>
+    </button>
+    <button class="ibtn" id="d-close" type="button" aria-label="Close details">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="d-body" id="d-body"></div>
+  <div class="d-foot">
+    <button class="pn prev" id="d-prev" type="button"><small>← Previous</small><span></span></button>
+    <button class="pn next" id="d-next" type="button"><small>Next →</small><span></span></button>
+  </div>
+</aside>
 <div id="tip" role="tooltip"></div>
-<aside class="panel" id="panel"></aside>
-<footer class="wrap">Compiled by Mandip Subedi. Each event has its own row; overlapping years sit on neighbouring rows. Bar length follows the dates in the source. BS dates from 1918 AD onwards are exact conversions or the dates recorded in the notes; earlier BS years are approximate. Drag to pan; use +/− to zoom.</footer>
 
 <script>
-const DATA_VERSION = "20261001010617";
-const TAG_COLORS = {
-  king: "#8a5a00", rana: "#9c2f2f", government: "#3d5a80", panchayat: "#7a6c2e", congress: "#2b8a3e",
-  communist: "#c92a2a", parties: "#5f3dc4", election: "#1971c2", constitution: "#495057", movement: "#e8590c",
-  conflict: "#862e2e", diplomacy: "#0b7285", international: "#2f6fb0", land: "#5c940d", economy: "#a26100",
-  infrastructure: "#6741d9", social: "#c2255c", calamity: "#d9480f", culture: "#9c36b5", identity: "#087f5b",
-  data: "#868e96",
+const DATA_VERSION = "20261001150900";
+
+/* ---------- constants ---------- */
+const GROUPS = [
+  { id: "state", label: "Monarchy and Rana rule", color: "#8a5530", tags: ["king", "rana"] },
+  { id: "politics", label: "Government and politics", color: "#35577f", tags: ["government", "panchayat", "congress", "communist", "parties", "election", "constitution"] },
+  { id: "conflict", label: "Conflict and movements", color: "#8f2737", tags: ["conflict", "movement"] },
+  { id: "world", label: "Diplomacy and world events", color: "#2b6d6a", tags: ["diplomacy", "international"] },
+  { id: "economy", label: "Economy, land and infrastructure", color: "#9a7322", tags: ["economy", "land", "infrastructure", "data"] },
+  { id: "society", label: "Society, culture and identity", color: "#6d4e7d", tags: ["social", "culture", "identity"] },
+  { id: "calamity", label: "Disasters", color: "#b8582a", tags: ["calamity"] },
+];
+const TAG_PRIORITY = ["calamity", "international", "conflict", "movement", "rana", "king", "panchayat", "election", "constitution",
+  "congress", "communist", "parties", "government", "diplomacy", "land", "economy", "infrastructure", "data", "social", "identity", "culture"];
+const TAG_GROUP = {};
+GROUPS.forEach(g => g.tags.forEach(t => { TAG_GROUP[t] = g; }));
+const ERA_META = {
+  ancient: { short: "Ancient", c: "#8a7350" }, medieval: { short: "Thakuri & Malla", c: "#9a6240" },
+  unification: { short: "Unification", c: "#6f6b34" }, rana: { short: "Rana", c: "#8c2f3a" },
+  transition: { short: "Transition", c: "#3b6e78" }, panchayat: { short: "Panchayat", c: "#7d612a" },
+  multiparty: { short: "Multiparty", c: "#3f557a" }, republic: { short: "Republic", c: "#9e1b32" },
 };
-const ERA_TINTS = ["#f3ebe0", "#eef2ea", "#e9eef6", "#f6eaea", "#eef6f2", "#f4eef6", "#eaf4f6", "#f6f0e6"];
 const BS_MONTHS = ["Baisakh", "Jestha", "Asar", "Shrawan", "Bhadra", "Asoj", "Kartik", "Mangsir", "Poush", "Magh", "Falgun", "Chaitra"];
 const BS_MONTHS_NE = ["बैशाख", "जेठ", "असार", "साउन", "भदौ", "असोज", "कात्तिक", "मंसिर", "पुस", "माघ", "फागुन", "चैत"];
 const MONTH_ALIASES = { baishakh: 0, baisakh: 0, jestha: 1, jeth: 1, asar: 2, ashadh: 2, shrawan: 3, saun: 3, bhadra: 4, bhadau: 4,
   asoj: 5, ashwin: 5, kartik: 6, mangsir: 7, poush: 8, push: 8, magh: 9, falgun: 10, phagun: 10, chaitra: 11, chait: 11 };
 const DIGITS_NE = "०१२३४५६७८९";
-const SEGMENTS = [
-  [-10000, -2000, 0.04],
-  [-2000, 300, 0.42],
-  [300, 879, 0.7],
-  [879, 1743, 0.95],
-  [1743, 1846, 7],
-  [1846, 1951, 11],
-  [1951, 1990, 18],
-  [1990, 2032, 22],
+const SEGMENTS = [ // [from, to, px per year at zoom 1]: early history is compressed
+  [-10000, -2000, 0.04], [-2000, 300, 0.42], [300, 879, 0.7], [879, 1743, 0.95],
+  [1743, 1846, 7], [1846, 1951, 11], [1951, 1990, 18], [1990, 2032, 22],
 ];
-const ROW = 42, RULER = 56, PAD = 40, MIN_BAR = 52, LABEL_ROOM = 320;
+const ROW = 40, AXIS = 54, BAR = 26, PAD = 48, LEAD = 72, LABEL_ROOM = 480, ZMIN = 0.12, ZMAX = 14;
+const LONG_YEARS = 20, POINT_YEARS = 0.6;
+const RM = matchMedia("(prefers-reduced-motion: reduce)");
+const MOBILE = matchMedia("(max-width: 760px)");
+
+/* ---------- helpers ---------- */
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-const state = { tag: null, q: "", deva: localStorage.getItem("timeline-deva") === "1", zoom: 1, selected: null };
-let DATA = null, byId = {}, TMIN = -10000, TMAX = 2027, shown = [];
-
 const neDigits = s => String(s).replace(/\d/g, d => DIGITS_NE[d]);
-const tagLabel = t => (DATA.tags.find(x => x.id === t) || { label: t }).label;
-const colorOf = e => TAG_COLORS[e.tags.find(t => t !== "international") || e.tags[0]] || "#6c757d";
+const plain = h => (h || "").replace(/<br>/g, " ").replace(/<\/(p|tr|th|td)>/g, " ").replace(/<[^>]+>/g, "")
+  .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").trim();
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+const state = {
+  tags: new Set(), eras: new Set(), from: null, to: null, scope: "all", q: "",
+  date: localStorage.getItem("timeline-dates") || (localStorage.getItem("timeline-deva") === "1" ? "ne" : "ad"),
+  zoom: 1, selected: null, view: "timeline",
+};
+let DATA = null, byId = {}, eraById = {}, tagById = {}, TMIN = -10000, TMAX = 2027;
+let shown = [], rowOf = new Map(), terms = [], matchSet = null;
+
+const groupOf = e => TAG_GROUP[TAG_PRIORITY.find(t => e.tags.includes(t)) || e.tags[0]] || GROUPS[1];
+const colorOf = e => groupOf(e).color;
+const tagColor = t => (TAG_GROUP[t] || GROUPS[1]).color;
+const tagLabel = t => (tagById[t] || { label: t }).label;
+const eraColor = id => (ERA_META[id] || { c: "#888" }).c;
+const isApprox = e => e.prec === "year" || e.prec === "era";
+const kindOf = e => (e.t1 - e.t0 >= LONG_YEARS ? "span" : e.t1 - e.t0 < POINT_YEARS ? "point" : "range");
+
+/* ---------- dates ---------- */
 function bsPart(b, deva) {
   if (b === "present") return deva ? "हालसम्म" : "present";
   const months = deva ? BS_MONTHS_NE : BS_MONTHS, n = deva ? neDigits : x => x;
@@ -218,7 +640,7 @@ function bsText(e, deva) {
       return i === undefined ? (w.toLowerCase() === "onward" ? "देखि" : w) : BS_MONTHS_NE[i];
     })).trim() + " वि.सं.";
   }
-  if (e.bs_note) return deva ? "वि.सं. अघि" : "Before BS era";
+  if (e.bs_note) return deva ? "वि.सं. सुरु हुनुअघि" : "Before the BS era";
   if (!e.bs) return "";
   const { from, to } = e.bs, n = deva ? neDigits : x => x, suffix = deva ? " वि.सं." : " BS";
   if (to && to !== "present" && from.y2 && to.y2 && !from.m) return `${n(from.y)}–${n(to.y2)}${suffix}`;
@@ -229,6 +651,41 @@ function bsText(e, deva) {
   return (b ? `${a} – ${b}` : a) + suffix;
 }
 
+const bsApprox = e => !e.bs_text && !!e.bs && (e.bs.from.approx || (e.bs.to && e.bs.to.approx));
+const adText = e => (e.prec === "era" && /^\d/.test(e.ad) ? "c. " : "") + e.ad;
+const dateText = (e, sys = state.date) => sys === "ad" ? adText(e) : (e.bs || e.bs_text ? bsText(e, sys === "ne") : adText(e));
+const altText = (e, sys = state.date) => sys === "ad" ? bsText(e, false) : (e.bs || e.bs_text ? adText(e) : bsText(e, sys === "ne"));
+const dateClass = (sys = state.date) => sys === "ne" ? "deva" : "";
+
+function yearLabel(y, sys = state.date) {
+  y = Math.round(y);
+  if (sys !== "ad" && y >= -56) return sys === "ne" ? neDigits(y + 57) : String(y + 57);
+  if (y < 0) return `${Math.abs(y).toLocaleString("en")} BCE`;
+  return y === 0 ? "1 CE" : String(y);
+}
+
+function eraYears(er) {
+  if (state.date === "ad") return er.years;
+  const n = state.date === "ne" ? neDigits : x => x;
+  const m = er.years.match(/^(\d+)–(\d+)$/);
+  if (m) return `${n(+m[1] + 57)}–${n(+m[2] + 57)}` + (state.date === "ne" ? " वि.सं." : " BS");
+  if (/present/.test(er.years)) return `${n(+er.years.slice(0, 4) + 57)}–` + (state.date === "ne" ? "हालसम्म" : "present");
+  return er.years;
+}
+
+function durationText(e) {
+  const d = e.t1 - e.t0;
+  if (e.ongoing) return "Ongoing";
+  if (e.prec === "era") return d >= 1 ? `About ${Math.round(d).toLocaleString("en")} years (approximate)` : "A single approximate date";
+  if (e.prec === "year" && d < 1) return `Sometime during ${e.ad}`;
+  if (e.prec === "month" && d < 0.09) return `Sometime during ${e.ad}`;
+  if (d >= 1.5) return `About ${Math.round(d)} years`;
+  if (d >= 0.12) return `About ${Math.max(2, Math.round(d * 12))} months`;
+  const days = Math.round(d * 365.25);
+  return days <= 1 ? "A single day" : `${days} days`;
+}
+
+/* ---------- scale ---------- */
 function xOf(t) {
   let x = PAD, prev = SEGMENTS[0][0];
   for (const [a, b, px] of SEGMENTS) {
@@ -239,283 +696,1063 @@ function xOf(t) {
   }
   return x;
 }
-
 function tOf(x) {
   let rest = x - PAD, prev = SEGMENTS[0][0];
+  if (rest <= 0) return SEGMENTS[0][0];
   for (const [a, b, px] of SEGMENTS) {
     const span = (b - Math.max(prev, a)) * px * state.zoom;
     if (rest <= span) return Math.max(prev, a) + rest / (px * state.zoom);
     rest -= span;
     prev = b;
   }
-  return TMAX;
+  return SEGMENTS[SEGMENTS.length - 1][1];
 }
-
-function yearLabel(y) {
-  if (y < 0) return `${Math.abs(y)} BCE`;
-  if (y === 0) return "1 CE";
-  return String(Math.round(y));
-}
+const gOf = t => (xOf(t) - PAD) / state.zoom;           // zoom-independent position
+const fracOf = t => gOf(t) / gOf(TMAX);                 // 0..1 across all of history
+function tOfFrac(f) { const z = state.zoom; state.zoom = 1; const t = tOf(PAD + f * gOf(TMAX)); state.zoom = z; return t; }
 
 function ticks() {
+  const nice = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000];
   const out = [];
+  let lastX = -1e9;
   for (const [a, b, px] of SEGMENTS) {
-    const stepPx = px * state.zoom;
-    const want = 90 / stepPx;
-    const nice = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000, 2500, 5000];
-    const step = nice.find(n => n >= want) || 5000;
-    const start = Math.ceil(a / step) * step;
-    for (let y = start; y < b; y += step) {
-      if (y < TMIN || y > TMAX) continue;
-      out.push({ t: y, major: step >= 100 ? y % (step * 2) === 0 : y % 5 === 0 || step === 1 });
+    const step = nice.find(n => n * px * state.zoom >= 84) || 5000;
+    for (let y = Math.ceil(a / step) * step; y < b; y += step) {
+      if (y < TMIN - step || y > TMAX) continue;
+      const x = xOf(y);
+      if (x - lastX < (y < 0 ? 84 : 60)) continue;
+      lastX = x;
+      out.push({ t: y, x, major: y % (step * 5) === 0 || (step >= 100 && y % (step * 2) === 0) });
     }
   }
   return out;
 }
 
-function pack(events) {
-  const ordered = [...events].sort((a, b) => a.t0 - b.t0 || a.t1 - b.t1 || a.title.localeCompare(b.title));
-  ordered.forEach((e, i) => { e.lane = i; });
-  return ordered.length;
+/* ---------- filtering & search ---------- */
+function passesFilters(e, skip) {
+  if (skip !== "tags" && state.tags.size && !e.tags.some(t => state.tags.has(t))) return false;
+  if (skip !== "eras" && state.eras.size && !state.eras.has(e.era)) return false;
+  if (state.from !== null && e.t1 < state.from) return false;
+  if (state.to !== null && e.t0 > state.to + 1) return false;
+  if (state.scope === "world" && !e.tags.includes("international")) return false;
+  if (state.scope === "nepal" && e.tags.includes("international")) return false;
+  return true;
+}
+const filterCount = () => state.tags.size + state.eras.size + (state.from !== null || state.to !== null ? 1 : 0) + (state.scope !== "all" ? 1 : 0);
+const matchesQuery = e => terms.every(w => e._text.includes(w));
+
+function applyFilters() {
+  shown = DATA.events.filter(e => passesFilters(e));
+  shown.sort((a, b) => a.t0 - b.t0 || a.t1 - b.t1 || a.title.localeCompare(b.title));
+  rowOf = new Map(shown.map((e, i) => [e.id, i]));
+  matchSet = terms.length ? new Set(shown.filter(matchesQuery).map(e => e.id)) : null;
 }
 
-function matches(e) {
-  return (!state.tag || e.tags.includes(state.tag)) && (!state.q || e._text.includes(state.q));
+function searchResults() {
+  if (!terms.length) return [];
+  const q = terms.join(" ");
+  const rank = e => {
+    const t = e.title.toLowerCase();
+    if (t.startsWith(q)) return 0;
+    if (terms.every(w => t.includes(w))) return 1;
+    if (terms.every(w => e._meta.includes(w))) return 2;
+    return 3;
+  };
+  return shown.filter(matchesQuery).map(e => [rank(e), e]).sort((a, b) => a[0] - b[0] || a[1].t0 - b[1].t0).map(x => x[1]);
 }
 
-function paint() {
-  shown = DATA.events.filter(matches);
-  const lanes = Math.max(pack(shown), 1);
-  const width = Math.ceil(xOf(TMAX) + PAD + LABEL_ROOM);
-  const height = RULER + lanes * ROW;
-  const eraLabels = DATA.eras.map(er =>
-    `<div class="era-label" style="left:${xOf(er.from) + 8}px">${esc(er.label)}</div>`).join("");
-  const tickHtml = ticks().map(({ t, major }) =>
-    `<div class="tick${major ? " major" : ""}" style="left:${xOf(t)}px">${yearLabel(t)}</div>`).join("");
-  const gridHtml = ticks().map(({ t }) =>
-    `<div class="gridline" style="left:${xOf(t)}px"></div>`).join("");
-  const bars = shown.map(e => {
-    const x = xOf(e.t0), w = Math.max(MIN_BAR, xOf(e.t1) - x);
-    const inside = w >= 160;
-    const world = e.tags.includes("international");
-    const y = e.lane * ROW + 6;
-    const name = inside ? "" : `<span class="name" style="left:${x + w + 10}px;top:${y}px">${esc(e.title)}</span>`;
-    return `<button type="button" class="bar${world ? " world" : ""}${state.selected === e.id ? " on" : ""}"
-      data-id="${esc(e.id)}"
-      style="left:${x}px;width:${w}px;top:${y}px">${inside ? esc(e.title) : ""}</button>${name}`;
-  }).join("");
-  $("board").style.width = width + "px";
-  $("board").style.height = height + "px";
-  $("board").innerHTML = `<div class="ruler">${eraLabels}${tickHtml}</div>${gridHtml}
-    <div class="now" style="left:${xOf(new Date().getFullYear() + 0.75)}px"></div>
-    <div class="lanes" style="top:${RULER}px;height:${lanes * ROW}px">${bars}</div>`;
-
-  $("eras").innerHTML = DATA.eras.map(er =>
-    `<button type="button" data-era="${er.id}">${esc(er.label)}</button>`).join("");
-  const counts = {};
-  DATA.events.filter(e => !state.q || e._text.includes(state.q)).forEach(e => e.tags.forEach(t => counts[t] = (counts[t] || 0) + 1));
-  $("tags").innerHTML = `<button class="tag${state.tag ? "" : " on"}" type="button" data-tag="">All events</button>` +
-    DATA.tags.map(t => `<button class="tag${state.tag === t.id ? " on" : ""}" type="button" data-tag="${t.id}" title="${esc(t.about)}" style="--c:${TAG_COLORS[t.id]}">
-      <span class="dot"></span>${esc(t.label)}<i>${counts[t.id] || 0}</i></button>`).join("");
-  const filters = [state.tag && `tagged <b>${esc(tagLabel(state.tag))}</b>`, state.q && `matching “${esc(state.q)}”`].filter(Boolean);
-  $("status").innerHTML = `${shown.length.toLocaleString()} of ${DATA.events.length.toLocaleString()} events` +
-    (filters.length ? ` ${filters.join(" and ")} <button class="btn" type="button" id="clear">Clear</button>` : "") +
-    ` · drag to pan · one event per row`;
-  $("deva").setAttribute("aria-pressed", state.deva);
-  $("zoom-out").disabled = state.zoom <= 0.45;
-  $("zoom-in").disabled = state.zoom >= 6;
-  $("tags-toggle").textContent = state.tag ? `Tag: ${tagLabel(state.tag)}` : "Tags";
-  if (state.selected) drawPanel(byId[state.selected]);
+function mark(text) {
+  const s = esc(text);
+  if (!terms.length) return s;
+  const re = new RegExp("(" + terms.map(t => reEsc(esc(t))).join("|") + ")", "gi");
+  return s.replace(re, "<mark>$1</mark>");
 }
-
-function highlight(htmlStr) {
-  if (!state.q) return htmlStr;
-  const re = new RegExp("(" + state.q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
-  return htmlStr.replace(/(^|>)([^<]+)/g, (m, a, text) => a + text.replace(re, "<mark>$1</mark>"));
+function markHtml(html) {
+  if (!terms.length) return html;
+  const re = new RegExp("(" + terms.map(t => reEsc(esc(t))).join("|") + ")", "gi");
+  return html.replace(/(^|>)([^<]+)/g, (m, a, text) => a + text.replace(re, "<mark>$1</mark>"));
 }
-
-function drawPanel(e) {
-  const panel = $("panel");
-  if (!e) { panel.classList.remove("open"); panel.innerHTML = ""; return; }
-  panel.classList.add("open");
-  const bs = bsText(e, state.deva);
-  const tags = e.tags.map(t => `<button class="chip" type="button" data-tag="${t}" style="--c:${TAG_COLORS[t]}"><span class="dot"></span>${esc(tagLabel(t))}</button>`).join("");
-  const sources = e.sources ? `<div class="meta">Source: ${e.sources.map(s => /^https?:\/\//.test(s)
-    ? `<a href="${esc(s)}" target="_blank" rel="noopener">${esc(s.replace(/^https?:\/\/(www\.)?/, "").slice(0, 70))}</a>` : esc(s)).join("; ")}</div>` : "";
-  const years = e.t1 - e.t0;
-  const lasted = years >= 1.5 ? `Lasted about ${Math.round(years)} years` : years >= 0.08 ? `Lasted about ${Math.max(1, Math.round(years * 12))} months` : "A short event";
-  panel.innerHTML = `<button class="btn close" type="button" id="close">Close</button>
-    <p class="when"><span class="ad">${esc(e.ad)}</span>${bs ? `<span class="bs${state.deva ? " deva" : ""}">${esc(bs)}</span>` : ""}
-    <span style="display:block;margin-top:4px;color:var(--faint)">${lasted}</span></p>
-    <h2>${highlight(esc(e.title))}</h2>
-    <div class="body">${e.detail ? highlight(e.detail) : `<p class="empty-hint">No further note in the source.</p>`}</div>
-    <div class="chips">${tags}<a class="chip" href="#${e.id}" style="text-decoration:none">#</a></div>${sources}`;
-}
-
-function select(id, scroll) {
-  state.selected = id || null;
-  paint();
-  writeHash();
-  if (id && scroll) {
-    const e = byId[id];
-    const stage = $("stage");
-    const x = xOf((e.t0 + e.t1) / 2);
-    stage.scrollTo({ left: x - stage.clientWidth * 0.3, top: Math.max(0, RULER + e.lane * ROW - 80), behavior: "instant" });
+function snippet(e, len = 170) {
+  const txt = e._plain;
+  if (!txt) return "";
+  let i = 0;
+  if (terms.length) {
+    const lower = txt.toLowerCase();
+    const hit = Math.min(...terms.map(w => { const k = lower.indexOf(w); return k < 0 ? 1e9 : k; }));
+    if (hit < 1e9 && hit > 60) i = txt.lastIndexOf(" ", hit - 50) + 1;
   }
+  let s = txt.slice(i, i + len);
+  if (i + len < txt.length) s = s.replace(/\s+\S*$/, "") + "…";
+  return (i > 0 ? "…" : "") + s;
 }
 
-function jumpEra(id) {
-  const first = shown.find(e => e.era === id);
-  if (!first) return;
-  const stage = $("stage");
-  stage.scrollLeft = Math.max(0, xOf(first.t0) - 28);
-  stage.scrollTop = Math.max(0, RULER + first.lane * ROW - 20);
+/* ---------- timeline rendering ---------- */
+const stage = $("stage"), board = $("board"), rowsEl = $("rows");
+let rowsKey = "", layoutKey = "", userOffset = 0, lastTop = 0, lastLeft = 0, settingLeft = null, hoverId = null;
+const measureCtx = document.createElement("canvas").getContext("2d");
+const widthCache = new Map();
+function textWidth(s) {
+  let w = widthCache.get(s);
+  if (w === undefined) {
+    measureCtx.font = `500 ${MOBILE.matches ? 14 : 14.5}px Newsreader, Georgia, serif`;
+    w = measureCtx.measureText(s).width;
+    widthCache.set(s, w);
+  }
+  return w;
+}
+
+function layoutBoard() {
+  const width = Math.ceil(xOf(TMAX) + LABEL_ROOM);
+  const height = AXIS + Math.max(shown.length, 1) * ROW + 120;
+  board.style.width = width + "px";
+  board.style.height = height + "px";
+  const key = `${state.zoom}|${state.date}|${width}`;
+  if (key !== layoutKey) {
+    layoutKey = key;
+    const tk = ticks();
+    const eras = DATA.eras.map((er, i) => {
+      const x0 = xOf(Math.max(er.from, TMIN - 50)), x1 = i + 1 < DATA.eras.length ? xOf(DATA.eras[i + 1].from) : width;
+      return { er, x0, x1 };
+    });
+    $("bands").innerHTML = eras.map(({ x0, x1 }) => `<div class="band" style="left:${x0}px;width:${x1 - x0}px"></div>`).join("") +
+      tk.filter(t => t.major).map(t => `<div class="gl" style="left:${t.x}px"></div>`).join("") +
+      `<div class="nowline" style="left:${xOf(DATA._now)}px"></div>`;
+    $("axis-unit").hidden = state.date === "ad";
+    $("axis-unit").textContent = state.date === "ne" ? "वि.सं. वर्ष (अनुमानित, ई.सं. + ५७)" : "BS years (approx. AD + 57)";
+    $("axis-unit").classList.toggle("deva", state.date === "ne");
+    $("axis").innerHTML =
+      eras.map(({ er, x0, x1 }) => `<div class="era" style="left:${x0 + 1}px;max-width:${Math.max(0, x1 - x0 - 6)}px;--ec:${eraColor(er.id)}">${esc(er.label)}</div>`).join("") +
+      tk.map(t => `<div class="tick${t.major ? " major" : ""}${state.date === "ne" ? " ne" : ""}" style="left:${t.x}px">${yearLabel(t.t)}</div>`).join("");
+  }
+  rowsKey = "";
+  drawRows();
+}
+
+function visibleRows() {
+  const top = stage.scrollTop - AXIS, h = stage.clientHeight;
+  return [Math.max(0, Math.floor(top / ROW)), Math.min(shown.length - 1, Math.ceil((top + h) / ROW))];
+}
+
+function evHtml(e, i) {
+  const x0 = xOf(e.t0), w = Math.max(xOf(e.t1) - x0, 0);
+  const kind = w < 14 && e.t1 - e.t0 < POINT_YEARS ? "point" : kindOf(e);
+  const y = i * ROW + (ROW - BAR) / 2;
+  const cls = ["ev", "k-" + kind];
+  if (isApprox(e)) cls.push("approx");
+  if (e.ongoing) cls.push("ongoing");
+  if (state.selected === e.id) cls.push("on");
+  if (matchSet && !matchSet.has(e.id)) cls.push("dim");
+  const label = `${e.title}, ${dateText(e)}`;
+  const attrs = `type="button" data-id="${esc(e.id)}" aria-label="${esc(label)}" style="--c:${colorOf(e)};left:${kind === "point" ? x0 + w / 2 - 7 : x0}px;top:${y}px"`;
+  if (kind === "point") return `<button class="${cls.join(" ")}" ${attrs}><span class="mark"></span><span class="lbl">${esc(e.title)}</span></button>`;
+  const bw = Math.max(w, 8);
+  const inside = textWidth(e.title) + 26 <= bw;
+  if (inside) cls.push("inside");
+  return `<button class="${cls.join(" ")}" ${attrs}><span class="bar" style="width:${bw}px"></span><span class="lbl">${esc(e.title)}</span></button>`;
+}
+
+function drawRows() {
+  if (!shown.length) { rowsEl.innerHTML = ""; return; }
+  const [a0, b0] = visibleRows();
+  const a = Math.max(0, a0 - 10), b = Math.min(shown.length - 1, b0 + 10);
+  const key = `${a}|${b}|${state.zoom}|${state.selected}|${hoverId}|${terms.join(" ")}|${state.date}|${shown.length}`;
+  if (key === rowsKey) return;
+  rowsKey = key;
+  const focusedId = document.activeElement && document.activeElement.closest && document.activeElement.closest(".ev") ? document.activeElement.dataset.id : null;
+  let lines = "";
+  const sel = rowOf.get(state.selected), hov = rowOf.get(hoverId);
+  if (sel !== undefined && sel >= a && sel <= b) lines += `<div class="rowline sel" style="top:${sel * ROW}px"></div>`;
+  if (hov !== undefined && hov !== sel && hov >= a && hov <= b) lines += `<div class="rowline hov" style="top:${hov * ROW}px"></div>`;
+  let html = "";
+  for (let i = a; i <= b; i++) html += evHtml(shown[i], i);
+  rowsEl.innerHTML = lines + html;
+  if (focusedId) { const el = rowsEl.querySelector(`[data-id="${CSS.escape(focusedId)}"]`); if (el) el.focus({ preventScroll: true }); }
+}
+
+/* horizontal position follows the rows: scrolling down travels forward in time */
+function baseLeft(top) {
+  if (!shown.length) return 0;
+  const r = Math.max(0, (top) / ROW);
+  const i = Math.min(shown.length - 1, Math.floor(r)), j = Math.min(shown.length - 1, i + 1);
+  const xa = xOf(shown[i].t0), xb = xOf(shown[j].t0);
+  return xa + (xb - xa) * Math.min(1, r - i) - LEAD;
+}
+function setLeft(v) {
+  v = clamp(v, 0, Math.max(0, stage.scrollWidth - stage.clientWidth));
+  settingLeft = v;
+  stage.scrollLeft = v;
+  lastLeft = stage.scrollLeft;
+}
+function onStageScroll() {
+  const top = stage.scrollTop, left = stage.scrollLeft;
+  if (settingLeft !== null && top === lastTop && Math.abs(left - settingLeft) < 1.5) { settingLeft = null; schedule(); return; }
+  settingLeft = null;
+  if (top !== lastTop) {
+    userOffset += left - lastLeft;
+    lastTop = top;
+    setLeft(baseLeft(top) + userOffset);
+  } else if (left !== lastLeft) {
+    userOffset = left - baseLeft(top);
+    lastLeft = left;
+  }
+  schedule();
+}
+let rafPending = false;
+function schedule() {
+  if (rafPending) return;
+  rafPending = true;
+  requestAnimationFrame(() => { rafPending = false; drawRows(); updateOverviewWindow(); updateViewing(); });
+}
+
+let scrollAnim = null;
+function animateTop(to, onDone) {
+  cancelAnimationFrame(scrollAnim);
+  to = clamp(to, 0, Math.max(0, stage.scrollHeight - stage.clientHeight));
+  const from = stage.scrollTop, dist = to - from;
+  if (RM.matches || Math.abs(dist) < 2) { stage.scrollTop = to; onStageScroll(); onDone && onDone(); return; }
+  const dur = clamp(240 + Math.abs(dist) / 60, 260, 620), t0 = performance.now();
+  const step = now => {
+    const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+    stage.scrollTop = from + dist * k;
+    onStageScroll();
+    if (p < 1) scrollAnim = requestAnimationFrame(step); else onDone && onDone();
+  };
+  scrollAnim = requestAnimationFrame(step);
+}
+function goToRow(i, offsetPx = 12) {
+  userOffset = 0;
+  animateTop(i * ROW - offsetPx);
+}
+function goToTime(t, instant) {
+  if (!shown.length) return;
+  let i = shown.findIndex(e => e.t0 >= t);
+  if (i < 0) i = shown.length - 1;
+  userOffset = 0;
+  if (instant) { cancelAnimationFrame(scrollAnim); stage.scrollTop = i * ROW; onStageScroll(); }
+  else goToRow(i);
+}
+
+function availWidth() {
+  return stage.clientWidth - (state.selected && !MOBILE.matches ? Math.min(440, innerWidth) : 0);
+}
+function revealEvent(e, instant) {
+  const i = rowOf.get(e.id);
+  if (i === undefined) return;
+  const top = stage.scrollTop - AXIS, h = stage.clientHeight;
+  let targetTop = stage.scrollTop;
+  if (i * ROW < top + ROW || (i + 1) * ROW > top + h - 60) targetTop = i * ROW - h * 0.32;
+  targetTop = clamp(targetTop, 0, Math.max(0, stage.scrollHeight - h));
+  const base = baseLeft(targetTop), x = xOf(e.t0), aw = availWidth();
+  const left = base + userOffset;
+  if (x < left + 24 || x > left + aw - 260) userOffset = (x - aw * 0.28) - base;
+  if (targetTop === stage.scrollTop) setLeft(base + userOffset);
+  else if (instant) { cancelAnimationFrame(scrollAnim); stage.scrollTop = targetTop; onStageScroll(); }
+  else animateTop(targetTop);
+  schedule();
 }
 
 function setZoom(z, cx) {
-  const stage = $("stage");
-  const pivot = tOf(stage.scrollLeft + (cx ?? stage.clientWidth / 2));
-  state.zoom = clamp(Math.round(z * 100) / 100, 0.4, 6);
-  paint();
-  stage.scrollLeft = xOf(pivot) - (cx ?? stage.clientWidth / 2);
+  z = clamp(z, ZMIN, ZMAX);
+  const w = stage.clientWidth;
+  cx = cx ?? Math.min(w * 0.35, LEAD + 200);
+  const t = tOf(stage.scrollLeft + cx);
+  state.zoom = z;
+  layoutBoard();
+  const desired = xOf(t) - cx;
+  userOffset = desired - baseLeft(stage.scrollTop);
+  setLeft(desired);
+  updateZoomButtons();
+  schedule();
+}
+let zoomAnim = null;
+function animateZoom(z, cx) {
+  cancelAnimationFrame(zoomAnim);
+  z = clamp(z, ZMIN, ZMAX);
+  const z0 = state.zoom;
+  if (RM.matches) return setZoom(z, cx);
+  const t0 = performance.now(), dur = 200;
+  const step = now => {
+    const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+    setZoom(z0 * Math.pow(z / z0, k), cx);
+    if (p < 1) zoomAnim = requestAnimationFrame(step);
+  };
+  zoomAnim = requestAnimationFrame(step);
+}
+function updateZoomButtons() {
+  $("zoom-out").disabled = state.zoom <= ZMIN + 1e-6;
+  $("zoom-in").disabled = state.zoom >= ZMAX - 1e-6;
+}
+function fitView() {
+  if (!shown.length) return;
+  const [a, b] = visibleRows();
+  const ev = shown.slice(a, b + 1);
+  const t0 = Math.min(...ev.map(e => e.t0)), t1 = Math.max(...ev.map(e => Math.min(e.t1, e.t0 + 60)), t0 + 1);
+  const span = gOf(t1) - gOf(t0);
+  const z = clamp((availWidth() - LEAD - 300) / Math.max(span, 1), ZMIN, ZMAX);
+  state.zoom = z;
+  layoutBoard();
+  userOffset = 0;
+  setLeft(baseLeft(stage.scrollTop));
+  updateZoomButtons();
+  schedule();
+}
+function showAll() {
+  state.zoom = clamp((stage.clientWidth - PAD - 60) / gOf(TMAX), ZMIN, ZMAX);
+  layoutBoard();
+  userOffset = 0;
+  updateZoomButtons();
+  animateTop(0);
+  schedule();
 }
 
-function fit() {
-  const events = shown.length ? shown : DATA.events;
-  const a = Math.min(...events.map(e => e.t0)), b = Math.max(...events.map(e => e.t1));
-  const span = xOf(b) - xOf(a);
-  const target = $("stage").clientWidth - 80;
-  setZoom(clamp(state.zoom * target / Math.max(span, 1), 0.4, 6));
-  $("stage").scrollLeft = xOf(a) - 40;
+/* ---------- overview & status ---------- */
+function renderOverview() {
+  const box = $("ov-eras"), W = box.clientWidth || 800;
+  box.innerHTML = DATA.eras.map((er, i) => {
+    const f0 = fracOf(Math.max(er.from, TMIN)), f1 = i + 1 < DATA.eras.length ? fracOf(DATA.eras[i + 1].from) : 1;
+    const px = (f1 - f0) * W, meta = ERA_META[er.id] || { short: er.label };
+    const label = px > er.label.length * 6.6 + 14 ? er.label : px > meta.short.length * 6.6 + 12 ? meta.short : px > 24 ? meta.short.slice(0, Math.max(1, Math.floor((px - 12) / 7))) + "…" : "";
+    return `<button type="button" class="ov-era" data-era="${er.id}" style="left:${f0 * 100}%;width:${(f1 - f0) * 100}%;--ec:${eraColor(er.id)}"
+      title="${esc(er.label)}, ${esc(eraYears(er))}" aria-label="Jump to ${esc(er.label)}, ${esc(er.years)}">${esc(label)}</button>`;
+  }).join("");
+  const bins = 260, counts = new Array(bins).fill(0);
+  shown.forEach(e => { counts[Math.min(bins - 1, Math.floor(fracOf(e.t0) * bins))]++; });
+  const max = Math.max(1, ...counts);
+  let d = `M0 30`;
+  counts.forEach((c, i) => { const h = c ? 4 + 24 * Math.sqrt(c / max) : 0; d += `L${i} ${30 - h}L${i + 1} ${30 - h}`; });
+  d += `L${bins} 30Z`;
+  $("ov-density").setAttribute("viewBox", `0 0 ${bins} 30`);
+  $("ov-density").innerHTML = `<path d="${d}"/>`;
+  updateOverviewWindow();
+}
+function updateOverviewWindow() {
+  const win = $("ov-window"), sel = $("ov-sel");
+  if (state.view === "timeline" && shown.length) {
+    const a = fracOf(tOf(stage.scrollLeft)), b = fracOf(tOf(stage.scrollLeft + availWidth()));
+    win.style.display = "block";
+    win.style.left = a * 100 + "%";
+    win.style.width = Math.max(0.4, (b - a) * 100) + "%";
+  } else win.style.display = "none";
+  const e = byId[state.selected];
+  sel.classList.toggle("on", !!e);
+  if (e) sel.style.left = fracOf(e.t0) * 100 + "%";
 }
 
-function writeHash() {
-  if (state.selected && !state.tag && !state.q) {
-    history.replaceState(null, "", `#${state.selected}`);
+let viewingEra = null;
+function currentEra() {
+  if (!shown.length) return null;
+  if (state.view === "timeline") {
+    const [a, b] = visibleRows();
+    return shown[Math.round((a + b) / 2)]?.era || null;
+  }
+  if (state.view === "list") {
+    const list = $("v-list"), heads = [...list.querySelectorAll("section[data-era]")];
+    let cur = heads[0];
+    for (const h of heads) if (h.offsetTop - list.scrollTop <= 60) cur = h;
+    return cur ? cur.dataset.era : null;
+  }
+  return null;
+}
+function updateViewing() {
+  const id = currentEra();
+  const el = $("viewing");
+  if (id !== viewingEra || (el && el.dataset.date !== state.date)) {
+    viewingEra = id;
+    document.querySelectorAll(".ov-era").forEach(b => b.classList.toggle("on", b.dataset.era === id));
+    if (el) {
+      const er = eraById[id];
+      el.dataset.date = state.date;
+      el.innerHTML = er ? `Viewing <b>${esc(er.label)}</b><span class="yrs ${dateClass()}">${esc(eraYears(er))}</span>` : "";
+    }
+  }
+}
+
+function renderStatus() {
+  const n = shown.length, total = DATA.events.length, fc = filterCount();
+  const chips = [];
+  state.tags.forEach(t => chips.push([`tag:${t}`, tagLabel(t)]));
+  state.eras.forEach(e => chips.push([`era:${e}`, eraById[e].label]));
+  if (state.from !== null || state.to !== null) chips.push(["range", `${state.from !== null ? yearLabel(state.from, "ad") : "start"} – ${state.to !== null ? yearLabel(state.to, "ad") : "today"}`]);
+  if (state.scope !== "all") chips.push(["scope", state.scope === "world" ? "World events only" : "Nepal only"]);
+  const x = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
+  const qInfo = terms.length ? ` · <b>${matchSet.size.toLocaleString()}</b> match “${esc(state.q)}”` : "";
+  $("status").innerHTML = `${state.view !== "periods" ? `<span class="viewing" id="viewing"></span><span class="sep"></span>` : ""}
+    <span>${fc ? `<b>${n.toLocaleString()}</b> of ${total.toLocaleString()} events` : `<b>${total.toLocaleString()}</b> events`}${qInfo}</span>
+    ${chips.length ? `<span class="chips">${chips.map(([k, l]) => `<button type="button" class="fchip" data-remove="${esc(k)}" aria-label="Remove filter: ${esc(l)}">${esc(l)}${x}</button>`).join("")}</span>
+      <button type="button" class="linkbtn" data-remove="all">Clear all</button>` : ""}
+    ${state.view === "timeline" ? `<span class="hint">Scroll to move through time · drag to pan · ⌘/Ctrl + scroll to zoom</span>` : ""}`;
+  viewingEra = undefined;
+  updateViewing();
+  $("live").textContent = `${n.toLocaleString()} events shown${terms.length ? `, ${matchSet.size} matching “${state.q}”` : ""}`;
+  const c = $("filters-count");
+  c.hidden = !fc;
+  c.textContent = fc;
+  $("filters-btn").setAttribute("aria-label", fc ? `Filters, ${fc} active` : "Filters");
+}
+
+/* ---------- list & periods views ---------- */
+function renderList() {
+  const items = terms.length ? shown.filter(e => matchSet.has(e.id)) : shown;
+  if (!items.length) {
+    $("list").innerHTML = `<div class="list-empty"><b>No events to show</b>${terms.length ? `Nothing matches “${esc(state.q)}”` : "No events match these filters"}.
+      <p><button class="btn small" type="button" data-remove="all">Clear search and filters</button></p></div>`;
     return;
   }
-  const parts = [];
-  if (state.tag) parts.push(`tag=${state.tag}`);
-  if (state.q) parts.push(`q=${encodeURIComponent(state.q)}`);
-  if (state.selected) parts.push(`e=${state.selected}`);
-  history.replaceState(null, "", parts.length ? `#${parts.join("&")}` : location.pathname + location.search);
+  const out = [];
+  let era = null;
+  const counts = {};
+  items.forEach(e => { counts[e.era] = (counts[e.era] || 0) + 1; });
+  items.forEach(e => {
+    if (e.era !== era) {
+      if (era) out.push("</ol></section>");
+      era = e.era;
+      const er = eraById[era];
+      out.push(`<section data-era="${era}"><div class="list-era" style="--ec:${eraColor(era)}"><h3>${esc(er.label)}</h3><span class="${dateClass()}">${esc(eraYears(er))} · ${counts[era]} event${counts[era] === 1 ? "" : "s"}</span></div><ol>`);
+    }
+    const snip = snippet(e, 220);
+    out.push(`<li><button type="button" class="li${state.selected === e.id ? " on" : ""}" data-id="${esc(e.id)}">
+      <span class="li-date"><span class="${dateClass()}">${esc(dateText(e))}</span><small>${esc(altText(e) || "")}</small></span>
+      <span><span class="li-title">${mark(e.title)}</span>${snip ? `<span class="li-snip">${mark(snip)}</span>` : ""}
+      <span class="li-tags">${e.tags.map(t => `<span style="--c:${tagColor(t)}">${esc(tagLabel(t))}</span>`).join("")}</span></span></button></li>`);
+  });
+  out.push("</ol></section>");
+  $("list").innerHTML = out.join("");
 }
 
-function readHash() {
-  const h = decodeURIComponent(location.hash.slice(1));
-  if (h && !h.includes("=") && byId[h]) return { event: h };
-  const p = Object.fromEntries(h.split("&").filter(Boolean).map(x => {
-    const i = x.indexOf("="); return i < 0 ? [x, ""] : [x.slice(0, i), x.slice(i + 1)];
-  }));
-  state.tag = DATA.tags.some(t => t.id === p.tag) ? p.tag : null;
-  state.q = (p.q || "").toLowerCase();
-  $("q").value = p.q || "";
-  return { event: byId[p.e] ? p.e : null };
+function renderPeriods() {
+  $("periods").innerHTML = DATA.eras.map((er, i) => {
+    const evs = shown.filter(e => e.era === er.id && (!matchSet || matchSet.has(e.id)));
+    const end = i + 1 < DATA.eras.length ? DATA.eras[i + 1].from : DATA._now;
+    const start = Math.max(er.from, TMIN);
+    const bins = 40, counts = new Array(bins).fill(0);
+    evs.forEach(e => { counts[clamp(Math.floor((fracOf(e.t0) - fracOf(start)) / (fracOf(end) - fracOf(start)) * bins), 0, bins - 1)]++; });
+    const max = Math.max(1, ...counts);
+    const tagCounts = {};
+    evs.forEach(e => e.tags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+    const themes = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const longest = [...evs].filter(e => !e.tags.includes("international")).sort((a, b) => (b.t1 - b.t0) - (a.t1 - a.t0)).slice(0, 3);
+    const first = evs[0];
+    return `<article class="pcard${evs.length ? "" : " none"}" style="--ec:${eraColor(er.id)}">
+      <div class="p-years ${dateClass()}">${esc(eraYears(er))}</div>
+      <h3>${esc(er.label)}</h3>
+      <div class="p-count"><b>${evs.length}</b> event${evs.length === 1 ? "" : "s"}${first ? ` · opens with <em>${esc(first.title)}</em>` : ""}</div>
+      <div class="p-spark" aria-hidden="true">${counts.map(c => `<i style="height:${c ? 8 + 92 * c / max : 0}%"></i>`).join("")}</div>
+      ${themes.length ? `<h4>Most common themes</h4><div class="p-themes">${themes.map(([t, c]) => `<button type="button" data-addtag="${t}" title="Filter to ${esc(tagLabel(t))}">${esc(tagLabel(t))}<i>${c}</i></button>`).join("")}</div>` : ""}
+      ${longest.length ? `<h4>Longest-running in Nepal</h4><ul>${longest.map(e => `<li><button type="button" data-open="${esc(e.id)}">${esc(e.title)}<small class="${dateClass()}">${esc(dateText(e))}</small></button></li>`).join("")}</ul>` : ""}
+      <div class="p-actions">${evs.length ? `<button class="btn small" type="button" data-goera="${er.id}" data-target="timeline">On the timeline</button>
+        <button class="btn small" type="button" data-goera="${er.id}" data-target="list">As a list</button>` : `<span class="p-count">No events match the current filters.</span>`}</div>
+    </article>`;
+  }).join("");
 }
 
-function setTag(tag) {
-  state.tag = tag || null;
+/* ---------- detail drawer ---------- */
+let lastFocus = null;
+function related(e) {
+  const mine = new Set(e.tags);
+  return DATA.events.filter(o => o !== e).map(o => {
+    const shared = o.tags.filter(t => mine.has(t));
+    return { o, shared, score: shared.length * 1000 - Math.min(999, Math.abs(o.t0 - e.t0)) };
+  }).filter(r => r.shared.length >= Math.min(2, e.tags.length) && Math.abs(r.o.t0 - e.t0) <= 60)
+    .sort((a, b) => b.score - a.score).slice(0, 5);
+}
+function neighbours(e) {
+  let list = shown, i = rowOf.get(e.id);
+  if (i === undefined) { list = DATA._sorted; i = list.indexOf(e); }
+  return [list[i - 1] || null, list[i + 1] || null];
+}
+function renderDrawer() {
+  const e = byId[state.selected];
+  const dr = $("drawer");
+  if (!e) return;
+  const er = eraById[e.era];
+  $("d-period").textContent = er ? er.label : "";
+  $("d-period").style.setProperty("--ec", eraColor(e.era));
+  const sysBs = state.date === "ne";
+  const bs = bsText(e, sysBs);
+  const approxNote = e.prec === "era" ? "This is an approximate ancient date range; the bar shows its rough extent."
+    : e.prec === "year" ? "The source gives only the year, so the event is drawn across that whole year."
+    : bsApprox(e) ? "BS dates before 1918 AD are given as approximate years only." : "";
+  const adRow = `<dt>AD</dt><dd>${esc(adText(e))}${e.prec === "era" ? `<span class="badge warn">Approximate</span>` : e.prec === "year" ? `<span class="badge">Year only</span>` : ""}</dd>`;
+  const bsRow = `<dt>BS</dt><dd class="${sysBs ? "deva" : ""}">${esc(bs || "—")}${bsApprox(e) ? `<span class="badge warn">Approximate</span>` : ""}${e.bs_text ? `<div class="sub">As recorded in the source</div>` : ""}</dd>`;
+  const dates = state.date === "ad" ? adRow + bsRow : bsRow + adRow;
+  const hidden = !rowOf.has(e.id);
+  const rel = related(e);
+  const [prev, next] = neighbours(e);
+  $("d-body").innerHTML = `
+    <h2 id="d-title" tabindex="-1">${mark(e.title)}</h2>
+    ${hidden ? `<p class="hidden-note">This event is hidden by your current filters. <button class="linkbtn" type="button" data-remove="all">Clear filters</button></p>` : ""}
+    <dl class="dates">${dates}
+      <dt>Duration</dt><dd>${esc(durationText(e))}</dd>
+      <dt>Period</dt><dd><button class="linkbtn" style="padding:0" type="button" data-goera="${e.era}" data-target="${state.view === "periods" ? "timeline" : state.view}">${esc(er ? er.label : e.era)}</button> <span class="sub ${dateClass()}">${esc(er ? eraYears(er) : "")}</span></dd>
+    </dl>
+    ${approxNote ? `<p class="hidden-note">${esc(approxNote)}</p>` : ""}
+    <div class="tagrow" aria-label="Themes">${e.tags.map(t => `<button type="button" data-addtag="${t}" style="--c:${tagColor(t)}" title="Show only ${esc(tagLabel(t))}"><span class="dot"></span>${esc(tagLabel(t))}</button>`).join("")}</div>
+    <div class="prose">${e.detail ? markHtml(e.detail) : `<p class="none">The source has no further note for this event.</p>`}</div>
+    ${e.sources ? `<div class="d-sec sources"><h3>Source${e.sources.length > 1 ? "s" : ""}</h3>${e.sources.map(s => /^https?:\/\//.test(s)
+      ? `<a href="${esc(s)}" target="_blank" rel="noopener">${esc(s.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""))}</a>` : `<span>${esc(s)}</span>`).join("")}</div>` : ""}
+    ${rel.length ? `<div class="d-sec"><h3>Related by theme</h3><p class="why">Events within 60 years that share the most themes with this one.</p>
+      ${rel.map(r => `<button class="rel" type="button" data-open="${esc(r.o.id)}"><b>${esc(r.o.title)}</b><small><span class="${dateClass()}">${esc(dateText(r.o))}</span> · shares ${r.shared.map(tagLabel).map(esc).join(", ")}</small></button>`).join("")}</div>` : ""}`;
+  const setPn = (btn, o) => {
+    btn.disabled = !o;
+    btn.dataset.open = o ? o.id : "";
+    btn.querySelector("span").textContent = o ? o.title : "None";
+    btn.title = o ? `${o.title} (${dateText(o)})` : "";
+  };
+  setPn($("d-prev"), prev);
+  setPn($("d-next"), next);
+  dr.classList.add("open");
+  dr.setAttribute("aria-hidden", "false");
+  dr.setAttribute("role", MOBILE.matches ? "dialog" : "complementary");
+  if (MOBILE.matches) dr.setAttribute("aria-modal", "true"); else dr.removeAttribute("aria-modal");
+  $("d-body").scrollTop = 0;
+  $("d-copy").querySelector("span").textContent = "Copy link";
+}
+
+function select(id, { reveal = true, focus = false, instant = false } = {}) {
+  const was = state.selected;
+  if (id && !was) lastFocus = document.activeElement;
+  state.selected = id && byId[id] ? id : null;
+  document.body.classList.toggle("drawer-open", !!state.selected);
   writeHash();
-  paint();
-  fit();
+  if (!state.selected) {
+    $("drawer").classList.remove("open");
+    $("drawer").setAttribute("aria-hidden", "true");
+    rowsKey = "";
+    refreshView(false);
+    if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
+    else stage.focus({ preventScroll: true });
+    lastFocus = null;
+    return;
+  }
+  renderDrawer();
+  placeDrawer();
+  rowsKey = "";
+  if (state.view === "timeline") { drawRows(); if (reveal) revealEvent(byId[id], instant); }
+  else if (state.view === "list") {
+    document.querySelectorAll(".li.on").forEach(b => b.classList.remove("on"));
+    const li = $("list").querySelector(`[data-id="${CSS.escape(id)}"]`);
+    if (li) { li.classList.add("on"); if (reveal) li.scrollIntoView({ block: "center", behavior: RM.matches ? "auto" : "smooth" }); }
+  }
+  updateOverviewWindow();
+  if (focus || MOBILE.matches) setTimeout(() => $("d-title") && $("d-title").focus({ preventScroll: true }), 30);
+}
+function placeDrawer() {
+  const top = MOBILE.matches ? 0 : Math.max(0, document.querySelector(".views").getBoundingClientRect().top);
+  $("drawer").style.setProperty("--dtop", top + "px");
+}
+function step(dir) {
+  const e = byId[state.selected];
+  if (!e) {
+    if (!shown.length) return;
+    const [a] = visibleRows();
+    select(shown[Math.min(shown.length - 1, a + 1)].id);
+    return;
+  }
+  const [prev, next] = neighbours(e);
+  const o = dir < 0 ? prev : next;
+  if (o) select(o.id);
 }
 
+/* ---------- filters popover ---------- */
+function renderFilters() {
+  const tagCounts = {}, eraCounts = {};
+  DATA.events.forEach(e => {
+    if (passesFilters(e, "tags")) e.tags.forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; });
+    if (passesFilters(e, "eras")) eraCounts[e.era] = (eraCounts[e.era] || 0) + 1;
+  });
+  const pill = (attr, id, label, n, on, c) => `<button type="button" class="pill${n ? "" : " zero"}" ${attr}="${id}" aria-pressed="${on}"${c ? ` style="--c:${c}"` : ""}>${c ? `<span class="dot"></span>` : ""}${esc(label)}<i>${n || 0}</i></button>`;
+  $("filters").innerHTML = `
+    <section><h3>Themes</h3>${GROUPS.map(g => `<div class="group-name">${esc(g.label)}</div><div class="pills">${g.tags.filter(t => tagById[t]).map(t =>
+      pill("data-ftag", t, tagLabel(t), tagCounts[t], state.tags.has(t), g.color)).join("")}</div>`).join("")}</section>
+    <section><h3>Historical period</h3><div class="pills">${DATA.eras.map(er => pill("data-fera", er.id, er.label, eraCounts[er.id], state.eras.has(er.id), eraColor(er.id))).join("")}</div></section>
+    <section><h3>Date range (AD)</h3><div class="range">
+      <label>From<input type="number" id="f-from" inputmode="numeric" placeholder="${Math.round(TMIN)}" value="${state.from ?? ""}"></label>
+      <label>To<input type="number" id="f-to" inputmode="numeric" placeholder="${new Date().getFullYear()}" value="${state.to ?? ""}"></label>
+      <span class="note">Use negative years for BCE (e.g. −500).</span></div></section>
+    <section><h3>Scope</h3><div class="seg" role="group" aria-label="Scope" id="f-scope">
+      <button type="button" data-scope="all" aria-pressed="${state.scope === "all"}">Everything</button>
+      <button type="button" data-scope="nepal" aria-pressed="${state.scope === "nepal"}">Nepal only</button>
+      <button type="button" data-scope="world" aria-pressed="${state.scope === "world"}">World events</button></div></section>
+    <div class="pop-foot"><span class="n"><b>${shown.length.toLocaleString()}</b> of ${DATA.events.length.toLocaleString()} events match</span>
+      <button class="btn small" type="button" data-remove="filters">Reset</button><button class="btn dark" type="button" id="f-done">Done</button></div>`;
+}
+function openFilters(open) {
+  const pop = $("filters");
+  pop.hidden = !open;
+  $("filters-btn").setAttribute("aria-expanded", open);
+  if (open) { renderFilters(); const f = pop.querySelector("button"); f && f.focus(); }
+}
+
+/* ---------- state changes ---------- */
+function refreshView(keepPlace = true) {
+  if (state.view === "timeline") {
+    const anchor = keepPlace && shown.length ? shown[visibleRows()[0]] : null;
+    layoutBoard();
+    $("tl-empty").hidden = shown.length > 0;
+    if (!shown.length) $("tl-empty").innerHTML = `<b>No events match</b><p>Try removing a filter or widening the date range.</p><button class="btn small" type="button" data-remove="all">Reset filters</button>`;
+    if (anchor && rowOf.has(anchor.id)) { stage.scrollTop = rowOf.get(anchor.id) * ROW; onStageScroll(); }
+    else if (keepPlace) onStageScroll();
+  } else if (state.view === "list") renderList();
+  else renderPeriods();
+  renderStatus();
+  updateOverviewWindow();
+}
+function filtersChanged() {
+  const sel = state.selected;
+  const anchor = state.view === "timeline" && shown.length ? shown[visibleRows()[0]] : null;
+  applyFilters();
+  writeHash();
+  renderOverview();
+  if (state.view === "timeline") {
+    layoutBoard();
+    $("tl-empty").hidden = shown.length > 0;
+    if (!shown.length) $("tl-empty").innerHTML = `<b>No events match</b><p>Try removing a filter or widening the date range.</p><button class="btn small" type="button" data-remove="all">Reset filters</button>`;
+    let i = anchor ? shown.findIndex(e => e.t0 >= anchor.t0) : 0;
+    if (sel && rowOf.has(sel)) i = Math.max(0, rowOf.get(sel) - 4);
+    userOffset = 0;
+    stage.scrollTop = Math.max(0, i) * ROW;
+    lastTop = -1;
+    onStageScroll();
+  } else refreshView(false);
+  renderStatus();
+  if (!$("filters").hidden) renderFilters();
+  if (sel) renderDrawer();
+}
+function setQuery(q) {
+  state.q = q.trim();
+  terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  matchSet = terms.length ? new Set(shown.filter(matchesQuery).map(e => e.id)) : null;
+  $("search-box").classList.toggle("has-q", !!state.q);
+  rowsKey = "";
+  if (state.view === "timeline") drawRows();
+  else if (state.view === "list") renderList();
+  else renderPeriods();
+  renderStatus();
+  writeHash();
+}
+function setView(v, { era } = {}) {
+  state.view = v;
+  document.querySelectorAll("#view-seg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === v));
+  $("v-timeline").hidden = v !== "timeline";
+  $("v-list").hidden = v !== "list";
+  $("v-periods").hidden = v !== "periods";
+  $("overview").style.display = v === "periods" ? "none" : "";
+  refreshView(false);
+  if (v === "timeline") {
+    layoutBoard();
+    if (era) jumpEra(era);
+    else if (state.selected && rowOf.has(state.selected)) revealEvent(byId[state.selected]);
+    else onStageScroll();
+  } else if (v === "list") {
+    if (era) jumpEra(era);
+    else if (state.selected) select(state.selected);
+  }
+  writeHash();
+}
+function jumpEra(id) {
+  if (state.view === "periods") return setView("timeline", { era: id });
+  const i = shown.findIndex(e => e.era === id);
+  if (i < 0) { flash(`No ${eraById[id].label} events match the current filters`); return; }
+  ensureExplorer();
+  if (state.view === "timeline") goToRow(i);
+  else {
+    const sec = $("list").querySelector(`section[data-era="${id}"]`);
+    if (sec) $("v-list").scrollTo({ top: sec.offsetTop, behavior: RM.matches ? "auto" : "smooth" });
+  }
+}
+function ensureExplorer() {
+  const top = $("explorer").getBoundingClientRect().top;
+  if (top > innerHeight * 0.45) window.scrollTo({ top: window.scrollY + top, behavior: RM.matches ? "auto" : "smooth" });
+}
+function flash(msg) {
+  const s = $("status"), n = document.createElement("span");
+  n.textContent = msg;
+  n.style.color = "var(--crimson)";
+  s.appendChild(n);
+  setTimeout(() => n.remove(), 2600);
+}
+function removeFilter(k) {
+  if (k === "all") {
+    state.tags.clear(); state.eras.clear(); state.from = state.to = null; state.scope = "all";
+    if (state.q) { $("q").value = ""; setQuery(""); }
+  } else if (k === "filters") {
+    state.tags.clear(); state.eras.clear(); state.from = state.to = null; state.scope = "all";
+  } else if (k.startsWith("tag:")) state.tags.delete(k.slice(4));
+  else if (k.startsWith("era:")) state.eras.delete(k.slice(4));
+  else if (k === "range") state.from = state.to = null;
+  else if (k === "scope") state.scope = "all";
+  filtersChanged();
+}
+function setDate(sys) {
+  state.date = sys;
+  localStorage.setItem("timeline-dates", sys);
+  document.querySelectorAll("#date-seg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.date === sys));
+  layoutKey = "";
+  rowsKey = "";
+  refreshView(true);
+  renderOverview();
+  if (state.selected) renderDrawer();
+  if (!$("results").hidden) renderResults();
+}
+
+/* ---------- search results ---------- */
+let resultItems = [], activeResult = -1;
+function renderResults() {
+  const box = $("results"), input = $("q");
+  if (!terms.length) { box.hidden = true; input.setAttribute("aria-expanded", "false"); return; }
+  const all = searchResults();
+  resultItems = all.slice(0, 40);
+  activeResult = resultItems.length ? 0 : -1;
+  if (!all.length) {
+    box.innerHTML = `<div class="r-empty"><b>No events match “${esc(state.q)}”</b>Try another spelling, a single keyword, or a year such as 1951.${filterCount()
+      ? ` Your filters are also narrowing the search. <button class="linkbtn" type="button" data-remove="filters">Search all events</button>` : ""}</div>`;
+  } else {
+    box.innerHTML = `<div class="r-head">${all.length} result${all.length === 1 ? "" : "s"}</div>` + resultItems.map((e, i) => {
+      const er = eraById[e.era];
+      return `<button type="button" class="result" role="option" id="res-${i}" aria-selected="${i === activeResult}" data-id="${esc(e.id)}" style="--c:${colorOf(e)}">
+        <div class="r-title">${mark(e.title)}</div>
+        <div class="r-meta"><span class="dot"></span><span class="${dateClass()}">${esc(dateText(e))}</span> · ${esc(er ? er.label : "")}</div>
+        ${e._plain ? `<div class="r-snip">${mark(snippet(e, 160))}</div>` : ""}</button>`;
+    }).join("") + (all.length > resultItems.length ? `<div class="r-more">Showing the first ${resultItems.length}. Refine the search, or open the List view to see all ${all.length}.</div>` : "");
+  }
+  box.hidden = false;
+  input.setAttribute("aria-expanded", "true");
+  input.setAttribute("aria-activedescendant", activeResult >= 0 ? `res-${activeResult}` : "");
+}
+function moveResult(d) {
+  if (!resultItems.length) return;
+  activeResult = (activeResult + d + resultItems.length) % resultItems.length;
+  document.querySelectorAll(".result").forEach((b, i) => b.setAttribute("aria-selected", i === activeResult));
+  const el = $(`res-${activeResult}`);
+  el && el.scrollIntoView({ block: "nearest" });
+  $("q").setAttribute("aria-activedescendant", `res-${activeResult}`);
+}
+function closeResults() { $("results").hidden = true; $("q").setAttribute("aria-expanded", "false"); }
+function openResult(id) {
+  closeResults();
+  ensureExplorer();
+  if (state.view === "periods") setView("timeline");
+  select(id, { focus: false });
+}
+
+/* ---------- URL ---------- */
+function writeHash() {
+  const p = [];
+  if (state.tags.size) p.push("tag=" + [...state.tags].join(","));
+  if (state.eras.size) p.push("era=" + [...state.eras].join(","));
+  if (state.from !== null) p.push("from=" + state.from);
+  if (state.to !== null) p.push("to=" + state.to);
+  if (state.scope !== "all") p.push("scope=" + state.scope);
+  if (state.q) p.push("q=" + encodeURIComponent(state.q));
+  if (state.view !== "timeline") p.push("view=" + state.view);
+  const h = !p.length && state.selected ? "#" + state.selected : p.length ? "#" + p.concat(state.selected ? ["e=" + state.selected] : []).join("&") : "";
+  if (h !== location.hash) history.replaceState(null, "", h || location.pathname + location.search);
+}
+function readHash() {
+  const raw = location.hash.slice(1);
+  const h = decodeURIComponent(raw);
+  if (h && !h.includes("=")) return { event: byId[h] ? h : null, view: "timeline" };
+  const p = Object.fromEntries(raw.split("&").filter(Boolean).map(x => {
+    const i = x.indexOf("=");
+    return i < 0 ? [x, ""] : [x.slice(0, i), decodeURIComponent(x.slice(i + 1))];
+  }));
+  state.tags = new Set((p.tag || "").split(",").filter(t => tagById[t]));
+  state.eras = new Set((p.era || "").split(",").filter(e => eraById[e]));
+  state.from = p.from !== undefined && p.from !== "" && !isNaN(+p.from) ? +p.from : null;
+  state.to = p.to !== undefined && p.to !== "" && !isNaN(+p.to) ? +p.to : null;
+  state.scope = ["nepal", "world"].includes(p.scope) ? p.scope : "all";
+  $("q").value = p.q || "";
+  return { event: byId[p.e] ? p.e : null, view: ["list", "periods"].includes(p.view) ? p.view : "timeline", q: p.q || "" };
+}
+
+/* ---------- legend & header ---------- */
+function renderLegend() {
+  const sample = (cls, w) => `<span class="shape"><span class="ev ${cls}" style="--c:#6b6357">${w ? `<span class="bar" style="width:${w}px"></span>` : `<span class="mark"></span>`}</span></span>`;
+  $("legend").innerHTML = `<h4>Colour shows the main theme</h4>${GROUPS.map(g => `<span><i class="sw" style="--c:${g.color}"></i>${esc(g.label)}</span>`).join("")}
+    <h4>Shape shows the date</h4>
+    <span>${sample("k-range", 30)}Bar length = how long it lasted</span>
+    <span>${sample("k-span", 30)}Long period or regime (20+ years)</span>
+    <span>${sample("k-point")}Single date</span>
+    <span>${sample("k-range approx", 30)}Approximate: year only or ancient range</span>
+    <span>${sample("k-point approx")}Approximate single date</span>
+    <span>${sample("k-range ongoing", 30)}Still ongoing</span>`;
+}
+function renderHeader() {
+  const n = DATA.events.length;
+  const first = DATA._sorted[0], lastYear = Math.floor(Math.max(...DATA.events.map(e => e.ongoing ? e.t0 : e.t1)));
+  const span = `${Math.abs(Math.round(first.t0)).toLocaleString("en")} BCE – ${lastYear}`;
+  $("stats").innerHTML = [[n.toLocaleString("en"), "Events"], [span, "Chronological span"], [DATA.eras.length, "Historical periods"], [DATA.tags.length, "Themes"]]
+    .map(([v, l]) => `<div><dt>${l}</dt><dd>${v}</dd></div>`).join("");
+  $("intro").innerHTML = `An interactive chronology of Nepal’s political, social and economic history: <strong>${n.toLocaleString("en")} events</strong>, from the drying of the ancient Kathmandu lake to the federal republic, set beside the world events that shaped them. Every entry carries its date in both the Gregorian calendar (AD) and Bikram Sambat (BS).`;
+  const v = DATA_VERSION.match(/^(\d{4})(\d{2})(\d{2})/);
+  if (v) $("updated").textContent = `Last updated ${new Date(+v[1], +v[2] - 1, +v[3]).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}.`;
+  const svg = document.querySelector(".motif"), [, , W, H] = svg.getAttribute("viewBox").split(" ").map(Number);
+  let g = "";
+  for (let x = W / 8; x < W; x += W / 8) g += `<line x1="${x}" y1="0" x2="${x}" y2="${H}"/>`;
+  for (let y = H / 4; y < H; y += H / 4) g += `<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`;
+  $("motif-grid").innerHTML = g;
+  const pin = $("motif-pin");  // Kathmandu, from the same projection as the outline
+  pin.setAttribute("cx", (W * 0.6469).toFixed(1));
+  pin.setAttribute("cy", (H * 0.6656).toFixed(1));
+}
+
+/* ---------- tooltip ---------- */
+const tip = $("tip");
+function showTip(e, x, y) {
+  const g = groupOf(e), alt = altText(e);
+  tip.innerHTML = `<b>${esc(e.title)}</b><div class="t-date ${dateClass()}">${esc(dateText(e))}${isApprox(e) ? " · approximate" : ""}</div>
+    ${alt ? `<div class="t-alt">${esc(alt)}</div>` : ""}
+    <div class="t-tags" style="--c:${g.color}"><i></i>${esc(e.tags.map(tagLabel).join(" · "))}</div>`;
+  tip.classList.add("on");
+  const r = tip.getBoundingClientRect();
+  tip.style.left = clamp(x + 14, 8, innerWidth - r.width - 8) + "px";
+  tip.style.top = (y + 18 + r.height > innerHeight - 8 ? y - r.height - 12 : y + 18) + "px";
+}
+function hideTip() { tip.classList.remove("on"); }
+
+/* ---------- init ---------- */
 async function init() {
   history.scrollRestoration = "manual";
   DATA = await fetch(`events.json?v=${DATA_VERSION}`).then(r => r.json());
+  const now = new Date();
+  DATA._now = now.getFullYear() + (now.getMonth() + 0.5) / 12;
+  DATA.tags.forEach(t => { tagById[t.id] = t; });
+  DATA.eras.forEach(er => { eraById[er.id] = er; });
   DATA.events.forEach(e => {
     byId[e.id] = e;
-    e._text = (e.title + " " + (e.detail || "").replace(/<[^>]+>/g, " ") + " " + e.ad).toLowerCase()
-      .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"');
+    e._plain = plain(e.detail);
+    e._meta = [adText(e), bsText(e, false), e.tags.map(tagLabel).join(" "), (eraById[e.era] || {}).label || ""].join(" ").toLowerCase();
+    e._text = (e.title + " " + e._plain + " " + e._meta).toLowerCase();
   });
+  DATA._sorted = [...DATA.events].sort((a, b) => a.t0 - b.t0 || a.t1 - b.t1 || a.title.localeCompare(b.title));
   TMIN = Math.min(...DATA.events.map(e => e.t0));
   TMAX = Math.max(2027, ...DATA.events.map(e => e.t1));
-  const { event } = readHash();
-  paint();
-  if (event) select(event, true);
-  else jumpEra("unification");
 
-  $("tags").addEventListener("click", ev => {
-    const b = ev.target.closest(".tag");
-    if (!b) return;
-    setTag(b.dataset.tag === state.tag ? "" : b.dataset.tag);
-    if (matchMedia("(max-width: 700px)").matches) { $("tags").classList.add("collapsed"); $("tags-toggle").setAttribute("aria-expanded", "false"); }
-  });
-  $("status").addEventListener("click", ev => {
-    if (ev.target.id !== "clear") return;
-    state.tag = null; state.q = ""; $("q").value = ""; writeHash(); paint();
-  });
-  $("eras").addEventListener("click", ev => {
-    const b = ev.target.closest("[data-era]");
-    if (b) jumpEra(b.dataset.era);
-  });
-  let timer;
-  $("q").addEventListener("input", () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { state.q = $("q").value.trim().toLowerCase(); writeHash(); paint(); }, 160);
-  });
-  $("zoom-in").addEventListener("click", () => setZoom(state.zoom * 1.35));
-  $("zoom-out").addEventListener("click", () => setZoom(state.zoom / 1.35));
-  $("fit").addEventListener("click", fit);
-  $("deva").addEventListener("click", () => {
-    state.deva = !state.deva;
-    localStorage.setItem("timeline-deva", state.deva ? "1" : "0");
-    paint();
-  });
-  $("tags-toggle").addEventListener("click", () => {
-    const collapsed = $("tags").classList.toggle("collapsed");
-    $("tags-toggle").setAttribute("aria-expanded", !collapsed);
-  });
+  renderHeader();
+  renderLegend();
+  const { event, view, q } = readHash();
+  state.view = view;
+  terms = (q || "").toLowerCase().split(/\s+/).filter(Boolean);
+  state.q = q || "";
+  $("search-box").classList.toggle("has-q", !!state.q);
+  applyFilters();
+  document.querySelectorAll("#date-seg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.date === state.date));
+  if (MOBILE.matches) state.zoom = 0.75;
+  await document.fonts.ready.catch(() => {});
+  widthCache.clear();
+  renderOverview();
+  setView(state.view);
+  updateZoomButtons();
+  if (event) {
+    select(event, { reveal: true, instant: true });
+    const top = $("explorer").getBoundingClientRect().top;
+    window.scrollTo({ top: window.scrollY + top });
+  }
+  bind();
+}
 
-  const stage = $("stage");
-  stage.addEventListener("click", ev => {
-    const bar = ev.target.closest(".bar");
-    if (bar) select(bar.dataset.id, false);
+function bind() {
+  stage.addEventListener("scroll", onStageScroll, { passive: true });
+  $("v-list").addEventListener("scroll", () => requestAnimationFrame(updateViewing), { passive: true });
+  addEventListener("scroll", () => { if (state.selected) placeDrawer(); }, { passive: true });
+  addEventListener("resize", () => { placeDrawer(); renderOverview(); layoutKey = ""; if (state.view === "timeline") layoutBoard(); schedule(); });
+
+  rowsEl.addEventListener("click", ev => {
+    const b = ev.target.closest(".ev");
+    if (b && !dragMoved) select(b.dataset.id, { reveal: false });
   });
+  let dragMoved = false;
   stage.addEventListener("pointerdown", ev => {
-    if (ev.target.closest(".bar")) return;
+    if (ev.pointerType !== "mouse" || ev.button !== 0) return;
     const x0 = ev.clientX, y0 = ev.clientY, sl = stage.scrollLeft, st = stage.scrollTop;
-    stage.classList.add("grabbing");
-    const move = e => { stage.scrollLeft = sl - (e.clientX - x0); stage.scrollTop = st - (e.clientY - y0); };
-    const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); stage.classList.remove("grabbing"); };
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
+    dragMoved = false;
+    const move = e => {
+      if (!dragMoved && Math.hypot(e.clientX - x0, e.clientY - y0) < 4) return;
+      if (!dragMoved) { dragMoved = true; stage.classList.add("grabbing"); hideTip(); }
+      cancelAnimationFrame(scrollAnim);
+      stage.scrollTop = st - (e.clientY - y0);
+      stage.scrollLeft = sl - (e.clientX - x0);
+      onStageScroll();
+    };
+    const up = () => {
+      removeEventListener("pointermove", move);
+      removeEventListener("pointerup", up);
+      stage.classList.remove("grabbing");
+      setTimeout(() => { dragMoved = false; }, 0);
+    };
+    addEventListener("pointermove", move);
+    addEventListener("pointerup", up);
   });
   stage.addEventListener("wheel", ev => {
     if (ev.ctrlKey || ev.metaKey) {
       ev.preventDefault();
-      const rect = stage.getBoundingClientRect();
-      setZoom(state.zoom * (ev.deltaY < 0 ? 1.12 : 0.89), ev.clientX - rect.left);
+      const r = stage.getBoundingClientRect();
+      setZoom(state.zoom * Math.exp(-ev.deltaY * (ev.deltaMode ? 0.05 : 0.0022)), ev.clientX - r.left);
     }
   }, { passive: false });
+  stage.addEventListener("keydown", ev => {
+    if (ev.key === "ArrowDown" || ev.key === "ArrowUp") { ev.preventDefault(); step(ev.key === "ArrowDown" ? 1 : -1); focusSelected(); }
+    else if (ev.key === "+" || ev.key === "=") animateZoom(state.zoom * 1.4);
+    else if (ev.key === "-" || ev.key === "_") animateZoom(state.zoom / 1.4);
+  });
+  const focusSelected = () => requestAnimationFrame(() => {
+    const el = rowsEl.querySelector(`[data-id="${CSS.escape(state.selected || "")}"]`);
+    if (el) el.focus({ preventScroll: true });
+  });
+  rowsEl.addEventListener("pointerover", ev => {
+    const b = ev.target.closest(".ev");
+    if (!b || ev.pointerType !== "mouse" || stage.classList.contains("grabbing")) return;
+    hoverId = b.dataset.id;
+    showTip(byId[hoverId], ev.clientX, ev.clientY);
+    schedule();
+  });
+  rowsEl.addEventListener("pointermove", ev => {
+    if (hoverId && tip.classList.contains("on")) showTip(byId[hoverId], ev.clientX, ev.clientY);
+  });
+  rowsEl.addEventListener("pointerout", ev => {
+    if (ev.relatedTarget && ev.relatedTarget.closest && ev.relatedTarget.closest(".ev")) return;
+    hoverId = null; hideTip(); schedule();
+  });
+  rowsEl.addEventListener("focusin", ev => {
+    const b = ev.target.closest(".ev");
+    if (!b || ev.target.matches(":hover")) return;
+    const r = b.getBoundingClientRect();
+    showTip(byId[b.dataset.id], r.left, r.bottom - 10);
+  });
+  rowsEl.addEventListener("focusout", hideTip);
 
-  const tip = $("tip");
-  stage.addEventListener("pointerover", ev => {
-    const bar = ev.target.closest(".bar");
-    if (!bar) return;
-    const e = byId[bar.dataset.id];
-    tip.style.display = "block";
-    tip.innerHTML = `<b>${esc(e.title)}</b>${esc(e.ad)}${bsText(e, state.deva) ? `<br>${esc(bsText(e, state.deva))}` : ""}`;
-  });
-  stage.addEventListener("pointermove", ev => {
-    if (tip.style.display === "block") { tip.style.left = ev.clientX + 12 + "px"; tip.style.top = ev.clientY + 14 + "px"; }
-  });
-  stage.addEventListener("pointerout", ev => {
-    if (!ev.relatedTarget || !ev.relatedTarget.closest(".bar")) tip.style.display = "none";
+  $("zoom-in").addEventListener("click", () => animateZoom(state.zoom * 1.5));
+  $("zoom-out").addEventListener("click", () => animateZoom(state.zoom / 1.5));
+  $("fit").addEventListener("click", fitView);
+  $("all").addEventListener("click", showAll);
+  $("key-btn").addEventListener("click", () => {
+    const open = $("legend").hidden;
+    $("legend").hidden = !open;
+    $("key-btn").setAttribute("aria-expanded", open);
   });
 
-  $("panel").addEventListener("click", ev => {
-    if (ev.target.id === "close") { select(null); return; }
-    const chip = ev.target.closest(".chip[data-tag]");
-    if (chip) setTag(chip.dataset.tag);
+  // overview: click a period, or click/drag along the track to travel through time
+  $("ov-eras").addEventListener("click", ev => { const b = ev.target.closest("[data-era]"); if (b) jumpEra(b.dataset.era); });
+  const track = $("ov-track");
+  track.addEventListener("pointerdown", ev => {
+    const go = e => {
+      const r = track.getBoundingClientRect();
+      const t = tOfFrac(clamp((e.clientX - r.left) / r.width, 0, 1));
+      if (state.view === "timeline") goToTime(t, true);
+      else {
+        const target = shown.find(x => x.t0 >= t) || shown[shown.length - 1];
+        const li = target && $("list").querySelector(`[data-id="${CSS.escape(target.id)}"]`);
+        if (li) $("v-list").scrollTop = li.closest("li").offsetTop - 70;
+      }
+    };
+    ensureExplorer();
+    go(ev);
+    track.setPointerCapture(ev.pointerId);
+    const move = e => go(e);
+    const up = () => { track.removeEventListener("pointermove", move); track.removeEventListener("pointerup", up); };
+    track.addEventListener("pointermove", move);
+    track.addEventListener("pointerup", up);
   });
-  window.addEventListener("keydown", ev => { if (ev.key === "Escape") select(null); });
-  window.addEventListener("hashchange", () => {
-    const { event } = readHash();
-    paint();
-    if (event) select(event, true);
+
+  // search
+  let qTimer;
+  $("q").addEventListener("input", () => {
+    clearTimeout(qTimer);
+    qTimer = setTimeout(() => { setQuery($("q").value); renderResults(); }, 90);
   });
+  $("q").addEventListener("focus", () => { if (terms.length) renderResults(); });
+  $("q").addEventListener("keydown", ev => {
+    if (ev.key === "ArrowDown") { ev.preventDefault(); if ($("results").hidden) renderResults(); else moveResult(1); }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); moveResult(-1); }
+    else if (ev.key === "Enter") { ev.preventDefault(); clearTimeout(qTimer); setQuery($("q").value); if ($("results").hidden) renderResults(); else if (resultItems[activeResult]) openResult(resultItems[activeResult].id); }
+    else if (ev.key === "Escape") {
+      ev.stopPropagation();
+      if (!$("results").hidden) closeResults();
+      else if ($("q").value) { $("q").value = ""; setQuery(""); }
+      else $("q").blur();
+    }
+  });
+  $("q-clear").addEventListener("click", () => { $("q").value = ""; setQuery(""); closeResults(); $("q").focus(); });
+  $("results").addEventListener("mousedown", ev => ev.preventDefault());
+  $("results").addEventListener("click", ev => {
+    const r = ev.target.closest(".result");
+    if (r) openResult(r.dataset.id);
+    const rm = ev.target.closest("[data-remove]");
+    if (rm) { state.tags.clear(); state.eras.clear(); state.from = state.to = null; state.scope = "all"; filtersChanged(); renderResults(); }
+  });
+
+  // filters
+  $("filters-btn").addEventListener("click", () => openFilters($("filters").hidden));
+  $("filters").addEventListener("click", ev => {
+    const t = ev.target.closest("[data-ftag]"), e = ev.target.closest("[data-fera]"), s = ev.target.closest("[data-scope]");
+    if (t) { state.tags.has(t.dataset.ftag) ? state.tags.delete(t.dataset.ftag) : state.tags.add(t.dataset.ftag); filtersChanged(); restoreFocus(`[data-ftag="${t.dataset.ftag}"]`); }
+    else if (e) { state.eras.has(e.dataset.fera) ? state.eras.delete(e.dataset.fera) : state.eras.add(e.dataset.fera); filtersChanged(); restoreFocus(`[data-fera="${e.dataset.fera}"]`); }
+    else if (s) { state.scope = s.dataset.scope; filtersChanged(); restoreFocus(`[data-scope="${s.dataset.scope}"]`); }
+    else if (ev.target.closest("#f-done")) { openFilters(false); $("filters-btn").focus(); }
+  });
+  const restoreFocus = sel => { const el = $("filters").querySelector(sel); el && el.focus(); };
+  $("filters").addEventListener("change", ev => {
+    if (ev.target.id !== "f-from" && ev.target.id !== "f-to") return;
+    const v = ev.target.value.trim(), n = v === "" ? null : Math.round(+v);
+    if (ev.target.id === "f-from") state.from = n; else state.to = n;
+    if (state.from !== null && state.to !== null && state.from > state.to) [state.from, state.to] = [state.to, state.from];
+    filtersChanged();
+  });
+  document.addEventListener("pointerdown", ev => {
+    if (!$("filters").hidden && !ev.target.closest("#filters, #filters-btn")) openFilters(false);
+    if (!$("results").hidden && !ev.target.closest("#search-box")) closeResults();
+  });
+
+  // generic actions (status chips, drawer, list, periods, empty states)
+  document.addEventListener("click", ev => {
+    const rm = ev.target.closest("[data-remove]");
+    if (rm && !ev.target.closest("#results")) { removeFilter(rm.dataset.remove); return; }
+    const add = ev.target.closest("[data-addtag]");
+    if (add) { state.tags = new Set([add.dataset.addtag]); filtersChanged(); if (state.view === "periods") setView("timeline"); flash(`Showing ${tagLabel(add.dataset.addtag)} events`); return; }
+    const open = ev.target.closest("[data-open]");
+    if (open && open.dataset.open) { if (state.view === "periods") setView("timeline"); select(open.dataset.open); return; }
+    const goera = ev.target.closest("[data-goera]");
+    if (goera) { const v = goera.dataset.target || "timeline"; if (v !== state.view) setView(v, { era: goera.dataset.goera }); else jumpEra(goera.dataset.goera); return; }
+    const li = ev.target.closest(".li");
+    if (li) select(li.dataset.id, { reveal: false });
+  });
+  $("d-close").addEventListener("click", () => select(null));
+  $("d-copy").addEventListener("click", async () => {
+    const url = `${location.origin}${location.pathname}#${state.selected}`;
+    const label = $("d-copy").querySelector("span");
+    try { await navigator.clipboard.writeText(url); label.textContent = "Link copied"; }
+    catch { window.prompt("Copy this link", url); }
+    setTimeout(() => { label.textContent = "Copy link"; }, 2000);
+  });
+  document.querySelectorAll("#date-seg button").forEach(b => b.addEventListener("click", () => setDate(b.dataset.date)));
+  document.querySelectorAll("#view-seg button").forEach(b => b.addEventListener("click", () => { setView(b.dataset.view); }));
+  $("cta").addEventListener("click", ev => { ev.preventDefault(); ensureExplorer(); window.scrollTo({ top: $("explorer").offsetTop, behavior: RM.matches ? "auto" : "smooth" }); });
+
+  addEventListener("keydown", ev => {
+    const typing = ev.target.closest && ev.target.closest("input, textarea, select");
+    if (ev.key === "/" && !typing) { ev.preventDefault(); ensureExplorer(); $("q").focus(); $("q").select(); return; }
+    if (ev.key === "Escape") {
+      if (!$("filters").hidden) { openFilters(false); $("filters-btn").focus(); }
+      else if (!$("results").hidden) closeResults();
+      else if (state.selected) select(null);
+      return;
+    }
+    if (typing || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    if (state.selected && (ev.key === "ArrowLeft" || ev.key === "ArrowRight") && !ev.target.closest(".stage, .seg")) {
+      ev.preventDefault();
+      step(ev.key === "ArrowLeft" ? -1 : 1);
+    }
+  });
+  addEventListener("hashchange", () => {
+    const { event, view, q } = readHash();
+    if ((q || "") !== state.q) setQuery(q || "");
+    filtersChanged();
+    if (view !== state.view) setView(view);
+    if (event && event !== state.selected) select(event);
+  });
+  MOBILE.addEventListener("change", () => { if (state.selected) renderDrawer(); renderOverview(); });
 }
+
 init();
 </script>
 </body>
