@@ -205,7 +205,7 @@
 
   .ev { position: absolute; height: 26px; display: flex; align-items: center; padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
         text-align: left; color: var(--ink); border-radius: 5px; max-width: none; }
-  .ev .bar { position: relative; flex: none; height: 26px; border-radius: 5px;
+  .ev .bar { position: absolute; left: 0; top: 0; height: 26px; border-radius: 5px;
              background: color-mix(in srgb, var(--c) 22%, var(--card)); border: 1px solid color-mix(in srgb, var(--c) 58%, transparent);
              box-shadow: inset 3px 0 0 var(--c); transition: box-shadow .12s, transform .12s; }
   .ev.k-span .bar { background: color-mix(in srgb, var(--c) 10%, rgba(251, 248, 241, .5)); border-color: color-mix(in srgb, var(--c) 38%, transparent);
@@ -218,9 +218,9 @@
   .ev .mark { flex: none; width: 12px; height: 12px; margin: 0 2px 0 1px; transform: rotate(45deg); background: var(--c); border-radius: 2px;
               box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px color-mix(in srgb, var(--c) 45%, transparent); transition: transform .12s; }
   .ev.approx .mark { background: var(--paper); box-shadow: inset 0 0 0 2px var(--c); }
-  .ev .lbl { font: 500 14.5px/26px var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 440px; padding: 0 6px 0 9px; color: var(--ink); }
-  .ev.inside .lbl { position: absolute; left: 6px; right: 6px; max-width: none; padding: 0 4px 0 6px; }
-  .ev.inside { overflow: visible; }
+  .ev .lbl { position: relative; font: 500 14.5px/26px var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 440px;
+             padding: 0 8px 0 12px; color: var(--ink); text-shadow: 0 0 3px var(--paper), 0 0 2px var(--paper); }
+  .ev.k-point .lbl { padding-left: 8px; }
   .ev:hover .bar, .ev:focus-visible .bar { box-shadow: inset 3px 0 0 var(--c), 0 2px 10px rgba(33, 29, 24, .14); }
   .ev:hover .mark, .ev:focus-visible .mark { transform: rotate(45deg) scale(1.2); }
   .ev:hover .lbl { color: var(--crimson-ink); }
@@ -258,7 +258,8 @@
   .legend span { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .legend .sw { width: 11px; height: 11px; border-radius: 3px; background: var(--c); flex: none; }
   .legend .shape { width: 34px; flex: none; display: flex; align-items: center; justify-content: center; }
-  .legend .shape .ev { position: static; }
+  .legend .shape .ev { position: relative; height: 14px; width: 30px; }
+  .legend .shape .ev.k-point { width: auto; }
   .legend .shape .bar { height: 14px !important; }
   .legend .shape .mark { width: 10px; height: 10px; }
 
@@ -348,6 +349,31 @@
   .tbl table { border-collapse: collapse; font: 13px/1.4 var(--sans); min-width: 100%; }
   .tbl th, .tbl td { border-bottom: 1px solid var(--rule-2); padding: 7px 10px; text-align: left; vertical-align: top; }
   .tbl th { background: var(--paper-2); font-weight: 600; }
+  .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--rule-2); border: 1px solid var(--rule-2);
+               border-radius: 10px; overflow: hidden; margin: 4px 0 16px; }
+  .stat { background: var(--card); padding: 11px 14px 12px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .stat .k { font: 500 12px/1.35 var(--sans); color: var(--ink-3); }
+  .stat .v { font: 500 21px/1.2 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .stat .v small, .stat-table small { font: 400 12px var(--sans); color: var(--ink-3); }
+  .stat .v small.sum, .stat-table small.sum { display: block; margin-top: 2px; }
+  .stat-grid .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .stat-table { width: 100%; }
+  .tbl .stat-table th, .tbl .stat-table td { padding: 8px 12px; }
+  .tbl .stat-table thead th { font: 600 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); background: var(--paper-2); }
+  .tbl .stat-table tbody th { font-weight: 500; color: var(--ink); background: none; }
+  .stat-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stat-table tr.total th, .stat-table tr.total td { font-weight: 600; border-top: 1.5px solid var(--ink-3); background: var(--paper); }
+  .stat-raw { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0 16px; border: 1px dashed var(--rule); border-radius: 10px; padding: 12px 14px; margin: 0 0 16px; }
+  .stat-raw h4 { font: 600 10.5px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 6px; }
+  .stat-raw ol { margin: 0; padding-left: 20px; font: 400 13.5px/1.45 var(--sans); }
+  .stat-raw li { padding: 3px 0; }
+  .stat-raw li::marker { color: var(--ink-3); font-size: 12px; }
+  .stat-note { font: 400 13px/1.5 var(--sans); color: var(--ink-3); margin: 0 0 12px; }
+  .stat-list { font: 400 16px/1.5 var(--serif); margin: 0 0 14px; padding: 0; list-style: none; border-top: 1px solid var(--rule-2); }
+  .stat-list li { padding: 8px 0 8px 18px; border-bottom: 1px solid var(--rule-2); position: relative; }
+  .stat-list li::before { content: ""; position: absolute; left: 2px; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--c-data, #9a7322); }
+  .stat-figure { font: 500 30px/1.2 var(--serif); margin: 4px 0 16px; padding: 14px 18px; background: var(--paper); border-left: 3px solid #9a7322; border-radius: 4px; }
+  .na { color: var(--ink-3); font-style: italic; font-size: .8em; }
   .prose pre { white-space: pre; overflow-x: auto; font: 12px/1.5 ui-monospace, Menlo, monospace; background: var(--paper-2); padding: 12px; border-radius: 8px; }
   .d-sec { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--rule-2); }
   .d-sec h3 { font: 600 11px var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
@@ -413,7 +439,9 @@
     .zoom .opt { display: none; }
     .legend { grid-template-columns: 1fr; max-width: calc(100vw - 24px); }
     footer.site .cols { grid-template-columns: 1fr; gap: 20px; }
-    .ev .lbl { max-width: 260px; font-size: 14px; }
+    .ev .lbl { font-size: 14px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .stat .v { font-size: 19px; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
@@ -557,7 +585,7 @@
 <div id="tip" role="tooltip"></div>
 
 <script>
-const DATA_VERSION = "20261001150900";
+const DATA_VERSION = "20261001153513";
 
 /* ---------- constants ---------- */
 const GROUPS = [
@@ -598,7 +626,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 const neDigits = s => String(s).replace(/\d/g, d => DIGITS_NE[d]);
-const plain = h => (h || "").replace(/<br>/g, " ").replace(/<\/(p|tr|th|td)>/g, " ").replace(/<[^>]+>/g, "")
+const plain = h => (h || "").replace(/<[^>]+>/g, m => /^<\/?(mark|b|i|em|strong)\b/.test(m) ? "" : " ")
   .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").trim();
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -789,18 +817,6 @@ function snippet(e, len = 170) {
 /* ---------- timeline rendering ---------- */
 const stage = $("stage"), board = $("board"), rowsEl = $("rows");
 let rowsKey = "", layoutKey = "", userOffset = 0, lastTop = 0, lastLeft = 0, settingLeft = null, hoverId = null;
-const measureCtx = document.createElement("canvas").getContext("2d");
-const widthCache = new Map();
-function textWidth(s) {
-  let w = widthCache.get(s);
-  if (w === undefined) {
-    measureCtx.font = `500 ${MOBILE.matches ? 14 : 14.5}px Newsreader, Georgia, serif`;
-    w = measureCtx.measureText(s).width;
-    widthCache.set(s, w);
-  }
-  return w;
-}
-
 function layoutBoard() {
   const width = Math.ceil(xOf(TMAX) + LABEL_ROOM);
   const height = AXIS + Math.max(shown.length, 1) * ROW + 120;
@@ -846,9 +862,8 @@ function evHtml(e, i) {
   const attrs = `type="button" data-id="${esc(e.id)}" aria-label="${esc(label)}" style="--c:${colorOf(e)};left:${kind === "point" ? x0 + w / 2 - 7 : x0}px;top:${y}px"`;
   if (kind === "point") return `<button class="${cls.join(" ")}" ${attrs}><span class="mark"></span><span class="lbl">${esc(e.title)}</span></button>`;
   const bw = Math.max(w, 8);
-  const inside = textWidth(e.title) + 26 <= bw;
-  if (inside) cls.push("inside");
-  return `<button class="${cls.join(" ")}" ${attrs}><span class="bar" style="width:${bw}px"></span><span class="lbl">${esc(e.title)}</span></button>`;
+  const maxLabel = MOBILE.matches ? Math.max(260, bw - 20) : Math.max(440, bw - 20);
+  return `<button class="${cls.join(" ")}" ${attrs.replace('style="', `style="min-width:${bw}px;`)}><span class="bar" style="width:${bw}px"></span><span class="lbl" style="max-width:${maxLabel}px">${esc(e.title)}</span></button>`;
 }
 
 function drawRows() {
@@ -1539,7 +1554,6 @@ async function init() {
   document.querySelectorAll("#date-seg button").forEach(b => b.setAttribute("aria-pressed", b.dataset.date === state.date));
   if (MOBILE.matches) state.zoom = 0.75;
   await document.fonts.ready.catch(() => {});
-  widthCache.clear();
   renderOverview();
   setView(state.view);
   updateZoomButtons();
